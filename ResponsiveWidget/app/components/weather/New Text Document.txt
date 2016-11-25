@@ -1,0 +1,12 @@
+var React = require('react');
+import weather from './weather';
+
+class WeatherForcast extends React.Component {
+render() {
+        return (
+           <weather latitude={34.05} longitude={118.25} name='Los Angeles' />
+        );
+    }    
+ 
+ }
+export default WeatherForcast;

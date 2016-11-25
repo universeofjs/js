@@ -1,0 +1,288 @@
+.employees {
+}
+
+.compact-employee {
+}
+
+.detailed-employee {
+}
+.employee {
+    border-bottom: 1px solid $footer-border-color;
+
+    padding: 1rem 0;
+
+    display: flex;
+
+    .info-container {
+        padding: 0 1rem;
+
+        flex: 1;
+    }
+
+    .icon {
+        flex: 0 0 4rem;
+    }
+
+    .firstname {
+        color: $date-font-color;
+    }    
+}
+
+
+.releases {
+}
+
+.compact-release {
+}
+
+.detailed-release {
+}
+.release{
+    border-bottom: 1px solid $footer-border-color;
+
+    padding: 1rem 0;
+
+    display: flex;
+
+    .info-container {
+        padding: 0 1rem;
+
+        flex: 1;
+    }
+}
+
+
+.floatleft {float:left;}
+.floatright {float: right;}
+
+
+.example-enter,
+.example-leave {
+  -webkit-transition: all .25s;
+  transition: all .25s;
+}
+
+.example-enter,
+.example-leave.example-leave-active {
+  opacity: 0.01;
+}
+
+.example-leave.example-leave-active {
+  margin-left: -128px;
+}
+
+.example-enter {
+  margin-left: 128px;
+}
+
+.example-enter.example-enter-active,
+.example-leave {
+  margin-left: 0;
+  opacity: 1;
+}
+
+.animateExample {
+  display: block;
+  height: 128px;
+  position: relative;
+  width: 384px;
+}
+
+.animateItem {
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+  height: 128px;
+  line-height: 128px;
+  position: absolute;
+  text-align: center;
+  -webkit-transition: all .25s; /* TODO: make this a move animation */
+  transition: all .25s; /* TODO: make this a move animation */
+  width: 128px;
+}
+
+
+
+/* CSS Styling for Progressive Form*/
+
+.form {
+  margin: 60px auto 30px;
+  max-width: 400px;
+  text-align: center;
+}
+
+.form--group {
+  margin: 10px auto 40px;
+  position: relative;
+  overflow: hidden;
+  height: 100px;
+}
+
+.form--focus {
+  position: absolute;
+  bottom: 25px;
+  left: 0;
+  width: 100%;
+  background: #1ECD97;
+  height: 2px;
+  -webkit-transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0);
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+}
+
+.form--control:focus + .form--focus {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.form--control {
+  display: block;
+  padding: 5px;
+  width: 100%;
+  border: none;
+  border-bottom: solid 2px #eee;
+  background: #f9f9f9;
+  text-align: center;
+  font-size: 2em;
+  outline: none;
+  font-family: Arial, sans-serif;
+}
+
+.form--error {
+  display: none;
+  color: #FB797E;
+  font-size: 1em;
+  padding: 4px;
+  border-radius: 20px;
+}
+
+.has--error .form--focus {
+  background: #FB797E;
+}
+.has--error .form--error {
+  display: block;
+}
+
+.form--submit {
+  display: block;
+  margin: 0 auto;
+  padding: 0;
+  width: 250px;
+  height: 70px;
+  border: 2px solid #1ECD97;
+  border-radius: 40px;
+  background: transparent;
+  color: #1ECD97;
+  letter-spacing: 1px;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+  outline: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-transition: background-color 0.3s, color 0.3s, width 0.3s, border-width 0.3s, border-color 0.3s;
+  transition: background-color 0.3s, color 0.3s, width 0.3s, border-width 0.3s, border-color 0.3s;
+}
+.form--submit:hover {
+  background-color: #1ECD97;
+  color: #fff;
+}
+
+.form--submit-disabled, .form--submit-disabled:hover {
+  cursor: not-allowed;
+  background: #FB797E;
+  border-color: #F0797E;
+  color: #fff;
+}
+
+.progressCircle {
+  position: fixed!important;
+  top: 50%;
+  margin-top: -100px;
+  padding-left: 25px;
+}
+
+.progressCircle-pie-chart {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #E5E5E5;
+  position: relative;
+}
+.progressCircle-pie-chart.gt-50 {
+  background-color: #1ECD97;
+}
+
+.ppc-progressCircle {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - 100px);
+  top: calc(50% - 100px);
+  width: 200px;
+  height: 200px;
+  clip: rect(0, 200px, 200px, 100px);
+}
+.ppc-progressCircle .ppc-progressCircle-fill {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - 100px);
+  top: calc(50% - 100px);
+  width: 200px;
+  height: 200px;
+  clip: rect(0, 100px, 200px, 0);
+  background: #1ECD97;
+  transition: all 1s ease;
+  -webkit-transition: all 1s ease;
+  -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+          transform: rotate(0deg);
+}
+.gt-50 .ppc-progressCircle {
+  clip: rect(0, 100px, 200px, 0);
+}
+.gt-50 .ppc-progressCircle .ppc-progressCircle-fill {
+  clip: rect(0, 200px, 200px, 100px);
+  background: #E5E5E5;
+}
+
+.ppc-percents {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - 173.91304px/2);
+  top: calc(50% - 173.91304px/2);
+  width: 173.91304px;
+  height: 173.91304px;
+  background: #fff;
+  text-align: center;
+  display: table;
+}
+.ppc-percents span {
+  display: block;
+  font-size: 2.6em;
+  font-weight: bold;
+  color: #1ECD97;
+}
+
+.pcc-percents-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+@media (max-width: 924px) {
+  .progressCircle {
+    position: relative!important;
+    top: 0;
+    left: 50%;
+    margin: 0 0 0 -100px;
+  }
+}
+
+/* Form Styling*/
+.customForm {    
+	width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}

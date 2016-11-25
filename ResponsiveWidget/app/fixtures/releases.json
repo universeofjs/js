@@ -1,0 +1,25 @@
+{
+    "releases": [
+        {
+            "rnumber": "1",
+			"codeLockDownDate": "1984-10-10",
+			"rcDate": "1984-10-10",
+			"xuatDate": "1984-10-10",
+			"prodDate": "1984-10-10"
+        },
+        {
+            "rnumber": "2",
+			"codeLockDownDate": "1984-10-10",
+			"rcDate": "1984-10-10",
+			"xuatDate": "1984-10-10",
+			"prodDate": "1984-10-10"
+        },
+        {
+            "rnumber": "3",
+			"codeLockDownDate": "1984-10-10",
+			"rcDate": "1984-10-10",
+			"xuatDate": "1984-10-10",
+			"prodDate": "1984-10-10"
+        }
+    ]
+}

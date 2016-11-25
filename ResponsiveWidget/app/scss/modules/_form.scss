@@ -1,0 +1,42 @@
+.common-form {width: 100%;}
+.common-form {
+	p {
+		color: orange;
+	}
+}
+
+.floatleft {float:left; height: 400px;}
+.floatright {float: right; height: 400px;}
+.clear{clear: both;}
+
+.common-form{ 
+	h1{
+		margin: 50px;width: 600px;font-size: 30px; border-collapse: separate; border-spacing: 0 1em;
+	}
+}
+
+.common-form{ 
+	table{
+			margin: 50px;width: 600px;font-size: 30px; border-collapse: separate; border-spacing: 0 1em;
+		}
+}
+
+.common-form{ 
+	table 
+		{ 
+			input[type="text"], input[type="date"], select
+			{
+				box-shadow: none; -webkit-box-shadow: none; padding: 8px 0 8px 25px; width: 300px;
+			}
+		} 
+}
+
+.common-form{ 
+	table 
+		{ 
+			input[type="submit"]
+			{
+				padding:10px 0; width: 200px;
+			}
+		} 
+}

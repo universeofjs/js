@@ -1,0 +1,40 @@
+{
+    "employees": [
+        {
+            "tnumber": "1",
+			"firstName": "Ankit",
+			"lastName": "Jain",
+			"dob": "1984-10-10",
+			"anniversaryDate": "March, 7th", 			
+			"location": "MI",
+			"icon": "/assets/images/ankit.png"
+        },
+		{
+            "tnumber": "2",
+			"firstName": "Priti",
+			"lastName": "Shinde",
+			"dob": "1984-04-10",
+			"anniversaryDate": "March, 7th", 			
+			"location": "MI",
+			"icon": "/assets/images/priti.png"
+        },
+        {
+            "tnumber": "3",
+			"firstName": "Gary",
+			"lastName": "XU",
+			"dob": "1984-10-10",
+			"anniversaryDate": "March, 7th", 
+			"location": "MI",
+			"icon": "/assets/images/gary.png"
+        },
+        {
+			"tnumber": "4",
+			"firstName": "Uma",
+			"lastName": "S",
+			"dob": "1984-10-10",
+			"anniversaryDate": "March, 7th", 
+			"location": "MI",
+			"icon": "/assets/images/uma.png"
+        }
+    ]
+}

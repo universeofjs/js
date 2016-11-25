@@ -1,0 +1,109 @@
+.app-header {
+    background-color: $header-bg-color;
+    border-bottom: 1px solid $header-border-color;
+
+    height: $header-height;
+    padding: $header-padding;
+
+    display: flex;
+    align-items: center;
+
+    h1 {
+        font-size: nth($heading-sizes, 2);
+        color: $header-logo-color;
+    }
+
+    .link {
+        display: block;
+    }    
+
+    .desc {
+        font-size: $header-desc-font-size;
+        font-weight: 700;
+        margin-left: $header-desc-margin;
+        line-height: $header-desc-line-height;
+    }
+}
+
+.app-content {
+    padding: $main-content-padding;
+}
+
+.section-header {
+    border-top: 1px solid $header-border-color;
+    border-bottom: 1px solid $header-border-color;
+
+    max-width: $section-width;
+
+    height: $section-header-height;
+    margin: $section-header-margin;
+
+    display: flex;
+    align-items: center;
+
+    & > .title {
+        flex: 1;
+    }
+
+    & > .link {
+        font-weight: 700;
+
+        flex: 0 0 $section-header-link-width; 
+        text-align: right;
+    }
+}
+
+.section-footer {
+    border-top: 1px solid $footer-border-color;
+    border-bottom: 1px solid $footer-border-color;
+
+    max-width: $section-width;
+
+    height: $section-footer-height;
+    margin: $section-footer-margin;
+
+    display: flex;
+    align-items: center;
+}
+
+.blink {
+	animation: blink-animation 1s steps(5, start) infinite;
+	-webkit-animation: blink-animation 1s steps(5, start) infinite;
+	font: 100 25px/1.0 'Just Another Hand', Helvetica, sans-serif;
+	font-size: 200%;
+	color: #969595;
+	text-shadow: 0px 3px 0px #5e5e5e, 0px 5px 0px #4d4d4d, 0px 7px 0px #3c3c3c, 0px 9px 0px #2b2b2b, 3px 8px 15px;
+}
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+.section-content-employee {
+    max-width: $section-width;
+    margin: $section-content-margin;
+	width: 630px;
+}
+
+.section-content-release {
+    max-width: $section-width;
+    margin: $section-content-margin;
+	width: 525px;
+}
+
+.homePage{
+	margin-left: auto;
+    margin-right: auto;
+}
+
+.calendar{
+	width: 1200px;
+	margin-left: auto;
+    margin-right: auto;
+}
