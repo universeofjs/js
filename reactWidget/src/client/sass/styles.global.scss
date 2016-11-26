@@ -20,7 +20,7 @@ body {
 .homePage{
 	width: 1200px;
 	margin-left: auto;
-    margin-right: auto;
+  margin-right: auto;
 }
 
 .employee-floatleft {
@@ -42,12 +42,53 @@ body {
 	float:left;
 	width: 500px;
 }
+
 .release-floatright {
 	float: right;
     width: 670px;
     padding-right: 140px;
 }
 
+.standups {
+  
+}
+
+.showTeam h1 {
+  text-align: center;
+}
+
+.oval-shape {
+    width: 400px;
+    margin: 15px;
+    text-align: center;
+    background: gray;
+    -moz-border-radius: 100px / 50px;
+    -webkit-border-radius: 100px / 50px;
+    border-radius: 50%;
+    display: inline-block;
+    color: black;
+}
+
+.content {
+  padding: 92px;
+}
+
+.content h2 {
+    text-decoration: underline;
+}
+
+.team-description {
+    font-size: 16px;
+    font-style: italic;
+}
+
+.tag-cloud {
+    background: #ddd;
+    padding: 5px 8px;
+    margin: 2px;
+    text-decoration: none !important;
+    border: 1px solid #d7d7d7;
+}
 
 *, *:after, *:before { box-sizing: border-box; }
 .clearfix:before, .clearfix:after { content: ''; display: table; }

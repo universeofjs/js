@@ -1,5 +1,5 @@
 import React from 'react';
-import AwesomeComponent from './AwesomeComponent.jsx';
+import AwesomeComponent from './AwesomeComponent.js';
 
 const BirthdayCard = React.createClass({
 	render() {

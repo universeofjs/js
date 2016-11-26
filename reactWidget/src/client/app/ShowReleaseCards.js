@@ -1,16 +1,16 @@
-import {CardStack, Card} from './cardstack.jsx';
+import {CardStack, Card} from './cardstack.js';
 import React from 'react';
 
 const backgroundColors = ['#2980B9', '#27AE60', '#9B27AE', '#e67e22'];
 
-const cardStyles = {
+const styles = {
 	cardHeader: {
 		display: 'flex',
 		height: '125px',
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		padding: '10px 20px',
-		color: '#fff'
+		color: '#fff',
 	},
 	headerName: {
 		fontWeight: 500,
@@ -28,17 +28,17 @@ const cardStyles = {
 
 let i = 0;
 
-const ShowEmployeeCards = (props) => {
-	const numberOfEmployees = props.employees.length;
-	const height = props.employees.length * 150;
+const ShowReleaseCards = (props) => {
+	const numberOfReleases = props.releases.length;
+	const height = props.releases.length * 125;
 	const cardstackElement = () => (
 		<CardStack height={height > 500 ? height : 500} width={500} background='#f8f8f8' hoverOffset={25}>
-			{(props.employees || []).map(employee => {
+			{(props.releases || []).map(release => {
 					const color = backgroundColors[i % 4];
 					i++;
 					return (
-						<Card background={color} key={employee.tnumber} >
-      						<EmployeeCard imgBorderColor='#015389' employee= {employee} />
+						<Card background={color} key={release.releaseNumber} >
+      						<ReleaseCard imgBorderColor='#015389' release= {release} />
 						</Card>
 					);
 				})
@@ -46,9 +46,9 @@ const ShowEmployeeCards = (props) => {
 		</CardStack>
 	);
 
-	const singleCard = (employee) => (
-		<div style={{'background-color': '#2980B9'}}>
-      		<EmployeeCard key={employee.tnumber} imgBorderColor='#015389' employee={employee} />
+	const singleCard = (release) => (
+		<div style={{'background-color':'#2980B9', position: 'relative', 'padding-top': '15px', width: '500px'}}>
+      		<ReleaseCard key={release.releaseNumber} imgBorderColor='#015389' release={release} />
 		</div>
 	);
 	
@@ -56,28 +56,30 @@ const ShowEmployeeCards = (props) => {
 		<div className="ui attached segment">
 			<div className="ui middle aligned column centered grid">
 				<div className="left floated six wide column">
-					<div className="ui header">Employees List:</div>
+					<div className="ui header">Release Info:</div>
 				</div>
 				<div className="right floated six wide column">
-					<button className="ui button" onClick={() => (props.showAddEmployeeForm())}>Add Birthday</button>
+					<button className="ui button" onClick={() => (props.showAddReleaseForm())}>Add Release</button>
 				</div>
         	</div>
 			<div className="ui divider"></div>
-			{numberOfEmployees > 0 ? numberOfEmployees > 1 ? cardstackElement() : singleCard(props.employees[0]) : <h4>No Employees</h4>}
+			{numberOfReleases > 0 ? numberOfReleases > 1 ? cardstackElement() : singleCard(props.releases[0]) : <h4>No Release Info Available at this time, check back later!</h4>}
 		</div>
 	);
 };
 
-const ProfilePicture = ({ imgSrc, borderColor }) => (
-	<img
-		style={{
-			width: '60px',
-			height: '60px',
-			borderRadius: '100%',
-			border: `3px solid ${borderColor}`
-		}}
-		src={imgSrc}
-	/>
+const ProfilePicture = ({ imgSrc, text }) => (
+	<div>
+		<img
+			style={{
+				width: '60px',
+				height: '60px',
+				borderRadius: '100%',
+				border: '3px solid'
+			}}
+			src={imgSrc}/>
+		<div style={{position: 'absolute',  top: '70px', fontWeight: 'bolder', fontSize: '15px', left: '30px'}}>{text}</div>
+	</div>
 );
 
 const DetailsRow = ({ icon, title, summary }) => {
@@ -106,13 +108,11 @@ const DetailsRow = ({ icon, title, summary }) => {
 		}
 	};
 	const renderSummary = () => {
-		if (summary) { 
-			return (
-				<p style={{ fontWeight: 300, lineHeight: 1.45 }}>
-					{summary}
-				</p>
-			);
-		}
+		if(summary) return (
+			<p style={{ fontWeight: 300, lineHeight: 1.45 }}>
+				{summary}
+			</p>
+		);
 		return null;
 	};
 
@@ -130,33 +130,39 @@ const DetailsRow = ({ icon, title, summary }) => {
 	);
 };
 
-const EmployeeCard = ({employee, props = {}}) => (
+const ReleaseCard = ({release, ...props}) => (
 	<div style={{top: 0 }}>
-		<header style={cardStyles.cardHeader} className='card-header-details'>
-			<ProfilePicture imgSrc={'img/' + employee.firstName + '.png'} borderColor={props.imgBorderColor} />
+		<header style={styles.cardHeader} className='card-header-details'>
+			<ProfilePicture imgSrc={props.imgSrc} text={release.releaseNumber} />
 			<div>
-				<h1 style={cardStyles.headerName}>{employee.firstName + ' ' +employee.lastName}</h1>
-				<h3 style={cardStyles.headerTitle} className='icon ion-ios-arrow-down'> {employee.title} </h3>
+				<h1 style={styles.headerName}>Code LockDown</h1>
+				<h3 style={styles.headerTitle}>{release.codeLockDownDate}</h3>
 			</div>
 		</header>
 
 		<div style={{color: '#fff'}}>
 			<DetailsRow
 				icon='ion-ios-location-outline'
-				title={employee.location}
+				title='RC Deployment Date'
+				summary={release.rcDeploymentDate}
 			/>
 			<DetailsRow
 				icon='icon ion-ios-paper-outline'
-				title='Date Of Birth'
-				summary={employee.dob}
+				title='XUAT Deployment Date'
+				summary={release.xuatDeploymentDate}
 			/>
 			<DetailsRow
 				icon='icon ion-ios-paper-outline'
-				title='Work Anniversary'
-				summary={employee.anniversaryDate}
+				title='Production Deployment Date'
+				summary={release.prodDeploymentDate}
+			/>
+			<DetailsRow
+				icon='icon ion-ios-paper-outline'
+				title='Release Notes'
+				summary={release.releaseNotes}
 			/>
 		</div>
   </div>
 );
 
-export default ShowEmployeeCards;
+export default ShowReleaseCards;

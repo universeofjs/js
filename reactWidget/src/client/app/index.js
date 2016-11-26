@@ -1,18 +1,20 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-import AwesomeComponent from './AwesomeComponent.jsx';
+import AwesomeComponent from './AwesomeComponent.js';
 
-import BirthdayComponent from './BirthdayComponent.jsx';
-import ReleaseComponent from './ReleaseComponent.jsx';
+import BirthdayComponent from './BirthdayComponent.js';
+import ReleaseComponent from './ReleaseComponent.js';
 import ProgressForm from './progressForm/ProgressForm.js';
 
-import ShowEmployees from './ShowEmployees.jsx';
-import BirthdayCard from './BirthdayCard.jsx';
-import ShowEmployeesCards from './ShowEmployeesCards.jsx';
+import ShowEmployees from './ShowEmployees.js';
+import BirthdayCard from './BirthdayCard.js';
+import ShowEmployeesCards from './ShowEmployeesCards.js';
 
-import ShowReleases from './ShowReleases.jsx';
-import ShowReleaseCards from './ShowReleaseCards.jsx';
+import ShowReleases from './ShowReleases.js';
+import ShowReleaseCards from './ShowReleaseCards.js';
+
+import ShowTeams from './ShowTeams.js';
 
 import {getApiCall, postApiCall} from './Api.js';
 
@@ -24,6 +26,7 @@ require('../sass/styles.global.scss');
 const App = React.createClass ({
 	getInitialState() {
 		return ({
+		  teams: [],
 		  employees: [],
 		  releases: [],
 		  showAddEmployeeForm: false,
@@ -31,6 +34,7 @@ const App = React.createClass ({
 		});
 	},
 	componentWillMount(){
+		this.getTeamData();
 		this.getEmployeeData();
 		this.getReleaseData();
 	},
@@ -40,6 +44,22 @@ const App = React.createClass ({
 		  detachable: false,
 		  closable  : true
 		})
+	},
+	getTeamData() {
+		const successCallback = (value) => {
+		  if (value._embedded) {
+			if (value._embedded.scrumTeams) {
+			  this.setState({teams: value._embedded.scrumTeams});
+			};
+		  };
+		}
+
+		const errorCallBack = (value) => {
+
+		}
+
+		getApiCall('/RewardsWidgetAPI/scrumteams', null, successCallback, errorCallBack);
+
 	},
 	getEmployeeData() {
 		const successCallback = (value) => {
@@ -106,22 +126,33 @@ const App = React.createClass ({
 		  <div className="homePage">
 			<h1><img src="/img/deluxe.png" alt="Deluxe Rewards"/></h1>
 			<hr/>
-			<h1> Birthday Calendar</h1>
-			<div className="employee-floatleft">
-				<BirthdayComponent getEmployeeData={this.getEmployeeData}/>
+
+			<div className="standups">
+				<ShowTeams teams={this.state.teams}/>
 			</div>
-			<div className="employee-floatright">
-				<BirthdayCard employees={this.state.employees} showAddEmployeeForm={this.showAddEmployeeForm}/>
+			
+			<div className="clear"></div>
+
+			<div className="birthdays">
+				<h1> Birthday Calendar</h1>
+				<div className="employee-floatleft">
+					<BirthdayComponent getEmployeeData={this.getEmployeeData}/>
+				</div>
+				<div className="employee-floatright">
+					<BirthdayCard employees={this.state.employees} showAddEmployeeForm={this.showAddEmployeeForm}/>
+				</div>
 			</div>
 			
 			<div className="clear"></div>
 			
-			<h1> Release Calendar</h1>
-			<div className="release-floatleft">
-				<ReleaseComponent getReleaseData={this.getReleaseData}/>
-			</div>
-			<div className="release-floatright">
-				<ShowReleaseCards releases={this.state.releases} showAddReleaseForm={() => (this.setState({showAddReleaseForm: true}))}/>
+			<div className="releases">
+				<h1> Release Calendar</h1>
+				<div className="release-floatleft">
+					<ReleaseComponent getReleaseData={this.getReleaseData}/>
+				</div>
+				<div className="release-floatright">
+					<ShowReleaseCards releases={this.state.releases} showAddReleaseForm={() => (this.setState({showAddReleaseForm: true}))}/>
+				</div>
 			</div>
 			
 			<div className="clear"></div>
