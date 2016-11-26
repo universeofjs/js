@@ -59,7 +59,7 @@ const ShowReleaseCards = (props) => {
 		<div className="ui attached segment">
 			<div className="ui middle aligned column centered grid">
 				<div className="left floated six wide column">
-					<div className="ui header">Release Calendar:</div>
+					<div className="ui header">Release Calendar</div>
 				</div>
 				<div className="right floated six wide column">
 					<button className="ui button" onClick={() => (props.showAddReleaseForm())}>Add Release</button>

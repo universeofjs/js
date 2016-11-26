@@ -4,19 +4,7 @@ import AwesomeComponent from './AwesomeComponent';
 export default class CompactEmployee extends React.Component {
 	
     render() {
-		let date = new Date();    
-		let employee = this.props.employee; 
-		let dob = new Date(employee.dob);	
-        let aniv = new Date(employee.anniversaryDate);	
-        let msg = '';	
-		let msg1 = '';
-		if (dob.getMonth() === date.getMonth()) {
-		  msg = 'Happy Birthday!!';	
-		}	
-		if (aniv.getMonth() === date.getMonth()) {
-		  msg1 = 'Happy Anniversary!!';	
-		}	
-        
+	let employee = this.props.employee; 	
 	return (
 			<div className="card">
 				<div className="image">
@@ -28,7 +16,6 @@ export default class CompactEmployee extends React.Component {
 						<a>{employee.title}</a>
 					</div>
 					<div className="description">
-						<p className="blink">{msg} {msg1}</p> 
 						<p>Date Of Birth: {employee.dob}</p> 
 						<p>Work Anniversary: {employee.anniversaryDate}</p> 
 						<p>Location: {employee.location}</p>

@@ -7,14 +7,14 @@ const BirthdayCard = React.createClass({
 			<div className="ui attached segment">
 				<div className="ui middle aligned column centered grid">
 					<div className="left floated six wide column">
-					<div className="ui header">Employees List:</div>
+					<div className="ui header">Birthday Calendar</div>
 				</div>
 				<div className="right floated six wide column">
 					<button className="ui button" onClick={() => (this.props.showAddEmployeeForm())}>Add Birthday</button>
 				</div>
 				</div>
 				<div className="ui divider"></div>
-					{this.props.employees.length > 0 ? null : <h4>No Employees</h4>}
+					{this.props.employees.length > 0 ? null : <h4>No Birthdays</h4>}
 					<div className="ui link cards">
 						{					
 							(this.props.employees || []).filter(function(employee) { 

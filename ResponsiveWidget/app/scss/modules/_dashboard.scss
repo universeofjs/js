@@ -1,59 +1,47 @@
-.employees {
+.standups {
 }
 
-.compact-employee {
+.birthdays {
 }
-
-.detailed-employee {
-}
-.employee {
-    border-bottom: 1px solid $footer-border-color;
-
-    padding: 1rem 0;
-
-    display: flex;
-
-    .info-container {
-        padding: 0 1rem;
-
-        flex: 1;
-    }
-
-    .icon {
-        flex: 0 0 4rem;
-    }
-
-    .firstname {
-        color: $date-font-color;
-    }    
-}
-
 
 .releases {
 }
 
-.compact-release {
+.oval-shape {
+    width: 400px;
+    margin: 15px;
+    text-align: center;
+    background: gray;
+    -moz-border-radius: 100px / 50px;
+    -webkit-border-radius: 100px / 50px;
+    border-radius: 50%;
+    display: inline-block;
 }
 
-.detailed-release {
-}
-.release{
-    border-bottom: 1px solid $footer-border-color;
-
-    padding: 1rem 0;
-
-    display: flex;
-
-    .info-container {
-        padding: 0 1rem;
-
-        flex: 1;
-    }
+.content {
+  padding: 100px;
 }
 
+.content h2 {
+    text-decoration: underline;
+}
 
-.floatleft {float:left;}
-.floatright {float: right;}
+.tag_cloud {
+    background: #ddd;
+    padding: 5px 8px;
+    margin: 2px;
+    text-decoration: none !important;
+    border: 1px solid #d7d7d7;
+}
+
+.team-description {
+    font-size: 16px;
+    font-style: italic;
+}
+
+.showTeam h1 {
+  text-align: center;
+}
 
 
 .example-enter,
