@@ -5,7 +5,7 @@ export const addEmployee = (employee) => {
     type: 'ADD_EMPLOYEE',
     employee: {
       id: nextTodoId++,
-      employee
+      ...employee
     }
   }
 }

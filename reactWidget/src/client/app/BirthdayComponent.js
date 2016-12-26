@@ -14,6 +14,7 @@ const BirthdayComponent = React.createClass({
 		this.props.addEmployee(this.getDataToSend());
 		this.gotReponseFromServer(true);
 	},
+
 	getDataToSend() {
 		return ({
 			tnumber: this.state.tnumber,
@@ -26,15 +27,12 @@ const BirthdayComponent = React.createClass({
 		});
 	},
 	gotReponseFromServer(success) {
-	  if (success) {
-			this.props.getEmployeeData();
-	  };
-
 	  this.setState({
 		gotResponse: true,
 		isSuccess: success,
 		isSubmitting: false
 	  });
+	  this.resetForm();
 	},
 	getInitialState() {
 		return ({
@@ -84,10 +82,6 @@ const BirthdayComponent = React.createClass({
 	},
   	render() {
 		this.progressBarIncrement();
-
-		console.log(this.props)
-
-
 		var formMessage = this.state.gotResponse ? this.state.isSuccess ? "success" : "error" : "";
 		formMessage = this.state.isSubmitting ? "loading" : formMessage;
     	return (

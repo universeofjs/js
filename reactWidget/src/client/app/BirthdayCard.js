@@ -1,8 +1,12 @@
 import React from 'react';
+import {connect} from 'react-redux'
 import AwesomeComponent from './AwesomeComponent.js';
 
 const BirthdayCard = React.createClass({
 	render() {
+
+    console.log(this.props.employees);
+
 		return (
 			<div className="ui attached segment">
 				<div className="ui middle aligned column centered grid">
@@ -10,14 +14,13 @@ const BirthdayCard = React.createClass({
 					<div className="ui header">Employees List:</div>
 				  </div>
 				  <div className="right floated six wide column">
-					<button className="ui button" onClick={() => (this.props.showAddEmployeeForm())}>Add Birthday</button>
 				  </div>
 				</div>
 				<div className="ui divider"></div>
 				{this.props.employees.length > 0 ? null : <h4>No Employees</h4>}
 				<div className="ui link cards">
 					{(this.props.employees || []).map(employee => (
-						<EmployeeCard employee={employee}/>
+						<EmployeeCard key={employee.id} employee={employee}/>
 					))}
 				</div>
 			</div>
@@ -27,9 +30,6 @@ const BirthdayCard = React.createClass({
 
 const EmployeeCard = ({employee}) => (
   	<div className="card">
-  		<div className="image">
-	      	<img src={"img/" + employee.firstName + ".png"} />
-	    </div>
     	<div className="content">
       		<div className="header">{employee.firstName} {employee.lastName}</div>
       		<div className="meta">
@@ -52,7 +52,16 @@ const EmployeeCard = ({employee}) => (
       		</span>
     	</div>
   	</div>
-    
 )
 
-export default BirthdayCard;
+const mapStateToProps = (state) => {
+  return {
+    employees: state.employees
+  }
+}
+
+const BirthdayCardComponent = connect(
+  mapStateToProps,
+)(BirthdayCard)
+
+export default BirthdayCardComponent
