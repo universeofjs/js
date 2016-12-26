@@ -137,10 +137,10 @@ export const App = React.createClass ({
 			<div className="birthdays">
 				<h1> Birthday Calendar</h1>
 				<div className="employee-floatleft">
-					<AddBirthdayComponent getEmployeeData={this.getEmployeeData}/>
+					<AddBirthdayComponent />
 				</div>
 				<div className="employee-floatright">
-					<BirthdayCard employees={this.state.employees} showAddEmployeeForm={this.showAddEmployeeForm}/>
+					<BirthdayCard />
 				</div>
 			</div>
 			

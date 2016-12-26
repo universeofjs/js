@@ -1,8 +1,12 @@
 import React from 'react';
+import {connect} from 'react-redux'
 import AwesomeComponent from './AwesomeComponent.js';
 
 const BirthdayCard = React.createClass({
 	render() {
+
+    console.log(this.props.employees);
+
 		return (
 			<div className="ui attached segment">
 				<div className="ui middle aligned column centered grid">
@@ -27,9 +31,6 @@ const BirthdayCard = React.createClass({
 
 const EmployeeCard = ({employee}) => (
   	<div className="card">
-  		<div className="image">
-	      	<img src={"img/" + employee.firstName + ".png"} />
-	    </div>
     	<div className="content">
       		<div className="header">{employee.firstName} {employee.lastName}</div>
       		<div className="meta">
@@ -54,4 +55,14 @@ const EmployeeCard = ({employee}) => (
   	</div>
 );
 
-export default BirthdayCard;
+const mapStateToProps = (state) => {
+  return {
+    employees: state.employees
+  }
+}
+
+const BirthdayCardComponent = connect(
+  mapStateToProps,
+)(BirthdayCard)
+
+export default BirthdayCardComponent
