@@ -6,7 +6,7 @@ export default class ShowTeams extends React.Component {
 			<div className="showTeam">
 				<h1>Standup Calendar</h1>
 				{(this.props.teams || []).map(team =>(
-					<TeamCard team={team} />
+					<TeamCard key={team.name} team={team} />
 				))}
 			</div>
 		);
@@ -23,7 +23,7 @@ const TeamCard = ({team}) => (
     			Business Analyst: {team.businessAnalyst}
 			</p>
 			{(team.members || []).map(member => (
-				<Member member={member} />
+				<Member key={member.name} member={member} />
 			))}
 		</div>
 	</div>
