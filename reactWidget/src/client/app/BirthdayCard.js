@@ -4,17 +4,9 @@ import AwesomeComponent from './AwesomeComponent.js';
 const BirthdayCard = React.createClass({
 	render() {
 		return (
-			<div className="ui attached segment">
-				<div className="ui middle aligned column centered grid">
-					<div className="left floated six wide column">
-						<div className="ui header">Employees List:</div>
-					</div>
-					<div className="right floated six wide column">
-						<button className="ui button" onClick={() => (this.props.showAddEmployeeForm())}>Add Birthday</button>
-					</div>
-				</div>
-				<div className="ui divider"></div>
-					{this.props.employees.length > 0 ? null : <h4>No Employees</h4>}
+			<div className="showBirthday">
+				<h1>Birthday Calendar</h1>
+				{this.props.employees.length > 0 ? null : <h4>No Birthdays To Display</h4>}
 				<div className="ui link cards">
 					{(this.props.employees || []).map(employee => (
 						<EmployeeCard key={employee.firstName} employee={employee}/>

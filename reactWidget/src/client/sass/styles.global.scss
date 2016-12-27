@@ -18,7 +18,7 @@ body {
 }
 
 .homePage{
-	width: 1200px;
+	width: auto;
 	margin-left: auto;
   margin-right: auto;
 }
@@ -30,7 +30,7 @@ body {
 .employee-floatright {
 	float: right;
 	width: 670px;
-    padding-right: 40px;
+  padding-right: 40px;
 }
 
 .clear{
@@ -45,15 +45,15 @@ body {
 
 .release-floatright {
 	float: right;
-    width: 670px;
-    padding-right: 140px;
+  width: 670px;
+  padding-right: 140px;
 }
 
 .standups {
   
 }
 
-.showTeam h1 {
+.showTeam h1, .showRelease h1, .showBirthday h1 {
   text-align: center;
 }
 

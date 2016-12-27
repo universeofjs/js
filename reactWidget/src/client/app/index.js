@@ -124,44 +124,12 @@ const App = React.createClass ({
 	render () {
 		return (
 		  <div className="homePage">
-			<h1><img src="/img/deluxe.png" alt="Deluxe Rewards"/></h1>
-			<hr/>
-
-			<div className="standups">
+				<h1><img src="/img/deluxe.png" alt="Deluxe Rewards"/></h1>
+				<hr/>
 				<ShowTeams teams={this.state.teams}/>
-			</div>
-			
-			<div className="clear"></div>
-
-			<div className="birthdays">
-				<h1> Birthday Calendar</h1>
-				<div className="employee-floatleft">
-					<BirthdayComponent getEmployeeData={this.getEmployeeData}/>
-				</div>
-				<div className="employee-floatright">
-					<BirthdayCard employees={this.state.employees} showAddEmployeeForm={this.showAddEmployeeForm}/>
-				</div>
-			</div>
-			
-			<div className="clear"></div>
-			
-			<div className="releases">
-				<h1> Release Calendar</h1>
-				<div className="release-floatleft">
-					<ReleaseComponent getReleaseData={this.getReleaseData}/>
-				</div>
-				<div className="release-floatright">
-					<ShowReleaseCards releases={this.state.releases} showAddReleaseForm={() => (this.setState({showAddReleaseForm: true}))}/>
-				</div>
-			</div>
-			
-			<div className="clear"></div>
-			
-			{this.state.showAddEmployeeForm && <ProgressForm onClosed={this.onClosed} onSubmitButton={this.createNewEmployee} inputDatas={birthdayFormData}/>}
-			{this.state.showAddReleaseForm && <ProgressForm onClosed={this.onClosed} onSubmitButton={this.createNewRelease} inputDatas={releaseFormData}/>}
-			
+				<BirthdayCard employees={this.state.employees}/>
+			  <ShowReleaseCards releases={this.state.releases}/>
 		  </div>
-
 		);
 	}
 });
