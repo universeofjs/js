@@ -15,7 +15,7 @@ class AwesomeComponent extends React.Component {
 
   render() {
     return (
-      <div className="ui labeled button" tabindex="0">
+      <div className="ui labeled button" tabIndex="0">
         <div className="ui red button" onClick={this.onLike}>
           <i className="heart icon"></i> Like
         </div>

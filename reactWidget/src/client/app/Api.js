@@ -1,5 +1,5 @@
-const LOCAL_BASE_URL = 'http://localhost:8080'
-const REMOTE_BASE_URL = 'https://rewardswidgetapi.drwdev.com'
+const LOCAL_BASE_URL = 'http://localhost:8080';
+const REMOTE_BASE_URL = 'https://rewardswidgetapi.drwdev.com';
 
 function callAPi (method, url, data={}, successCallback, errorCallback) {
 	$.ajax({
@@ -14,7 +14,7 @@ function callAPi (method, url, data={}, successCallback, errorCallback) {
     console.log(apiResponse);
     successCallback(apiResponse);
   }).error(apiResponse => {
-	console.log("error")
+	  console.log("error")
     console.log(apiResponse);
     errorCallback(apiResponse);
   })

@@ -6,18 +6,18 @@ const BirthdayCard = React.createClass({
 		return (
 			<div className="ui attached segment">
 				<div className="ui middle aligned column centered grid">
-				  <div className="left floated six wide column">
-					<div className="ui header">Employees List:</div>
-				  </div>
-				  <div className="right floated six wide column">
-					<button className="ui button" onClick={() => (this.props.showAddEmployeeForm())}>Add Birthday</button>
-				  </div>
+					<div className="left floated six wide column">
+						<div className="ui header">Employees List:</div>
+					</div>
+					<div className="right floated six wide column">
+						<button className="ui button" onClick={() => (this.props.showAddEmployeeForm())}>Add Birthday</button>
+					</div>
 				</div>
 				<div className="ui divider"></div>
-				{this.props.employees.length > 0 ? null : <h4>No Employees</h4>}
+					{this.props.employees.length > 0 ? null : <h4>No Employees</h4>}
 				<div className="ui link cards">
 					{(this.props.employees || []).map(employee => (
-						<EmployeeCard employee={employee}/>
+						<EmployeeCard key={employee.firstName} employee={employee}/>
 					))}
 				</div>
 			</div>
@@ -39,7 +39,7 @@ const EmployeeCard = ({employee}) => (
         		<p>Date Of Birth: {employee.dob}</p> 
         		<p>Work Anniversary: {employee.anniversaryDate}</p> 
         		<p>Location: {employee.location}</p>
-            <p><AwesomeComponent/></p>
+            	<AwesomeComponent/>
       		</div>
     	</div>
     	<div className="extra content">
@@ -52,7 +52,6 @@ const EmployeeCard = ({employee}) => (
       		</span>
     	</div>
   	</div>
-    
-)
+);
 
 export default BirthdayCard;
