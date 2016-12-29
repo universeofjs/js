@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import {getApiCall, postApiCall} from './Api.js';
 import {connect} from 'react-redux'
-import {addEmployee} from './actions/actions'
+import {addEmployee} from './actions/employeeActions'
 
 require('../sass/styles.global.scss');
 

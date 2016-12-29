@@ -1,11 +1,14 @@
 import React from 'react'
 import {render} from 'react-dom'
 import {Provider} from 'react-redux'
-import {createStore} from 'redux'
-import combinedReducer from './reducers/index'
+import configureStore from './store/configureStore'
+import {loadEmployees} from './actions/employeeActions'
+import {loadReleases} from './actions/releaseActions'
 import {App} from './App'
 
-const store = createStore(combinedReducer)
+const store = configureStore();
+store.dispatch(loadEmployees);
+store.dispatch(loadReleases);
 
 render(
   <Provider store={store}>

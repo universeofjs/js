@@ -1,5 +1,8 @@
 import {CardStack, Card} from './cardstack.js';
 import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as releaseActions from './actions/releaseActions';
 
 const backgroundColors = ['#2980B9', '#27AE60', '#9B27AE', '#e67e22'];
 
@@ -165,4 +168,17 @@ const ReleaseCard = ({release, ...props}) => (
   </div>
 );
 
-export default ShowReleaseCards;
+function mapStateToProps(state, ownProps) {
+  return {
+    releases: state.releases
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(releaseActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShowReleaseCards);
+
