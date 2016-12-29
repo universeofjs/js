@@ -5,10 +5,12 @@ import AwesomeComponent from './AwesomeComponent.js';
 import * as employeeActions from './actions/employeeActions';
 
 const BirthdayCard = React.createClass({
+
+  componentWillMount() {
+    this.props.loadEmployees();
+  },
+
 	render() {
-
-		this.props.actions.loadEmployeesSuccess(this.props.employees);
-
 		return (
 			<div className="ui attached segment">
 				<div className="ui middle aligned column centered grid">
@@ -22,7 +24,7 @@ const BirthdayCard = React.createClass({
 				{this.props.employees.length > 0 ? null : <h4>No Employees</h4>}
 				<div className="ui link cards">
 					{(this.props.employees || []).map(employee => (
-						<EmployeeCard key={employee.id} employee={employee}/>
+						<EmployeeCard key={`${employee.firstName}-${employee.dob}`} employee={employee}/>
 					))}
 				</div>
 			</div>
@@ -41,7 +43,7 @@ const EmployeeCard = ({employee}) => (
         		<p>Date Of Birth: {employee.dob}</p> 
         		<p>Work Anniversary: {employee.anniversaryDate}</p> 
         		<p>Location: {employee.location}</p>
-            <p><AwesomeComponent/></p>
+            <div><AwesomeComponent/></div>
       		</div>
     	</div>
     	<div className="extra content">
@@ -64,7 +66,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(employeeActions, dispatch)
+    loadEmployees: () => dispatch(employeeActions.loadEmployees())
   };
 }
 

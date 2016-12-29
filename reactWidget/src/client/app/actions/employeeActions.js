@@ -13,19 +13,31 @@ export const addEmployee = (employee) => {
 }
 
 export function loadEmployeesSuccess(employees) {
+
+  console.log(employees);
+
   return { type: types.LOAD_EMPLOYEES_SUCCESS, employees};
 }
 
 export function loadEmployees() {
-  console.log('----inside functon loadEmployees------');
-  return function(dispatch) {
-    console.log('----inside functon dispatch------');
-    return getApiCall('/RewardsWidgetAPI/employees', null, null, null).then(employees => {
-      console.log('------inside promise-----');
-      console.log(employees);
-      dispatch(loadEmployeesSuccess(employees));
-    }).catch(error => {
-      throw(error);
-    });
+  return dispatch => {
+
+    const successCallback = (value) => {
+      console.log(value)
+      if (value._embedded) {
+        if (value._embedded.employees) {
+
+          console.log(value._embedded.employees)
+
+          dispatch(loadEmployeesSuccess(value._embedded.employees))
+        };
+      };
+    }
+
+    const errorCallBack = (value) => {
+
+    }
+
+    return getApiCall('/RewardsWidgetAPI/employees', null, successCallback, errorCallBack);
   };
 }
