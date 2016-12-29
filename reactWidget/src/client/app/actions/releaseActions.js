@@ -7,26 +7,18 @@ export function loadReleasesSuccess(releases) {
 
 export function loadReleases() {
     return dispatch => {
-        return getReleaseData().then(releases => {
-            dispatch(loadReleasesSuccess(releases));
-        }).catch(error => {
-            throw(error);
-        });
-    };
-}
-
-function getReleaseData(){
-    const successCallback = (value) => {
-        if(value._embedded) {
-            if(value._embedded.releases){
-                this.setState({releases: value._embedded.releases});
+        const successCallback = (value) => {
+            if(value._embedded) {
+                if(value._embedded.releases){
+                    dispatch(loadReleasesSuccess(value._embedded.releases))
+                };
             };
-        };
-    }
+        }
 
-    const errorCallBack = (value) => {
+        const errorCallBack = (value) => {
 
-    }
+        }
 
-    getApiCall('/RewardsWidgetAPI/releases', null, successCallback, errorCallBack);
+        return getApiCall('/RewardsWidgetAPI/releases', null, successCallback, errorCallBack);
+    };
 }
