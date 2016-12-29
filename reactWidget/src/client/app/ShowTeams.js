@@ -1,6 +1,14 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as teamActions from './actions/teamActions';
 
-export default class ShowTeams extends React.Component {
+class ShowTeams extends React.Component {
+
+	componentWillMount() {
+		this.props.loadTeams();
+	}
+
 	render() {
 		return (
 			<div className="showTeam">
@@ -34,3 +42,19 @@ const Member = ({member}) => (
 		{member.name} -- {member.role}
 	</div>
 );
+
+const mapStateToProps = (state, ownProps) => {
+	return {
+		teams: state.teams
+	};
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+	return {
+		loadTeams: () => {
+			dispatch(teamActions.loadTeams());
+		}
+	};
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(ShowTeams)
