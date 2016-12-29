@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {render} from 'react-dom';
 
 import AwesomeComponent from './AwesomeComponent.js';
@@ -16,6 +16,10 @@ import ShowReleases from './ShowReleases.js';
 import ShowReleaseCards from './ShowReleaseCards.js';
 
 import ShowTeams from './ShowTeams.js';
+
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as employeeActions from './actions/employeeActions';
 
 import {getApiCall, postApiCall} from './Api.js';
 
@@ -166,5 +170,3 @@ export const App = React.createClass ({
 		);
 	}
 });
-
-// render(<App/>, document.getElementById('app'));

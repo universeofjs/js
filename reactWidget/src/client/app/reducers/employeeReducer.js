@@ -1,3 +1,5 @@
+import * as types from '../actions/actionTypes';
+
 const employeeReducer = (state = [], action) => {
   switch (action.type) {
     case 'ADD_EMPLOYEE':
@@ -5,6 +7,10 @@ const employeeReducer = (state = [], action) => {
       ...state,
       action.employee,
       ];
+
+    case types.LOAD_EMPLOYEES_SUCCESS:
+      return action.employees;
+
     default:
       return state
   }

@@ -1,11 +1,13 @@
 import React from 'react';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import AwesomeComponent from './AwesomeComponent.js';
+import * as employeeActions from './actions/employeeActions';
 
 const BirthdayCard = React.createClass({
 	render() {
 
-    console.log(this.props.employees);
+		this.props.actions.loadEmployeesSuccess(this.props.employees);
 
 		return (
 			<div className="ui attached segment">
@@ -55,14 +57,16 @@ const EmployeeCard = ({employee}) => (
   	</div>
 );
 
-const mapStateToProps = (state) => {
+function mapStateToProps(state, ownProps) {
   return {
     employees: state.employees
-  }
+  };
 }
 
-const BirthdayCardComponent = connect(
-  mapStateToProps,
-)(BirthdayCard)
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(employeeActions, dispatch)
+  };
+}
 
-export default BirthdayCardComponent
+export default connect(mapStateToProps, mapDispatchToProps)(BirthdayCard);

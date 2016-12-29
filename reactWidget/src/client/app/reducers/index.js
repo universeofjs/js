@@ -1,8 +1,10 @@
-import {combineReducers} from 'redux'
-import employeeReducer from './employeeReducer'
+import {combineReducers} from 'redux';
+import employees from './employeeReducer';
+import releases from './releaseReducer';
 
 const combinedReducer = combineReducers({
-  employees: employeeReducer
-})
+  employees,
+  releases
+});
 
 export default combinedReducer

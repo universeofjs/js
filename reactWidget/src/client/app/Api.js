@@ -10,12 +10,12 @@ function callAPi (method, url, data={}, successCallback, errorCallback) {
     dataType: 'json',
     data: JSON.stringify(data)
   }).success(apiResponse => {
-    console.log("success")
-    console.log(apiResponse);
+    //console.log("success")
+    //console.log(apiResponse);
     successCallback(apiResponse);
   }).error(apiResponse => {
-	  console.log("error")
-    console.log(apiResponse);
+	  //console.log("error")
+    //console.log(apiResponse);
     errorCallback(apiResponse);
   })
 }
