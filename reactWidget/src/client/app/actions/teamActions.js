@@ -6,13 +6,13 @@ export function loadTeamSuccess(teams) {
 }
 
 export function loadTeams() {
-    return dispatch => {
-        const successCallback = (value) => {
-		  if (value._embedded) {
-			if (value._embedded.scrumTeams) {
-			  dispatch(loadTeamSuccess(value._embedded.scrumTeams))
+	return dispatch => {
+		const successCallback = (value) => {
+			if (value._embedded) {
+				if (value._embedded.scrumTeams) {
+					dispatch(loadTeamSuccess(value._embedded.scrumTeams))
+				};
 			};
-		  };
 		}
 
 		const errorCallBack = (value) => {
@@ -20,5 +20,5 @@ export function loadTeams() {
 		}
 
 		return getApiCall('/RewardsWidgetAPI/scrumteams', null, successCallback, errorCallBack);
-    }
+	}
 }
