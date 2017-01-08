@@ -31,44 +31,51 @@ const styles = {
 
 let i = 0;
 
-const ShowReleaseCards = (props) => {
-	const numberOfReleases = props.releases.length;
-	const height = props.releases.length * 125;
-	const cardstackElement = () => (
-		<CardStack height={height > 500 ? height : 500} width={500} background='#f8f8f8' hoverOffset={25}>
-			{(props.releases || []).map(release => {
-					const color = backgroundColors[i % 4];
-					i++;
-					return (
-						<Card background={color} key={release.releaseNumber} >
-      						<ReleaseCard imgBorderColor='#015389' release= {release} />
-						</Card>
-					);
-				})
-			}
-		</CardStack>
-	);
+class ShowReleaseCards extends React.Component {
 
-	const singleCard = (release) => (
-		<div style={{'background-color':'#2980B9', position: 'relative', 'padding-top': '15px', width: '500px'}}>
-      		<ReleaseCard key={release.releaseNumber} imgBorderColor='#015389' release={release} />
-		</div>
-	);
-	
-	return (
-		<div className="ui attached segment">
-			<div className="ui middle aligned column centered grid">
-				<div className="left floated six wide column">
-					<div className="ui header">Release Info:</div>
+	componentWillMount() {
+		this.props.actions.loadReleases();
+	}
+
+	render() {
+		const numberOfReleases = this.props.releases.length;
+		const height = this.props.releases.length * 125;
+		const cardstackElement = () => (
+			<CardStack height={height > 500 ? height : 500} width={500} background='#f8f8f8' hoverOffset={25}>
+				{(this.props.releases || []).map(release => {
+						const color = backgroundColors[i % 4];
+						i++;
+						return (
+							<Card background={color} key={release.releaseNumber} >
+								<ReleaseCard imgBorderColor='#015389' release= {release} />
+							</Card>
+						);
+					})
+				}
+			</CardStack>
+		);
+
+		const singleCard = (release) => (
+			<div style={{'background-color':'#2980B9', position: 'relative', 'padding-top': '15px', width: '500px'}}>
+				<ReleaseCard key={release.releaseNumber} imgBorderColor='#015389' release={release} />
+			</div>
+		);
+		
+		return (
+			<div className="ui attached segment">
+				<div className="ui middle aligned column centered grid">
+					<div className="left floated six wide column">
+						<div className="ui header">Release Info:</div>
+					</div>
+					<div className="right floated six wide column">
+						<button className="ui button" onClick={() => (this.props.showAddReleaseForm())}>Add Release</button>
+					</div>
 				</div>
-				<div className="right floated six wide column">
-					<button className="ui button" onClick={() => (props.showAddReleaseForm())}>Add Release</button>
-				</div>
-        	</div>
-			<div className="ui divider"></div>
-			{numberOfReleases > 0 ? numberOfReleases > 1 ? cardstackElement() : singleCard(props.releases[0]) : <h4>No Release Info Available at this time, check back later!</h4>}
-		</div>
-	);
+				<div className="ui divider"></div>
+				{numberOfReleases > 0 ? numberOfReleases > 1 ? cardstackElement() : singleCard(this.props.releases[0]) : <h4>No Release Info Available at this time, check back later!</h4>}
+			</div>
+		);
+	}
 };
 
 const ProfilePicture = ({ imgSrc, text }) => (

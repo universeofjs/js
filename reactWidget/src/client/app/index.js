@@ -8,9 +8,9 @@ import {loadTeams} from './actions/teamActions'
 import {App} from './App'
 
 const store = configureStore();
-store.dispatch(loadEmployees);
-store.dispatch(loadReleases);
-store.dispatch(loadTeams);
+//store.dispatch(loadEmployees);
+//store.dispatch(loadReleases);
+//store.dispatch(loadTeams);
 
 render(
   <Provider store={store}>

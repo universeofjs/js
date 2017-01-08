@@ -9,7 +9,10 @@ const employeeReducer = (state = [], action) => {
       ];
 
     case types.LOAD_EMPLOYEES_SUCCESS:
-      return action.employees;
+      return [
+        ...state,
+        ...action.employees,
+      ];
 
     default:
       return state

@@ -3,7 +3,10 @@ import * as types from '../actions/actionTypes';
 const teamReducers = (state = [], action) => {
     switch(action.type){
         case types.LOAD_TEAMS_SUCCESS:
-            return action.teams
+            return [
+                ...state,
+                 ...action.teams
+            ];
         
         default:
             return state
