@@ -22,6 +22,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-slick": "^0.14.5",
     "validatorjs": "^2.0.5",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"

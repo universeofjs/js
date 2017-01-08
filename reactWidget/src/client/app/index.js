@@ -15,6 +15,7 @@ import ShowReleases from './ShowReleases.js';
 import ShowReleaseCards from './ShowReleaseCards.js';
 
 import ShowTeams from './ShowTeams.js';
+import DeluxeCoreValues from './DeluxeCoreValues.js';
 
 import {getApiCall, postApiCall} from './Api.js';
 
@@ -126,6 +127,7 @@ const App = React.createClass ({
 		  <div className="homePage">
 				<h1><img src="/img/deluxe.png" alt="Deluxe Rewards"/></h1>
 				<hr/>
+				<DeluxeCoreValues/>
 				<ShowTeams teams={this.state.teams}/>
 				<BirthdayCard employees={this.state.employees}/>
 			  <ShowReleaseCards releases={this.state.releases}/>
