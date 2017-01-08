@@ -13,8 +13,16 @@ body {
   font-family: Arial, sans-serif;
 }
 
-#app{
+.container {
+  margin: 0 auto;
+  padding: 40px;
+  width: 70%;
+  color: #333;
+  background: #FFF;
+}
 
+.container h3 {
+  text-align: center;
 }
 
 .homePage{
@@ -47,10 +55,6 @@ body {
 	float: right;
   width: 670px;
   padding-right: 140px;
-}
-
-.standups {
-  
 }
 
 .showTeam h1, .showRelease h1, .showBirthday h1 {
