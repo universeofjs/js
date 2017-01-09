@@ -12,7 +12,7 @@ class ShowTeams extends React.Component {
 	render() {
 		return (
 			<div className="showTeam">
-				<h1>Standup Calendar</h1>
+				<h1>DR Standup Calendar</h1>
 				{(this.props.teams || []).map(team =>(
 					<TeamCard key={team.name} team={team} />
 				))}

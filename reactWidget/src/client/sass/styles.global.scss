@@ -1,7 +1,3 @@
-html {
-  background: #FFF;
-}
-
 body {
   color: #62706c;
   font-size: 100%;
@@ -13,52 +9,99 @@ body {
   font-family: Arial, sans-serif;
 }
 
-.container {
-  padding: 40px;
-  width: 60%;
-  color: #333;
-  background: #FFF;
-}
-
-.container h3 {
-  text-align: center;
-}
-
 .homePage{
 	width: auto;
 	margin-left: auto;
   margin-right: auto;
 }
 
-.employee-floatleft {
-	float:left;
-	width: 500px;
-}
-.employee-floatright {
-	float: right;
-	width: 670px;
-  padding-right: 40px;
+.footer {
+  padding-bottom: 30px;
 }
 
-.clear{
-	clear: both;
-	height: 50px;
-}
-
-.release-floatleft {
-	float:left;
-	width: 500px;
-}
-
-.release-floatright {
-	float: right;
-  width: 670px;
-  padding-right: 140px;
-}
-
-.showTeam h1, .showRelease h1, .showBirthday h1 {
+.footer h4 {
   text-align: center;
 }
+
+.container {
+  padding: 10px 120px;
+  width: 55%;
+  height: 660px;
+  color: #333;
+  background: #FFF;
+  float: left;
+}
+
+.container h1 {
+  text-align: center;
+}
+
+.events {
+  padding: 40px 0 0 0;
+}
+
+.upcoming-events, .show-employees-of-the-month, .show-quotes {
+  padding: 20px 0 0 0;
+}
+
+.upcoming-events table tr td {
+  background: wheat; 
+}
+
+.show-employees-of-the-month table tr td {
+  background: darkseagreen; 
+}
+
+.show-quotes table tr td {
+  background: khaki; 
+}
+
+.showTeam {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.showBirthday {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.ui.cards {
+  justify-content: center;
+}
+
+.showRelease {
+  text-align: center;
+  width: 550px;
+  padding-bottom: 30px;
+}
+
+table {
+    width: 800px;
+    height: 200px;
+}
+
+table thead th { 
+	border:1px solid black; 
+	font-size:24px; 
+	color:#555; 
+	background:#dbdbdb; 
+	padding:10px 15px; 
+	margin:0; 
+	text-shadow: 1px 1px 1px white; 
+	text-align: center;
+}
+
+table tbody tr td {
+  border:1px solid black; 
+	font-size:20px; 
+	color:#555; 
+	background: wheat; 
+	padding:10px 15px; 
+	margin:0; 
+	text-shadow: 1px 1px 1px white; 
+	text-align: center;
+} 
 
 .oval-shape {
     width: 400px;
@@ -91,6 +134,32 @@ body {
     margin: 2px;
     text-decoration: none !important;
     border: 1px solid #d7d7d7;
+}
+
+.employee-floatleft {
+	float:left;
+	width: 500px;
+}
+.employee-floatright {
+	float: right;
+	width: 670px;
+  padding-right: 40px;
+}
+
+.clear{
+	clear: both;
+	height: 50px;
+}
+
+.release-floatleft {
+	float:left;
+	width: 500px;
+}
+
+.release-floatright {
+	float: right;
+  width: 670px;
+  padding-right: 140px;
 }
 
 *, *:after, *:before { box-sizing: border-box; }

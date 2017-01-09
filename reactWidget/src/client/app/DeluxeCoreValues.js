@@ -12,7 +12,7 @@ export default class DeluxeCoreValues extends React.Component {
         };
         return (
             <div className='container'>
-                <h3> Deluxe Core Values</h3>
+                <h1> Deluxe Core Values</h1>
                 <Slider {...settings}>
                     <div><img src="/img/ankit.png" alt=""/></div>
                     <div><img src="/img/Vinita.png" alt=""/></div>
