@@ -14,12 +14,12 @@ export default class DeluxeCoreValues extends React.Component {
             <div className='container'>
                 <h1> Deluxe Core Values</h1>
                 <Slider {...settings}>
-                    <div><img src="/img/ankit.png" alt=""/></div>
-                    <div><img src="/img/Vinita.png" alt=""/></div>
-                    <div><img src="/img/Reeni.png" alt=""/></div>
-                    <div><img src="/img/Priti.png" alt=""/></div>
-                    <div><img src="/img/Yang.png" alt=""/></div>
-                    <div><img src="/img/Uma.png" alt=""/></div>
+                    <div><img src="/img/Commitments.png" alt=""/></div>
+                    <div><img src="/img/Curious.png" alt=""/></div>
+                    <div><img src="/img/Diversity.png" alt=""/></div>
+                    <div><img src="/img/Excellence.png" alt=""/></div>
+                    <div><img src="/img/Open.png" alt=""/></div>
+                    <div><img src="/img/Teams.png" alt=""/></div>
                 </Slider>
             </div>
         );

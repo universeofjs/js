@@ -24,12 +24,18 @@ body {
 }
 
 .container {
-  padding: 10px 120px;
-  width: 55%;
-  height: 660px;
+  padding: 10px 30px;
+  width: 700px;
+  height: 510px;
   color: #333;
   background: #FFF;
   float: left;
+}
+
+.slick-slide img {
+  display: block;
+  width: 700px;
+  height: 510px;
 }
 
 .container h1 {
@@ -77,8 +83,8 @@ body {
 }
 
 table {
-    width: 800px;
-    height: 200px;
+    width: 500px;
+    height: 150px;
 }
 
 table thead th { 
