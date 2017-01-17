@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/assets/";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -42,14 +42,12 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/*!**********************************!*\
-  !*** ./src/client/app/index.jsx ***!
-  \**********************************/
+/*!*********************************!*\
+  !*** ./src/client/app/index.js ***!
+  \*********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(/*! react */ 1);
 	
@@ -57,47 +55,217 @@
 	
 	var _reactDom = __webpack_require__(/*! react-dom */ 158);
 	
-	var _AwesomeComponent = __webpack_require__(/*! ./AwesomeComponent.jsx */ 159);
+	var _AwesomeComponent = __webpack_require__(/*! ./AwesomeComponent.js */ 159);
 	
 	var _AwesomeComponent2 = _interopRequireDefault(_AwesomeComponent);
 	
+	var _BirthdayComponent = __webpack_require__(/*! ./BirthdayComponent.js */ 160);
+	
+	var _BirthdayComponent2 = _interopRequireDefault(_BirthdayComponent);
+	
+	var _ReleaseComponent = __webpack_require__(/*! ./ReleaseComponent.js */ 166);
+	
+	var _ReleaseComponent2 = _interopRequireDefault(_ReleaseComponent);
+	
+	var _ProgressForm = __webpack_require__(/*! ./progressForm/ProgressForm.js */ 167);
+	
+	var _ProgressForm2 = _interopRequireDefault(_ProgressForm);
+	
+	var _ShowEmployees = __webpack_require__(/*! ./ShowEmployees.js */ 188);
+	
+	var _ShowEmployees2 = _interopRequireDefault(_ShowEmployees);
+	
+	var _BirthdayCard = __webpack_require__(/*! ./BirthdayCard.js */ 189);
+	
+	var _BirthdayCard2 = _interopRequireDefault(_BirthdayCard);
+	
+	var _ShowEmployeesCards = __webpack_require__(/*! ./ShowEmployeesCards.js */ 190);
+	
+	var _ShowEmployeesCards2 = _interopRequireDefault(_ShowEmployeesCards);
+	
+	var _ShowReleases = __webpack_require__(/*! ./ShowReleases.js */ 192);
+	
+	var _ShowReleases2 = _interopRequireDefault(_ShowReleases);
+	
+	var _ShowReleaseCards = __webpack_require__(/*! ./ShowReleaseCards.js */ 193);
+	
+	var _ShowReleaseCards2 = _interopRequireDefault(_ShowReleaseCards);
+	
+	var _ShowTeams = __webpack_require__(/*! ./ShowTeams.js */ 194);
+	
+	var _ShowTeams2 = _interopRequireDefault(_ShowTeams);
+	
+	var _Api = __webpack_require__(/*! ./Api.js */ 161);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	var birthdayFormData = __webpack_require__(/*! ./progressForm/datas/inputDatas.js */ 195);
+	var releaseFormData = __webpack_require__(/*! ./progressForm/datas/ReleaseFormData.js */ 196);
 	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	__webpack_require__(/*! ../sass/styles.global.scss */ 162);
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	var App = _react2.default.createClass({
+		displayName: 'App',
+		getInitialState: function getInitialState() {
+			return {
+				teams: [],
+				employees: [],
+				releases: [],
+				showAddEmployeeForm: false,
+				showAddReleaseForm: false
+			};
+		},
+		componentWillMount: function componentWillMount() {
+			this.getTeamData();
+			this.getEmployeeData();
+			this.getReleaseData();
+		},
+		componentDidMount: function componentDidMount() {
+			$('.ui.modal').modal({
+				detachable: false,
+				closable: true
+			});
+		},
+		getTeamData: function getTeamData() {
+			var _this = this;
 	
-	__webpack_require__(/*! ../sass/test.scss */ 160);
+			var successCallback = function successCallback(value) {
+				if (value._embedded) {
+					if (value._embedded.scrumTeams) {
+						_this.setState({ teams: value._embedded.scrumTeams });
+					};
+				};
+			};
 	
-	var App = function (_React$Component) {
-	  _inherits(App, _React$Component);
+			var errorCallBack = function errorCallBack(value) {};
 	
-	  function App() {
-	    _classCallCheck(this, App);
+			(0, _Api.getApiCall)('/RewardsWidgetAPI/scrumteams', null, successCallback, errorCallBack);
+		},
+		getEmployeeData: function getEmployeeData() {
+			var _this2 = this;
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(App).apply(this, arguments));
-	  }
+			var successCallback = function successCallback(value) {
+				if (value._embedded) {
+					if (value._embedded.employees) {
+						_this2.setState({ employees: value._embedded.employees });
+					};
+				};
+			};
 	
-	  _createClass(App, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'hello-form' },
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          ' Hello React!'
-	        ),
-	        _react2.default.createElement(_AwesomeComponent2.default, null)
-	      );
-	    }
-	  }]);
+			var errorCallBack = function errorCallBack(value) {};
 	
-	  return App;
-	}(_react2.default.Component);
+			(0, _Api.getApiCall)('/RewardsWidgetAPI/employees', null, successCallback, errorCallBack);
+		},
+		getReleaseData: function getReleaseData() {
+			var _this3 = this;
+	
+			var successCallback = function successCallback(value) {
+				if (value._embedded) {
+					if (value._embedded.releases) {
+						_this3.setState({ releases: value._embedded.releases });
+					};
+				};
+			};
+	
+			var errorCallBack = function errorCallBack(value) {};
+	
+			(0, _Api.getApiCall)('/RewardsWidgetAPI/releases', null, successCallback, errorCallBack);
+		},
+		createNewEmployee: function createNewEmployee(value) {
+			var _this4 = this;
+	
+			var successCallback = function successCallback(value) {
+				_this4.getEmployeeData();
+				_this4.onClosed();
+			};
+	
+			var errorCallBack = function errorCallBack(value) {};
+	
+			(0, _Api.postApiCall)('/RewardsWidgetAPI/employees', value, successCallback, errorCallBack);
+		},
+		createNewRelease: function createNewRelease(value) {
+			var _this5 = this;
+	
+			var successCallback = function successCallback(value) {
+				_this5.getReleaseData();
+				_this5.onClosed();
+			};
+	
+			var errorCallBack = function errorCallBack(value) {};
+	
+			(0, _Api.postApiCall)('/RewardsWidgetAPI/releases', value, successCallback, errorCallBack);
+		},
+		onClosed: function onClosed() {
+			this.setState({ showAddEmployeeForm: false, showAddReleaseForm: false });
+		},
+		showAddEmployeeForm: function showAddEmployeeForm() {
+			this.setState({ showAddEmployeeForm: true });
+		},
+		render: function render() {
+			var _this6 = this;
+	
+			return _react2.default.createElement(
+				'div',
+				{ className: 'homePage' },
+				_react2.default.createElement(
+					'h1',
+					null,
+					_react2.default.createElement('img', { src: '/img/deluxe.png', alt: 'Deluxe Rewards' })
+				),
+				_react2.default.createElement('hr', null),
+				_react2.default.createElement(
+					'div',
+					{ className: 'standups' },
+					_react2.default.createElement(_ShowTeams2.default, { teams: this.state.teams })
+				),
+				_react2.default.createElement('div', { className: 'clear' }),
+				_react2.default.createElement(
+					'div',
+					{ className: 'birthdays' },
+					_react2.default.createElement(
+						'h1',
+						null,
+						' Birthday Calendar'
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'employee-floatleft' },
+						_react2.default.createElement(_BirthdayComponent2.default, { getEmployeeData: this.getEmployeeData })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'employee-floatright' },
+						_react2.default.createElement(_BirthdayCard2.default, { employees: this.state.employees, showAddEmployeeForm: this.showAddEmployeeForm })
+					)
+				),
+				_react2.default.createElement('div', { className: 'clear' }),
+				_react2.default.createElement(
+					'div',
+					{ className: 'releases' },
+					_react2.default.createElement(
+						'h1',
+						null,
+						' Release Calendar'
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'release-floatleft' },
+						_react2.default.createElement(_ReleaseComponent2.default, { getReleaseData: this.getReleaseData })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'release-floatright' },
+						_react2.default.createElement(_ShowReleaseCards2.default, { releases: this.state.releases, showAddReleaseForm: function showAddReleaseForm() {
+								return _this6.setState({ showAddReleaseForm: true });
+							} })
+					)
+				),
+				_react2.default.createElement('div', { className: 'clear' }),
+				this.state.showAddEmployeeForm && _react2.default.createElement(_ProgressForm2.default, { onClosed: this.onClosed, onSubmitButton: this.createNewEmployee, inputDatas: birthdayFormData }),
+				this.state.showAddReleaseForm && _react2.default.createElement(_ProgressForm2.default, { onClosed: this.onClosed, onSubmitButton: this.createNewRelease, inputDatas: releaseFormData })
+			);
+		}
+	});
 	
 	(0, _reactDom.render)(_react2.default.createElement(App, null), document.getElementById('app'));
 
@@ -260,7 +428,7 @@
 	}
 	
 	module.exports = React;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 4 */
@@ -270,14 +438,103 @@
 /***/ function(module, exports) {
 
 	// shim for using process in browser
-	
 	var process = module.exports = {};
+	
+	// cached from whatever global is present so that test runners that stub it
+	// don't break things.  But we need to wrap it in a try catch in case it is
+	// wrapped in strict mode code which doesn't define any globals.  It's inside a
+	// function because try/catches deoptimize in certain engines.
+	
+	var cachedSetTimeout;
+	var cachedClearTimeout;
+	
+	function defaultSetTimout() {
+	    throw new Error('setTimeout has not been defined');
+	}
+	function defaultClearTimeout () {
+	    throw new Error('clearTimeout has not been defined');
+	}
+	(function () {
+	    try {
+	        if (typeof setTimeout === 'function') {
+	            cachedSetTimeout = setTimeout;
+	        } else {
+	            cachedSetTimeout = defaultSetTimout;
+	        }
+	    } catch (e) {
+	        cachedSetTimeout = defaultSetTimout;
+	    }
+	    try {
+	        if (typeof clearTimeout === 'function') {
+	            cachedClearTimeout = clearTimeout;
+	        } else {
+	            cachedClearTimeout = defaultClearTimeout;
+	        }
+	    } catch (e) {
+	        cachedClearTimeout = defaultClearTimeout;
+	    }
+	} ())
+	function runTimeout(fun) {
+	    if (cachedSetTimeout === setTimeout) {
+	        //normal enviroments in sane situations
+	        return setTimeout(fun, 0);
+	    }
+	    // if setTimeout wasn't available but was latter defined
+	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+	        cachedSetTimeout = setTimeout;
+	        return setTimeout(fun, 0);
+	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedSetTimeout(fun, 0);
+	    } catch(e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+	            return cachedSetTimeout.call(null, fun, 0);
+	        } catch(e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+	            return cachedSetTimeout.call(this, fun, 0);
+	        }
+	    }
+	
+	
+	}
+	function runClearTimeout(marker) {
+	    if (cachedClearTimeout === clearTimeout) {
+	        //normal enviroments in sane situations
+	        return clearTimeout(marker);
+	    }
+	    // if clearTimeout wasn't available but was latter defined
+	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+	        cachedClearTimeout = clearTimeout;
+	        return clearTimeout(marker);
+	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedClearTimeout(marker);
+	    } catch (e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+	            return cachedClearTimeout.call(null, marker);
+	        } catch (e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+	            return cachedClearTimeout.call(this, marker);
+	        }
+	    }
+	
+	
+	
+	}
 	var queue = [];
 	var draining = false;
 	var currentQueue;
 	var queueIndex = -1;
 	
 	function cleanUpNextTick() {
+	    if (!draining || !currentQueue) {
+	        return;
+	    }
 	    draining = false;
 	    if (currentQueue.length) {
 	        queue = currentQueue.concat(queue);
@@ -293,7 +550,7 @@
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = setTimeout(cleanUpNextTick);
+	    var timeout = runTimeout(cleanUpNextTick);
 	    draining = true;
 	
 	    var len = queue.length;
@@ -310,7 +567,7 @@
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    clearTimeout(timeout);
+	    runClearTimeout(timeout);
 	}
 	
 	process.nextTick = function (fun) {
@@ -322,7 +579,7 @@
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        setTimeout(drainQueue, 0);
+	        runTimeout(drainQueue);
 	    }
 	};
 	
@@ -534,7 +791,7 @@
 	});
 	
 	module.exports = ReactDOMTextComponent;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 7 */
@@ -672,7 +929,7 @@
 	});
 	
 	module.exports = DOMChildrenOperations;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 8 */
@@ -826,7 +1083,7 @@
 	};
 	
 	module.exports = Danger;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 9 */
@@ -963,7 +1220,7 @@
 	}
 	
 	module.exports = createNodesFromMarkup;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 11 */
@@ -1122,7 +1379,7 @@
 	}
 	
 	module.exports = toArray;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 13 */
@@ -1181,7 +1438,7 @@
 	}
 	
 	module.exports = invariant;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 14 */
@@ -1285,7 +1542,7 @@
 	}
 	
 	module.exports = getMarkupWrap;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 15 */
@@ -1428,7 +1685,7 @@
 	};
 	
 	module.exports = keyMirror;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 18 */
@@ -1533,7 +1790,7 @@
 	}
 	
 	module.exports = ReactPerf;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 19 */
@@ -1959,7 +2216,7 @@
 	});
 	
 	module.exports = DOMPropertyOperations;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 23 */
@@ -2202,7 +2459,7 @@
 	};
 	
 	module.exports = DOMProperty;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 24 */
@@ -2302,7 +2559,7 @@
 	}
 	
 	module.exports = warning;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 26 */
@@ -2454,7 +2711,7 @@
 	});
 	
 	module.exports = ReactDOMIDOperations;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 28 */
@@ -3313,7 +3570,7 @@
 	});
 	
 	module.exports = ReactMount;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 29 */
@@ -4033,7 +4290,7 @@
 	};
 	
 	module.exports = EventPluginHub;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 32 */
@@ -4262,7 +4519,7 @@
 	};
 	
 	module.exports = EventPluginRegistry;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 33 */
@@ -4473,7 +4730,7 @@
 	};
 	
 	module.exports = EventPluginUtils;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 34 */
@@ -4559,7 +4816,7 @@
 	}
 	
 	module.exports = ReactErrorUtils;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 35 */
@@ -4627,7 +4884,7 @@
 	}
 	
 	module.exports = accumulateInto;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 36 */
@@ -5150,7 +5407,7 @@
 	};
 	
 	module.exports = ReactElement;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 43 */
@@ -5183,7 +5440,7 @@
 	}
 	
 	module.exports = canDefineProperty;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 44 */
@@ -5550,7 +5807,7 @@
 	};
 	
 	module.exports = ReactInstanceHandles;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 46 */
@@ -6046,7 +6303,7 @@
 	};
 	
 	module.exports = ReactOwner;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 53 */
@@ -6312,7 +6569,7 @@
 	};
 	
 	module.exports = ReactUpdateQueue;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 54 */
@@ -6544,7 +6801,7 @@
 	};
 	
 	module.exports = ReactUpdates;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 55 */
@@ -6646,7 +6903,7 @@
 	PooledClass.addPoolingTo(CallbackQueue);
 	
 	module.exports = CallbackQueue;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 56 */
@@ -6774,7 +7031,7 @@
 	};
 	
 	module.exports = PooledClass;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 57 */
@@ -7014,7 +7271,7 @@
 	};
 	
 	module.exports = Transaction;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 58 */
@@ -7043,7 +7300,7 @@
 	}
 	
 	module.exports = emptyObject;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 59 */
@@ -7291,7 +7548,7 @@
 	}
 	
 	module.exports = instantiateReactComponent;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 63 */
@@ -7994,7 +8251,7 @@
 	};
 	
 	module.exports = ReactCompositeComponent;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 64 */
@@ -8054,7 +8311,7 @@
 	};
 	
 	module.exports = ReactComponentEnvironment;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 65 */
@@ -8117,7 +8374,7 @@
 	}
 	
 	module.exports = ReactPropTypeLocationNames;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 67 */
@@ -8204,6 +8461,10 @@
 	  }
 	};
 	
+	function registerNullComponentID() {
+	  ReactEmptyComponentRegistry.registerNullComponentID(this._rootNodeID);
+	}
+	
 	var ReactEmptyComponent = function (instantiate) {
 	  this._currentElement = null;
 	  this._rootNodeID = null;
@@ -8212,7 +8473,7 @@
 	assign(ReactEmptyComponent.prototype, {
 	  construct: function (element) {},
 	  mountComponent: function (rootID, transaction, context) {
-	    ReactEmptyComponentRegistry.registerNullComponentID(rootID);
+	    transaction.getReactMountReady().enqueue(registerNullComponentID, this);
 	    this._rootNodeID = rootID;
 	    return ReactReconciler.mountComponent(this._renderedComponent, rootID, transaction, context);
 	  },
@@ -8330,7 +8591,7 @@
 	};
 	
 	module.exports = ReactNativeComponent;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 70 */
@@ -8702,7 +8963,7 @@
 	}
 	
 	module.exports = validateDOMNesting;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 71 */
@@ -8808,7 +9069,7 @@
 	module.exports = {
 	  inject: inject
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 72 */
@@ -9365,7 +9626,7 @@
 	};
 	
 	module.exports = EventPropagators;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 74 */
@@ -9743,7 +10004,7 @@
 	PooledClass.addPoolingTo(SyntheticEvent, PooledClass.fourArgumentPooler);
 	
 	module.exports = SyntheticEvent;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 78 */
@@ -10928,7 +11189,7 @@
 	};
 	
 	module.exports = ReactBrowserComponentMixin;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 91 */
@@ -10986,7 +11247,7 @@
 	}
 	
 	module.exports = findDOMNode;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 92 */
@@ -12032,7 +12293,7 @@
 	assign(ReactDOMComponent.prototype, ReactDOMComponent.Mixin, ReactMultiChild.Mixin);
 	
 	module.exports = ReactDOMComponent;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 94 */
@@ -12294,7 +12555,7 @@
 	});
 	
 	module.exports = CSSPropertyOperations;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 97 */
@@ -12939,7 +13200,7 @@
 	}
 	
 	module.exports = ReactDOMInput;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 106 */
@@ -13082,7 +13343,7 @@
 	};
 	
 	module.exports = LinkedValueUtils;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 107 */
@@ -13592,7 +13853,7 @@
 	};
 	
 	module.exports = ReactDOMOption;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 110 */
@@ -13980,7 +14241,7 @@
 	}
 	
 	module.exports = traverseAllChildren;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 112 */
@@ -14177,7 +14438,7 @@
 	}
 	
 	module.exports = ReactDOMSelect;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 113 */
@@ -14299,7 +14560,7 @@
 	}
 	
 	module.exports = ReactDOMTextarea;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 114 */
@@ -14804,7 +15065,7 @@
 	};
 	
 	module.exports = ReactMultiChild;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 115 */
@@ -14935,7 +15196,7 @@
 	};
 	
 	module.exports = ReactChildReconciler;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 116 */
@@ -14992,7 +15253,7 @@
 	}
 	
 	module.exports = flattenChildren;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 117 */
@@ -15362,7 +15623,7 @@
 	};
 	
 	module.exports = EventListener;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 120 */
@@ -16234,7 +16495,7 @@
 	};
 	
 	module.exports = ReactClass;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 123 */
@@ -16365,7 +16626,7 @@
 	}
 	
 	module.exports = ReactComponent;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 124 */
@@ -16492,7 +16753,7 @@
 	};
 	
 	module.exports = ReactNoopUpdateQueue;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 125 */
@@ -17969,7 +18230,7 @@
 	};
 	
 	module.exports = SimpleEventPlugin;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 133 */
@@ -19169,7 +19430,7 @@
 	
 	'use strict';
 	
-	module.exports = '0.14.7';
+	module.exports = '0.14.8';
 
 /***/ },
 /* 147 */
@@ -19319,7 +19580,7 @@
 	  renderToString: renderToString,
 	  renderToStaticMarkup: renderToStaticMarkup
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 150 */
@@ -19528,7 +19789,7 @@
 	};
 	
 	module.exports = React;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 153 */
@@ -19714,7 +19975,7 @@
 	}, createDOMFactory);
 	
 	module.exports = ReactDOMFactories;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 154 */
@@ -20004,7 +20265,7 @@
 	};
 	
 	module.exports = ReactElementValidator;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 155 */
@@ -20105,7 +20366,7 @@
 	}
 	
 	module.exports = onlyChild;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 157 */
@@ -20162,7 +20423,7 @@
 	}
 	
 	module.exports = deprecated;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/~/node-libs-browser/~/process/browser.js */ 4)))
 
 /***/ },
 /* 158 */
@@ -20178,12 +20439,12 @@
 
 /***/ },
 /* 159 */
-/*!*********************************************!*\
-  !*** ./src/client/app/AwesomeComponent.jsx ***!
-  \*********************************************/
+/*!********************************************!*\
+  !*** ./src/client/app/AwesomeComponent.js ***!
+  \********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -20209,7 +20470,7 @@
 	  function AwesomeComponent(props) {
 	    _classCallCheck(this, AwesomeComponent);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AwesomeComponent).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (AwesomeComponent.__proto__ || Object.getPrototypeOf(AwesomeComponent)).call(this, props));
 	
 	    _this.state = { likesCount: 0 };
 	    _this.onLike = _this.onLike.bind(_this);
@@ -20217,31 +20478,27 @@
 	  }
 	
 	  _createClass(AwesomeComponent, [{
-	    key: 'onLike',
+	    key: "onLike",
 	    value: function onLike() {
 	      var newLikesCount = this.state.likesCount + 1;
 	      this.setState({ likesCount: newLikesCount });
 	    }
 	  }, {
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        'Likes : ',
+	        "div",
+	        { className: "ui labeled button", tabindex: "0" },
 	        _react2.default.createElement(
-	          'span',
-	          null,
-	          this.state.likesCount
+	          "div",
+	          { className: "ui red button", onClick: this.onLike },
+	          _react2.default.createElement("i", { className: "heart icon" }),
+	          " Like"
 	        ),
 	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.onLike },
-	            'Like Me'
-	          )
+	          "a",
+	          { className: "ui basic red left pointing label" },
+	          this.state.likesCount
 	        )
 	      );
 	    }
@@ -20254,25 +20511,357 @@
 
 /***/ },
 /* 160 */
-/*!***********************************!*\
-  !*** ./src/client/sass/test.scss ***!
-  \***********************************/
+/*!*********************************************!*\
+  !*** ./src/client/app/BirthdayComponent.js ***!
+  \*********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(/*! react-dom */ 158);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _Api = __webpack_require__(/*! ./Api.js */ 161);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	__webpack_require__(/*! ../sass/styles.global.scss */ 162);
+	
+	var TOTAL_INPUTS = 7;
+	
+	var BirthdayComponent = _react2.default.createClass({
+		displayName: 'BirthdayComponent',
+		postData: function postData(e) {
+			var _this = this;
+	
+			e.preventDefault();
+			var successCallback = function successCallback(value) {
+				_this.resetForm();
+				_this.gotReponseFromServer(true);
+			};
+			var errorCallBack = function errorCallBack(value) {
+				_this.gotReponseFromServer(false);
+			};
+			(0, _Api.postApiCall)('/RewardsWidgetAPI/employees', this.getDataToSend(), successCallback, errorCallBack);
+		},
+		getDataToSend: function getDataToSend() {
+			return {
+				tnumber: this.state.tnumber,
+				firstName: this.state.firstName,
+				lastName: this.state.lastName,
+				title: this.state.title,
+				dob: this.state.dob,
+				anniversaryDate: this.state.anniversaryDate,
+				location: this.state.location
+			};
+		},
+		gotReponseFromServer: function gotReponseFromServer(success) {
+			if (success) {
+				this.props.getEmployeeData();
+			};
+	
+			this.setState({
+				gotResponse: true,
+				isSuccess: success,
+				isSubmitting: false
+			});
+		},
+		getInitialState: function getInitialState() {
+			return {
+				tnumber: "",
+				firstName: "",
+				lastName: "",
+				title: "",
+				dob: "",
+				anniversaryDate: "",
+				location: "",
+				icon: "",
+				isSubmitting: false,
+				gotResponse: false,
+				isSuccess: false
+			};
+		},
+		resetForm: function resetForm() {
+			this.refs.birhtdayForm.reset();
+			this.setState({
+				tnumber: "",
+				firstName: "",
+				lastName: "",
+				title: "",
+				dob: "",
+				anniversaryDate: "",
+				location: "",
+				icon: "",
+				gotResponse: false
+			});
+		},
+		progressBarIncrement: function progressBarIncrement() {
+			var allStateKeys = Object.keys(this.getDataToSend());
+			var totalBlank = 0;
+			for (var i = allStateKeys.length - 1; i >= 0; i--) {
+				if (this.state[allStateKeys[i]] === "") {
+					totalBlank++;
+				};
+			};
+	
+			var percent = (TOTAL_INPUTS - totalBlank) / TOTAL_INPUTS * 100;
+			$('#progress_bar').progress({
+				percent: percent
+			});
+	
+			this.percent = percent;
+		},
+		render: function render() {
+			var _this2 = this;
+	
+			this.progressBarIncrement();
+			var formMessage = this.state.gotResponse ? this.state.isSuccess ? "success" : "error" : "";
+			formMessage = this.state.isSubmitting ? "loading" : formMessage;
+			return _react2.default.createElement(
+				'div',
+				{ className: 'ui attached segment' },
+				_react2.default.createElement(
+					'form',
+					{ className: 'ui form ' + formMessage, ref: 'birhtdayForm', id: 'birhtdayForm', onSubmit: this.postData },
+					_react2.default.createElement(
+						'h3',
+						{ className: 'ui dividing header' },
+						'Add Birthday'
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'ui indicating progress', 'data-value': '0', 'data-total': TOTAL_INPUTS, id: 'progress_bar' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'bar' },
+							_react2.default.createElement('div', { className: 'progress' })
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'field' },
+						_react2.default.createElement(
+							'label',
+							null,
+							'T Number:'
+						),
+						_react2.default.createElement('input', { type: 'text', name: 'tnumber', placeholder: 'tnumber', onChange: function onChange(event) {
+								return _this2.setState({ tnumber: event.target.value });
+							}, required: true })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'field' },
+						_react2.default.createElement(
+							'label',
+							null,
+							'First Name:'
+						),
+						_react2.default.createElement('input', { type: 'text', name: 'fname', placeholder: 'First Name', onChange: function onChange(event) {
+								return _this2.setState({ firstName: event.target.value });
+							}, required: true })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'field' },
+						_react2.default.createElement(
+							'label',
+							null,
+							'Last Name:'
+						),
+						_react2.default.createElement('input', { type: 'text', name: 'lname', placeholder: 'Last Name', onChange: function onChange(event) {
+								return _this2.setState({ lastName: event.target.value });
+							}, required: true })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'field' },
+						_react2.default.createElement(
+							'label',
+							null,
+							'Job Title:'
+						),
+						_react2.default.createElement('input', { type: 'text', name: 'title', placeholder: 'Title', onChange: function onChange(event) {
+								return _this2.setState({ title: event.target.value });
+							}, required: true })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'field' },
+						_react2.default.createElement(
+							'label',
+							null,
+							'Date Of Birth:'
+						),
+						_react2.default.createElement('input', { type: 'date', name: 'bday', placeholder: 'Birthday', onChange: function onChange(event) {
+								return _this2.setState({ dob: event.target.value });
+							}, required: true })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'field' },
+						_react2.default.createElement(
+							'label',
+							null,
+							'Work Anniversary:'
+						),
+						_react2.default.createElement('input', { type: 'date', name: 'anniversaryDate', placeholder: 'Work Anniversary', onChange: function onChange(event) {
+								return _this2.setState({ anniversaryDate: event.target.value });
+							}, required: true })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'field' },
+						_react2.default.createElement(
+							'label',
+							null,
+							'Work Location'
+						),
+						_react2.default.createElement(
+							'select',
+							{ className: 'ui fluid search dropdown', name: 'location', onChange: function onChange(event) {
+									return _this2.setState({ location: event.target.value });
+								}, required: true },
+							_react2.default.createElement(
+								'option',
+								{ value: '' },
+								'-- Select Your Location --'
+							),
+							_react2.default.createElement(
+								'option',
+								{ value: 'Plymouth, MI' },
+								'Plymouth, MI'
+							),
+							_react2.default.createElement(
+								'option',
+								{ value: 'Boca, FL' },
+								'Boca, FL'
+							),
+							_react2.default.createElement(
+								'option',
+								{ value: 'Atlanta, GA' },
+								'Atlanta, GA'
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'ui success message' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'header' },
+							'Form Completed'
+						),
+						_react2.default.createElement(
+							'p',
+							null,
+							'Your information is entered successfully.'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'ui error message' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'header' },
+							'Error!'
+						),
+						_react2.default.createElement(
+							'p',
+							null,
+							'It seems there is some error. Please try again later.'
+						)
+					),
+					_react2.default.createElement(
+						'button',
+						{ className: 'ui green button ' + (this.state.isSubmitting ? "loading" : "") + ' ' + (this.percent === 100 ? "" : "disabled"), type: 'submit' },
+						'Submit'
+					)
+				)
+			);
+		}
+	});
+	
+	exports.default = BirthdayComponent;
+
+/***/ },
+/* 161 */
+/*!*******************************!*\
+  !*** ./src/client/app/Api.js ***!
+  \*******************************/
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.getApiCall = getApiCall;
+	exports.postApiCall = postApiCall;
+	var LOCAL_BASE_URL = 'http://localhost:8080';
+	var REMOTE_BASE_URL = 'https://rewardswidgetapi.drwdev.com';
+	
+	function callAPi(method, url) {
+	  var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+	  var successCallback = arguments[3];
+	  var errorCallback = arguments[4];
+	
+	  $.ajax({
+	    method: method,
+	    url: REMOTE_BASE_URL + url,
+	    crossDomain: true,
+	    contentType: 'application/hal+json;charset=UTF-8',
+	    dataType: 'json',
+	    data: JSON.stringify(data)
+	  }).success(function (apiResponse) {
+	    console.log("success");
+	    console.log(apiResponse);
+	    successCallback(apiResponse);
+	  }).error(function (apiResponse) {
+	    console.log("error");
+	    console.log(apiResponse);
+	    errorCallback(apiResponse);
+	  });
+	}
+	
+	function getApiCall(url, data, successCallback, errorCallback) {
+	  callAPi('GET', url, data, successCallback, errorCallback);
+	}
+	
+	function postApiCall(url, data, successCallback, errorCallback) {
+	  callAPi('POST', url, data, successCallback, errorCallback);
+	}
+
+/***/ },
+/* 162 */
+/*!********************************************!*\
+  !*** ./src/client/sass/styles.global.scss ***!
+  \********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./../../../~/css-loader!./../../../~/sass-loader!./test.scss */ 161);
+	var content = __webpack_require__(/*! !./../../../~/css-loader!./../../../~/sass-loader!./styles.global.scss */ 163);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(/*! ./../../../~/style-loader/addStyles.js */ 163)(content, {});
+	var update = __webpack_require__(/*! ./../../../~/style-loader/addStyles.js */ 165)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./test.scss", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./test.scss");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./styles.global.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./styles.global.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -20282,24 +20871,24 @@
 	}
 
 /***/ },
-/* 161 */
-/*!******************************************************************!*\
-  !*** ./~/css-loader!./~/sass-loader!./src/client/sass/test.scss ***!
-  \******************************************************************/
+/* 163 */
+/*!***************************************************************************!*\
+  !*** ./~/css-loader!./~/sass-loader!./src/client/sass/styles.global.scss ***!
+  \***************************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(/*! ./../../../~/css-loader/lib/css-base.js */ 162)();
+	exports = module.exports = __webpack_require__(/*! ./../../../~/css-loader/lib/css-base.js */ 164)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, ".hello-form p {\n  color: blue; }\n", ""]);
+	exports.push([module.id, "html {\n  background: #FFF; }\n\nbody {\n  color: #62706c;\n  font-size: 100%;\n  line-height: 1.25;\n  padding: 25px;\n  margin: 25px 0;\n  border-right: 25px solid #fff;\n  border-left: 25px solid #fff;\n  font-family: Arial, sans-serif; }\n\n.homePage {\n  width: 1200px;\n  margin-left: auto;\n  margin-right: auto; }\n\n.employee-floatleft {\n  float: left;\n  width: 500px; }\n\n.employee-floatright {\n  float: right;\n  width: 670px;\n  padding-right: 40px; }\n\n.clear {\n  clear: both;\n  height: 50px; }\n\n.release-floatleft {\n  float: left;\n  width: 500px; }\n\n.release-floatright {\n  float: right;\n  width: 670px;\n  padding-right: 140px; }\n\n.showTeam h1 {\n  text-align: center; }\n\n.oval-shape {\n  width: 400px;\n  margin: 15px;\n  text-align: center;\n  background: gray;\n  -moz-border-radius: 100px / 50px;\n  -webkit-border-radius: 100px / 50px;\n  border-radius: 50%;\n  display: inline-block;\n  color: black; }\n\n.content {\n  padding: 92px; }\n\n.content h2 {\n  text-decoration: underline; }\n\n.team-description {\n  font-size: 16px;\n  font-style: italic; }\n\n.tag-cloud {\n  background: #ddd;\n  padding: 5px 8px;\n  margin: 2px;\n  text-decoration: none !important;\n  border: 1px solid #d7d7d7; }\n\n*, *:after, *:before {\n  box-sizing: border-box; }\n\n.clearfix:before, .clearfix:after {\n  content: '';\n  display: table; }\n\n.clearfix:after {\n  clear: both; }\n\nlabel {\n  display: block;\n  font-size: 1.3em; }\n\n.form {\n  margin: 60px auto 30px;\n  max-width: 400px;\n  text-align: center; }\n\n.form--group {\n  margin: 10px auto 40px;\n  position: relative;\n  overflow: hidden;\n  height: 100px; }\n\n.form--focus {\n  position: absolute;\n  bottom: 25px;\n  left: 0;\n  width: 100%;\n  background: #1ECD97;\n  height: 2px;\n  -webkit-transform: translate3d(-100%, 0, 0);\n  transform: translate3d(-100%, 0, 0);\n  -webkit-transition: -webkit-transform 0.3s;\n  transition: transform 0.3s; }\n\n.form--control:focus + .form--focus {\n  -webkit-transform: translate3d(0, 0, 0);\n  transform: translate3d(0, 0, 0); }\n\n.form--control {\n  display: block;\n  padding: 5px;\n  width: 100%;\n  border: none;\n  border-bottom: solid 2px #eee;\n  background: #f9f9f9;\n  text-align: center;\n  font-size: 2em;\n  outline: none;\n  font-family: Arial, sans-serif; }\n\n.form--error {\n  display: none;\n  color: #FB797E;\n  font-size: 1em;\n  padding: 4px;\n  border-radius: 20px; }\n\n.has--error .form--focus {\n  background: #FB797E; }\n\n.has--error .form--error {\n  display: block; }\n\n.form--submit {\n  display: block;\n  margin: 0 auto;\n  padding: 0;\n  width: 250px;\n  height: 70px;\n  border: 2px solid #1ECD97;\n  border-radius: 40px;\n  background: transparent;\n  color: #1ECD97;\n  letter-spacing: 1px;\n  font-size: 18px;\n  font-family: Arial, sans-serif;\n  outline: none;\n  cursor: pointer;\n  -webkit-tap-highlight-color: transparent;\n  -webkit-transition: background-color 0.3s, color 0.3s, width 0.3s, border-width 0.3s, border-color 0.3s;\n  transition: background-color 0.3s, color 0.3s, width 0.3s, border-width 0.3s, border-color 0.3s; }\n\n.form--submit:hover {\n  background-color: #1ECD97;\n  color: #fff; }\n\n.form--submit-disabled, .form--submit-disabled:hover {\n  cursor: not-allowed;\n  background: #FB797E;\n  border-color: #F0797E;\n  color: #fff; }\n\n.progressCircle {\n  position: fixed !important;\n  top: 50%;\n  margin-top: -100px;\n  padding-left: 25px; }\n\n.progressCircle-pie-chart {\n  width: 200px;\n  height: 200px;\n  border-radius: 50%;\n  background-color: #E5E5E5;\n  position: relative; }\n\n.progressCircle-pie-chart.gt-50 {\n  background-color: #1ECD97; }\n\n.ppc-progressCircle {\n  content: \"\";\n  position: absolute;\n  border-radius: 50%;\n  left: calc(50% - 100px);\n  top: calc(50% - 100px);\n  width: 200px;\n  height: 200px;\n  clip: rect(0, 200px, 200px, 100px); }\n\n.ppc-progressCircle .ppc-progressCircle-fill {\n  content: \"\";\n  position: absolute;\n  border-radius: 50%;\n  left: calc(50% - 100px);\n  top: calc(50% - 100px);\n  width: 200px;\n  height: 200px;\n  clip: rect(0, 100px, 200px, 0);\n  background: #1ECD97;\n  transition: all 1s ease;\n  -webkit-transition: all 1s ease;\n  -webkit-transform: rotate(0deg);\n  -ms-transform: rotate(0deg);\n  transform: rotate(0deg); }\n\n.gt-50 .ppc-progressCircle {\n  clip: rect(0, 100px, 200px, 0); }\n\n.gt-50 .ppc-progressCircle .ppc-progressCircle-fill {\n  clip: rect(0, 200px, 200px, 100px);\n  background: #E5E5E5; }\n\n.ppc-percents {\n  content: \"\";\n  position: absolute;\n  border-radius: 50%;\n  left: calc(50% - 173.91304px/2);\n  top: calc(50% - 173.91304px/2);\n  width: 173.91304px;\n  height: 173.91304px;\n  background: #fff;\n  text-align: center;\n  display: table; }\n\n.ppc-percents span {\n  display: block;\n  font-size: 2.6em;\n  font-weight: bold;\n  color: #1ECD97; }\n\n.pcc-percents-wrapper {\n  display: table-cell;\n  vertical-align: middle; }\n\n@media (max-width: 924px) {\n  .progressCircle {\n    position: relative !important;\n    top: 0;\n    left: 50%;\n    margin: 0 0 0 -100px; } }\n", ""]);
 	
 	// exports
 
 
 /***/ },
-/* 162 */
+/* 164 */
 /*!**************************************!*\
   !*** ./~/css-loader/lib/css-base.js ***!
   \**************************************/
@@ -20358,7 +20947,7 @@
 
 
 /***/ },
-/* 163 */
+/* 165 */
 /*!*************************************!*\
   !*** ./~/style-loader/addStyles.js ***!
   \*************************************/
@@ -20577,7 +21166,6 @@
 	function applyToTag(styleElement, obj) {
 		var css = obj.css;
 		var media = obj.media;
-		var sourceMap = obj.sourceMap;
 	
 		if(media) {
 			styleElement.setAttribute("media", media)
@@ -20595,7 +21183,6 @@
 	
 	function updateLink(linkElement, obj) {
 		var css = obj.css;
-		var media = obj.media;
 		var sourceMap = obj.sourceMap;
 	
 		if(sourceMap) {
@@ -20613,6 +21200,3681 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 166 */
+/*!********************************************!*\
+  !*** ./src/client/app/ReleaseComponent.js ***!
+  \********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(/*! react-dom */ 158);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _Api = __webpack_require__(/*! ./Api.js */ 161);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	__webpack_require__(/*! ../sass/styles.global.scss */ 162);
+	
+	var TOTAL_INPUTS = 6;
+	
+	var ReleaseComponent = _react2.default.createClass({
+		displayName: 'ReleaseComponent',
+		postData: function postData(e) {
+			var _this = this;
+	
+			e.preventDefault();
+			var successCallback = function successCallback(value) {
+				_this.resetForm();
+				_this.gotReponseFromServer(true);
+			};
+			var errorCallBack = function errorCallBack(value) {
+				_this.gotReponseFromServer(false);
+			};
+			(0, _Api.postApiCall)('/RewardsWidgetAPI/releases', this.getDataToSend(), successCallback, errorCallBack);
+		},
+		getDataToSend: function getDataToSend() {
+			return {
+				releaseNumber: this.state.releaseNumber,
+				codeLockDownDate: this.state.codeLockDownDate,
+				rcDeploymentDate: this.state.rcDeploymentDate,
+				xuatDeploymentDate: this.state.xuatDeploymentDate,
+				prodDeploymentDate: this.state.prodDeploymentDate,
+				releaseNotes: this.state.releaseNotes
+			};
+		},
+		gotReponseFromServer: function gotReponseFromServer(success) {
+			if (success) {
+				this.props.getReleaseData();
+			}
+			this.setState({
+				gotResponse: true,
+				isSuccess: success,
+				isSubmitting: false
+			});
+		},
+		getInitialState: function getInitialState() {
+			return {
+				releaseNumber: "",
+				codeLockDownDate: "",
+				rcDeploymentDate: "",
+				xuatDeploymentDate: "",
+				prodDeploymentDate: "",
+				releaseNotes: "",
+				isSubmitting: false,
+				gotResponse: false,
+				isSuccess: false
+			};
+		},
+		resetForm: function resetForm() {
+			this.refs.releaseForm.reset();
+			this.setState({
+				releaseNumber: "",
+				codeLockDownDate: "",
+				rcDeploymentDate: "",
+				xuatDeploymentDate: "",
+				prodDeploymentDate: "",
+				releaseNotes: "",
+				gotResponse: false
+			});
+		},
+		progressBarIncrement: function progressBarIncrement() {
+			var allStateKeys = Object.keys(this.getDataToSend());
+			var totalBlank = 0;
+			for (var i = allStateKeys.length - 1; i >= 0; i--) {
+				if (this.state[allStateKeys[i]] === "") {
+					totalBlank++;
+				};
+			};
+	
+			var percent = (TOTAL_INPUTS - totalBlank) / TOTAL_INPUTS * 100;
+	
+			$('#progress_bar_release').progress({
+				percent: percent
+			});
+	
+			this.percent = percent;
+		},
+		render: function render() {
+			var _this2 = this;
+	
+			this.progressBarIncrement();
+			var formMessage = this.state.gotResponse ? this.state.isSuccess ? "success" : "error" : "";
+			formMessage = this.state.isSubmitting ? "loading" : formMessage;
+			return _react2.default.createElement(
+				'div',
+				{ className: 'ui attached segment' },
+				_react2.default.createElement(
+					'form',
+					{ className: 'ui form ' + formMessage, ref: 'releaseForm', id: 'releaseForm', onSubmit: this.postData },
+					_react2.default.createElement(
+						'h3',
+						{ className: 'ui dividing header' },
+						'Add Release Info'
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'ui indicating progress', 'data-value': '0', 'data-total': TOTAL_INPUTS, id: 'progress_bar_release' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'bar' },
+							_react2.default.createElement('div', { className: 'progress' })
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'field' },
+						_react2.default.createElement(
+							'label',
+							null,
+							'Release Number:'
+						),
+						_react2.default.createElement('input', { type: 'text', name: 'releaseNumber', placeholder: 'Release Number', onChange: function onChange(event) {
+								return _this2.setState({ releaseNumber: event.target.value });
+							}, required: true })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'field' },
+						_react2.default.createElement(
+							'label',
+							null,
+							'Code LockDown:'
+						),
+						_react2.default.createElement('input', { type: 'date', name: 'codeLockDownDate', placeholder: 'Code LockDown', onChange: function onChange(event) {
+								return _this2.setState({ codeLockDownDate: event.target.value });
+							}, required: true })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'field' },
+						_react2.default.createElement(
+							'label',
+							null,
+							'Deployment to RC:'
+						),
+						_react2.default.createElement('input', { type: 'date', name: 'rcDeploymentDate', placeholder: 'Deployment to RC', onChange: function onChange(event) {
+								return _this2.setState({ rcDeploymentDate: event.target.value });
+							}, required: true })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'field' },
+						_react2.default.createElement(
+							'label',
+							null,
+							'Deployment to XUAT:'
+						),
+						_react2.default.createElement('input', { type: 'date', name: 'xuatDeploymentDate', placeholder: 'Deployment to XUAT', onChange: function onChange(event) {
+								return _this2.setState({ xuatDeploymentDate: event.target.value });
+							}, required: true })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'field' },
+						_react2.default.createElement(
+							'label',
+							null,
+							'Deployment to Production:'
+						),
+						_react2.default.createElement('input', { type: 'date', name: 'prodDeploymentDate', placeholder: 'Birthday', onChange: function onChange(event) {
+								return _this2.setState({ prodDeploymentDate: event.target.value });
+							}, required: true })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'field' },
+						_react2.default.createElement(
+							'label',
+							null,
+							'Release Notes:'
+						),
+						_react2.default.createElement('textarea', { type: 'text', name: 'releaseNotes', placeholder: 'Release Notes:', onChange: function onChange(event) {
+								return _this2.setState({ releaseNotes: event.target.value });
+							}, required: true })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'ui success message' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'header' },
+							'Form Completed'
+						),
+						_react2.default.createElement(
+							'p',
+							null,
+							'Release information has been successfully entered.'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'ui error message' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'header' },
+							'Error!'
+						),
+						_react2.default.createElement(
+							'p',
+							null,
+							'It seems there is some error. Please try again later.'
+						)
+					),
+					_react2.default.createElement(
+						'button',
+						{ className: 'ui green button ' + (this.state.isSubmitting ? "loading" : "") + ' ' + (this.percent === 100 ? "" : "disabled"), type: 'submit' },
+						'Submit'
+					)
+				)
+			);
+		}
+	});
+	
+	exports.default = ReleaseComponent;
+
+/***/ },
+/* 167 */
+/*!*****************************************************!*\
+  !*** ./src/client/app/progressForm/ProgressForm.js ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var Validator = __webpack_require__(/*! validatorjs */ 168);
+	var classSet = __webpack_require__(/*! ./utils/classSet */ 183);
+	var ProgressElement = __webpack_require__(/*! ./components/Progress */ 184);
+	var FormElement = __webpack_require__(/*! ./components/Form */ 185);
+	
+	var ProgressForm = React.createClass({
+	  displayName: 'ProgressForm',
+	
+	  getInitialState: function getInitialState() {
+	
+	    return {
+	      inputDatas: [],
+	      progressPercent: 0
+	    };
+	  },
+	  componentWillMount: function componentWillMount() {
+	    var inputDatas = this.props.inputDatas;
+	    this.setState({ inputDatas: inputDatas });
+	  },
+	  componentDidMount: function componentDidMount() {
+	    var _this = this;
+	
+	    $('.ui.modal').modal({
+	      detachable: false,
+	      closable: true,
+	      onHidden: function onHidden() {
+	        return _this.props.onClosed();
+	      }
+	    }).modal('show');
+	
+	    this._initialInputVerification();
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    var isActive = $('.ui.modal').modal('is active');
+	    if (isActive) {
+	      $('.ui.modal').modal('hide');
+	    };
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'ui modal' },
+	      React.createElement(ProgressElement, { percent: this.state.progressPercent }),
+	      React.createElement(FormElement, {
+	        inputs: this.state.inputDatas,
+	        onChangeInputHandler: this._onChangeInputHandler,
+	        onSubmitFormHandler: this._onSubmitFormHandler,
+	        percent: this.state.progressPercent })
+	    );
+	  },
+	  _initialInputVerification: function _initialInputVerification() {
+	
+	    var self = this;
+	    this.state.inputDatas.forEach(function (item, index) {
+	      self._setAndValidateInput(index, item.value);
+	    });
+	    this._calculatePercent();
+	  },
+	  _resetInputDatas: function _resetInputDatas() {
+	
+	    var inputDatas = this.state.inputDatas.map(function (item) {
+	      item.value = '';
+	      item.pristine = true;
+	      item.hasError = false;
+	      return item;
+	    });
+	    this.setState({ inputDatas: inputDatas });
+	    this._initialInputVerification();
+	  },
+	  _calculatePercent: function _calculatePercent() {
+	
+	    var total = this.state.inputDatas.length;
+	    var done = 0;
+	    var progressPercent;
+	    this.state.inputDatas.forEach(function (item) {
+	      if (item.hasError === false) {
+	        done += 1;
+	      }
+	    });
+	    progressPercent = done / total * 100;
+	    this.setState({ progressPercent: progressPercent });
+	  },
+	  _setAndValidateInput: function _setAndValidateInput(index, value, noMorePristine) {
+	
+	    var pristine = noMorePristine ? false : true;
+	    var inputDatas = this.state.inputDatas;
+	    var item = inputDatas[index];
+	    var data = {};
+	    var validation;
+	
+	    inputDatas[index].value = value;
+	    inputDatas[index].pristine = pristine;
+	    inputDatas[index].hasError = false;
+	    inputDatas[index].errorMessage = '';
+	
+	    data[item.id] = value || '';
+	
+	    validation = new Validator(data, item.validation.rules, item.validation.messages);
+	    if (validation.fails()) {
+	      inputDatas[index].hasError = true;
+	      inputDatas[index].errorMessage = validation.errors.first(item.id);
+	    }
+	    this.setState({ inputDatas: inputDatas });
+	  },
+	  _onChangeInputHandler: function _onChangeInputHandler(index, value) {
+	
+	    this._setAndValidateInput(index, value, true);
+	    this._calculatePercent();
+	  },
+	  _onSubmitFormHandler: function _onSubmitFormHandler() {
+	
+	    if (this.state.progressPercent >= 100) {
+	      var dataToSubmit = {};
+	
+	      this.state.inputDatas.forEach(function (item) {
+	        dataToSubmit[item.id] = item.value;
+	      });
+	      this.props.onSubmitButton(dataToSubmit);
+	
+	      this._resetInputDatas();
+	      this._calculatePercent();
+	    }
+	  }
+	
+	});
+	
+	module.exports = ProgressForm;
+
+/***/ },
+/* 168 */
+/*!****************************************!*\
+  !*** ./~/validatorjs/src/validator.js ***!
+  \****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var Rules = __webpack_require__(/*! ./rules */ 169);
+	var Lang = __webpack_require__(/*! ./lang */ 170);
+	var Errors = __webpack_require__(/*! ./errors */ 181);
+	var Attributes = __webpack_require__(/*! ./attributes */ 172);
+	var AsyncResolvers = __webpack_require__(/*! ./async */ 182);
+	
+	var Validator = function(input, rules, customMessages) {
+	  var lang = Validator.getDefaultLang();
+	  this.input = input;
+	  this.messages = Lang._make(lang);
+	  this.messages._setCustom(customMessages);
+	  this.setAttributeFormatter(Validator.prototype.attributeFormatter);
+	
+	  this.errors = new Errors();
+	  this.errorCount = 0;
+	
+	  this.hasAsync = false;
+	  this.rules = this._parseRules(rules);
+	};
+	
+	Validator.prototype = {
+	
+	  constructor: Validator,
+	
+	  /**
+	   * Default language
+	   *
+	   * @type {string}
+	   */
+	  lang: 'en',
+	
+	  /**
+	   * Numeric based rules
+	   *
+	   * @type {array}
+	   */
+	  numericRules: ['integer', 'numeric'],
+	
+	  /**
+	   * Attribute formatter.
+	   *
+	   * @type {function}
+	   */
+	  attributeFormatter: Attributes.formatter,
+	
+	  /**
+	   * Run validator
+	   *
+	   * @return {boolean} Whether it passes; true = passes, false = fails
+	   */
+	  check: function() {
+	    var self = this;
+	
+	    for (var attribute in this.rules) {
+	      var attributeRules = this.rules[attribute];
+	      var inputValue = this.input[attribute]; // if it doesnt exist in input, it will be undefined
+	
+	      for (var i = 0, len = attributeRules.length, rule, ruleOptions, rulePassed; i < len; i++) {
+	        ruleOptions = attributeRules[i];
+	        rule = this.getRule(ruleOptions.name);
+	
+	        if (!this._isValidatable(rule, inputValue)) {
+	          continue;
+	        }
+	
+	        rulePassed = rule.validate(inputValue, ruleOptions.value, attribute);
+	        if (!rulePassed) {
+	          this._addFailure(rule);
+	        }
+	
+	        if (this._shouldStopValidating(attribute, rulePassed)) {
+	          break;
+	        }
+	      }
+	    }
+	
+	    return this.errorCount === 0;
+	  },
+	
+	  /**
+	   * Run async validator
+	   *
+	   * @param {function} passes
+	   * @param {function} fails
+	   * @return {void}
+	   */
+	  checkAsync: function(passes, fails) {
+	    var _this = this;
+	    passes = passes || function() {};
+	    fails = fails || function() {};
+	
+	    var failsOne = function(rule, message) {
+	      _this._addFailure(rule, message);
+	    };
+	
+	    var resolvedAll = function(allPassed) {
+	      if (allPassed) {
+	        passes();
+	      } else {
+	        fails();
+	      }
+	    };
+	
+	    var validateRule = function(inputValue, ruleOptions, attribute, rule) {
+	      return function() {
+	        var resolverIndex = asyncResolvers.add(rule);
+	        rule.validate(inputValue, ruleOptions.value, attribute, function() {
+	          asyncResolvers.resolve(resolverIndex);
+	        });
+	      };
+	    };
+	
+	    var asyncResolvers = new AsyncResolvers(failsOne, resolvedAll);
+	
+	    for (var attribute in this.rules) {
+	      var attributeRules = this.rules[attribute];
+	      var inputValue = this.input[attribute]; // if it doesnt exist in input, it will be undefined
+	
+	      for (var i = 0, len = attributeRules.length, rule, ruleOptions; i < len; i++) {
+	        ruleOptions = attributeRules[i];
+	
+	        rule = this.getRule(ruleOptions.name);
+	
+	        if (!this._isValidatable(rule, inputValue)) {
+	          continue;
+	        }
+	
+	        validateRule(inputValue, ruleOptions, attribute, rule)();
+	      }
+	    }
+	
+	    asyncResolvers.enableFiring();
+	    asyncResolvers.fire();
+	  },
+	
+	  /**
+	   * Add failure and error message for given rule
+	   *
+	   * @param {Rule} rule
+	   */
+	  _addFailure: function(rule) {
+	    var msg = this.messages.render(rule);
+	    this.errors.add(rule.attribute, msg);
+	    this.errorCount++;
+	  },
+	
+	  /**
+	   * Parse rules, normalizing format into: { attribute: [{ name: 'age', value: 3 }] }
+	   *
+	   * @param  {object} rules
+	   * @return {object}
+	   */
+	  _parseRules: function(rules) {
+	    var parsedRules = {};
+	    for (var attribute in rules) {
+	      var rulesArray = rules[attribute];
+	      var attributeRules = [];
+	
+	      if (typeof rulesArray === 'string') {
+	        rulesArray = rulesArray.split('|');
+	      }
+	
+	      for (var i = 0, len = rulesArray.length, rule; i < len; i++) {
+	        rule = this._extractRuleAndRuleValue(rulesArray[i]);
+	        if (Rules.isAsync(rule.name)) {
+	          this.hasAsync = true;
+	        }
+	        attributeRules.push(rule);
+	      }
+	
+	      parsedRules[attribute] = attributeRules;
+	    }
+	    return parsedRules;
+	  },
+	
+	  /**
+	   * Extract a rule and a value from a ruleString (i.e. min:3), rule = min, value = 3
+	   *
+	   * @param  {string} ruleString min:3
+	   * @return {object} object containing the name of the rule and value
+	   */
+	  _extractRuleAndRuleValue: function(ruleString) {
+	    var rule = {},
+	      ruleArray;
+	
+	    rule.name = ruleString;
+	
+	    if (ruleString.indexOf(':') >= 0) {
+	      ruleArray = ruleString.split(':');
+	      rule.name = ruleArray[0];
+	      rule.value = ruleArray.slice(1).join(":");
+	    }
+	
+	    return rule;
+	  },
+	
+	  /**
+	   * Determine if attribute has any of the given rules
+	   *
+	   * @param  {string}  attribute
+	   * @param  {array}   findRules
+	   * @return {boolean}
+	   */
+	  _hasRule: function(attribute, findRules) {
+	    var rules = this.rules[attribute] || [];
+	    for (var i = 0, len = rules.length; i < len; i++) {
+	      if (findRules.indexOf(rules[i].name) > -1) {
+	        return true;
+	      }
+	    }
+	    return false;
+	  },
+	
+	  /**
+	   * Determine if attribute has any numeric-based rules.
+	   *
+	   * @param  {string}  attribute
+	   * @return {Boolean}
+	   */
+	  _hasNumericRule: function(attribute) {
+	    return this._hasRule(attribute, this.numericRules);
+	  },
+	
+	  /**
+	   * Determine if rule is validatable
+	   *
+	   * @param  {Rule}   rule
+	   * @param  {mixed}  value
+	   * @return {boolean}
+	   */
+	  _isValidatable: function(rule, value) {
+	    if (Rules.isImplicit(rule.name)) {
+	      return true;
+	    }
+	
+	    return this.getRule('required').validate(value);
+	  },
+	
+	
+	  /**
+	   * Determine if we should stop validating.
+	   *
+	   * @param  {string} attribute
+	   * @param  {boolean} rulePassed
+	   * @return {boolean}
+	   */
+	  _shouldStopValidating: function(attribute, rulePassed) {
+	
+	    var stopOnAttributes = this.stopOnAttributes;
+	    if (stopOnAttributes === false || rulePassed === true) {
+	      return false;
+	    }
+	
+	    if (stopOnAttributes instanceof Array) {
+	      return stopOnAttributes.indexOf(attribute) > -1;
+	    }
+	
+	    return true;
+	  },
+	
+	  /**
+	   * Set custom attribute names.
+	   *
+	   * @param {object} attributes
+	   * @return {void}
+	   */
+	  setAttributeNames: function(attributes) {
+	    this.messages._setAttributeNames(attributes);
+	  },
+	
+	  /**
+	   * Set the attribute formatter.
+	   *
+	   * @param {fuction} func
+	   * @return {void}
+	   */
+	  setAttributeFormatter: function(func) {
+	    this.messages._setAttributeFormatter(func);
+	  },
+	
+	  /**
+	   * Get validation rule
+	   *
+	   * @param  {string} name
+	   * @return {Rule}
+	   */
+	  getRule: function(name) {
+	    return Rules.make(name, this);
+	  },
+	
+	  /**
+	   * Stop on first error.
+	   *
+	   * @param  {boolean|array} An array of attributes or boolean true/false for all attributes.
+	   * @return {void}
+	   */
+	  stopOnError: function(attributes) {
+	    this.stopOnAttributes = attributes;
+	  },
+	
+	  /**
+	   * Determine if validation passes
+	   *
+	   * @param {function} passes
+	   * @return {boolean|undefined}
+	   */
+	  passes: function(passes) {
+	    var async = this._checkAsync('passes', passes);
+	    if (async) {
+	      return this.checkAsync(passes);
+	    }
+	    return this.check();
+	  },
+	
+	  /**
+	   * Determine if validation fails
+	   *
+	   * @param {function} fails
+	   * @return {boolean|undefined}
+	   */
+	  fails: function(fails) {
+	    var async = this._checkAsync('fails', fails);
+	    if (async) {
+	      return this.checkAsync(function() {}, fails);
+	    }
+	    return !this.check();
+	  },
+	
+	  /**
+	   * Check if validation should be called asynchronously
+	   *
+	   * @param  {string}   funcName Name of the caller
+	   * @param  {function} callback
+	   * @return {boolean}
+	   */
+	  _checkAsync: function(funcName, callback) {
+	    var hasCallback = typeof callback === 'function';
+	    if (this.hasAsync && !hasCallback) {
+	      throw funcName + ' expects a callback when async rules are being tested.';
+	    }
+	
+	    return this.hasAsync || hasCallback;
+	  }
+	
+	};
+	
+	/**
+	 * Set messages for language
+	 *
+	 * @param {string} lang
+	 * @param {object} messages
+	 * @return {this}
+	 */
+	Validator.setMessages = function(lang, messages) {
+	  Lang._set(lang, messages);
+	  return this;
+	};
+	
+	/**
+	 * Get messages for given language
+	 *
+	 * @param  {string} lang
+	 * @return {Messages}
+	 */
+	Validator.getMessages = function(lang) {
+	  return Lang._get(lang);
+	};
+	
+	/**
+	 * Set default language to use
+	 *
+	 * @param {string} lang
+	 * @return {void}
+	 */
+	Validator.useLang = function(lang) {
+	  this.prototype.lang = lang;
+	};
+	
+	/**
+	 * Get default language
+	 *
+	 * @return {string}
+	 */
+	Validator.getDefaultLang = function() {
+	  return this.prototype.lang;
+	};
+	
+	/**
+	 * Set the attribute formatter.
+	 *
+	 * @param {fuction} func
+	 * @return {void}
+	 */
+	Validator.setAttributeFormatter = function(func) {
+	  this.prototype.attributeFormatter = func;
+	};
+	
+	/**
+	 * Stop on first error.
+	 *
+	 * @param  {boolean|array} An array of attributes or boolean true/false for all attributes.
+	 * @return {void}
+	 */
+	Validator.stopOnError = function(attributes) {
+	  this.prototype.stopOnAttributes = attributes;
+	};
+	
+	/**
+	 * Register custom validation rule
+	 *
+	 * @param  {string}   name
+	 * @param  {function} fn
+	 * @param  {string}   message
+	 * @return {void}
+	 */
+	Validator.register = function(name, fn, message) {
+	  var lang = Validator.getDefaultLang();
+	  Rules.register(name, fn);
+	  Lang._setRuleMessage(lang, name, message);
+	};
+	
+	/**
+	 * Register asynchronous validation rule
+	 *
+	 * @param  {string}   name
+	 * @param  {function} fn
+	 * @param  {string}   message
+	 * @return {void}
+	 */
+	Validator.registerAsync = function(name, fn, message) {
+	  var lang = Validator.getDefaultLang();
+	  Rules.registerAsync(name, fn);
+	  Lang._setRuleMessage(lang, name, message);
+	};
+	
+	module.exports = Validator;
+
+
+/***/ },
+/* 169 */
+/*!************************************!*\
+  !*** ./~/validatorjs/src/rules.js ***!
+  \************************************/
+/***/ function(module, exports) {
+
+	var rules = {
+	
+	  required: function(val) {
+	    var str;
+	
+	    if (val === undefined || val === null) {
+	      return false;
+	    }
+	
+	    str = String(val).replace(/\s/g, "");
+	    return str.length > 0 ? true : false;
+	  },
+	
+	  required_if: function(val, req, attribute) {
+	    req = this.getParameters();
+	    if (this.validator.input[req[0]] === req[1]) {
+	      return this.validator.getRule('required').validate(val);
+	    }
+	
+	    return true;
+	  },
+	
+	  // compares the size of strings
+	  // with numbers, compares the value
+	  size: function(val, req, attribute) {
+	    if (val) {
+	      req = parseFloat(req);
+	
+	      var size = this.getSize();
+	
+	      return size === req;
+	    }
+	
+	    return true;
+	  },
+	
+	  string: function(val, req, attribute) {
+	    return typeof val === 'string';
+	  },
+	
+	  /**
+	   * Compares the size of strings or the value of numbers if there is a truthy value
+	   */
+	  min: function(val, req, attribute) {
+	    var size = this.getSize();
+	    return size >= req;
+	  },
+	
+	  /**
+	   * Compares the size of strings or the value of numbers if there is a truthy value
+	   */
+	  max: function(val, req, attribute) {
+	    var size = this.getSize();
+	    return size <= req;
+	  },
+	
+	  between: function(val, req, attribute) {
+	    req = this.getParameters();
+	    var size = this.getSize();
+	    var min = parseFloat(req[0], 10);
+	    var max = parseFloat(req[1], 10);
+	    return size >= min && size <= max;
+	  },
+	
+	  email: function(val) {
+	    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	    return re.test(val);
+	  },
+	
+	  numeric: function(val) {
+	    var num;
+	
+	    num = Number(val); // tries to convert value to a number. useful if value is coming from form element
+	
+	    if (typeof num === 'number' && !isNaN(num) && typeof val !== 'boolean') {
+	      return true;
+	    } else {
+	      return false;
+	    }
+	  },
+	
+	  array: function(val) {
+	    return val instanceof Array;
+	  },
+	
+	  url: function(url) {
+	    return (/^https?:\/\/\S+/).test(url);
+	  },
+	
+	  alpha: function(val) {
+	    return (/^[a-zA-Z]+$/).test(val);
+	  },
+	
+	  alpha_dash: function(val) {
+	    return (/^[a-zA-Z0-9_\-]+$/).test(val);
+	  },
+	
+	  alpha_num: function(val) {
+	    return (/^[a-zA-Z0-9]+$/).test(val);
+	  },
+	
+	  same: function(val, req) {
+	    var val1 = this.validator.input[req];
+	    var val2 = val;
+	
+	    if (val1 === val2) {
+	      return true;
+	    }
+	
+	    return false;
+	  },
+	
+	  different: function(val, req) {
+	    var val1 = this.validator.input[req];
+	    var val2 = val;
+	
+	    if (val1 !== val2) {
+	      return true;
+	    }
+	
+	    return false;
+	  },
+	
+	  "in": function(val, req) {
+	    var list, i;
+	
+	    if (val) {
+	      list = req.split(',');
+	    }
+	
+	    if (val && !(val instanceof Array)) {
+	      val = String(val); // if it is a number
+	
+	      for (i = 0; i < list.length; i++) {
+	        if (val === list[i]) {
+	          return true;
+	        }
+	      }
+	
+	      return false;
+	    }
+	
+	    if (val && val instanceof Array) {
+	      for (i = 0; i < val.length; i++) {
+	        if (list.indexOf(val[i]) < 0) {
+	          return false;
+	        }
+	      }
+	    }
+	
+	    return true;
+	  },
+	
+	  not_in: function(val, req) {
+	    var list = req.split(',');
+	    var len = list.length;
+	    var returnVal = true;
+	
+	    val = String(val); // convert val to a string if it is a number
+	
+	    for (var i = 0; i < len; i++) {
+	      if (val === list[i]) {
+	        returnVal = false;
+	        break;
+	      }
+	    }
+	
+	    return returnVal;
+	  },
+	
+	  accepted: function(val) {
+	    if (val === 'on' || val === 'yes' || val === 1 || val === '1' || val === true) {
+	      return true;
+	    }
+	
+	    return false;
+	  },
+	
+	  confirmed: function(val, req, key) {
+	    var confirmedKey = key + '_confirmation';
+	
+	    if (this.validator.input[confirmedKey] === val) {
+	      return true;
+	    }
+	
+	    return false;
+	  },
+	
+	  integer: function(val) {
+	    return String(parseInt(val, 10)) === String(val);
+	  },
+	
+	  digits: function(val, req) {
+	    var numericRule = this.validator.getRule('numeric');
+	    if (numericRule.validate(val) && String(val).length === parseInt(req)) {
+	      return true;
+	    }
+	
+	    return false;
+	  },
+	
+	  regex: function(val, req) {
+	    var mod = /[g|i|m]{1,3}$/;
+	    var flag = req.match(mod);
+	    flag = flag ? flag[0] : "i";
+	    req = req.replace(mod, "").slice(1, -1);
+	    req = new RegExp(req, flag);
+	    return !!val.match(req);
+	  }
+	
+	};
+	
+	function Rule(name, fn, async) {
+	  this.name = name;
+	  this.fn = fn;
+	  this.passes = null;
+	  this.customMessage = undefined;
+	  this.async = async;
+	}
+	
+	Rule.prototype = {
+	
+	  /**
+	   * Validate rule
+	   *
+	   * @param  {mixed} inputValue
+	   * @param  {mixed} ruleValue
+	   * @param  {string} attribute
+	   * @param  {function} callback
+	   * @return {boolean|undefined}
+	   */
+	  validate: function(inputValue, ruleValue, attribute, callback) {
+	    var _this = this;
+	    this._setValidatingData(attribute, inputValue, ruleValue);
+	    if (typeof callback === 'function') {
+	      this.callback = callback;
+	      var handleResponse = function(passes, message) {
+	        _this.response(passes, message);
+	      };
+	
+	      if (this.async) {
+	        return this.fn.apply(this, [inputValue, ruleValue, attribute, handleResponse]);
+	      } else {
+	        return handleResponse(this.fn.apply(this, [inputValue, ruleValue, attribute]));
+	      }
+	    }
+	    return this.fn.apply(this, [inputValue, ruleValue, attribute]);
+	  },
+	
+	  /**
+	   * Set validating data
+	   *
+	   * @param {string} attribute
+	   * @param {mixed} inputValue
+	   * @param {mixed} ruleValue
+	   * @return {void}
+	   */
+	  _setValidatingData: function(attribute, inputValue, ruleValue) {
+	    this.attribute = attribute;
+	    this.inputValue = inputValue;
+	    this.ruleValue = ruleValue;
+	  },
+	
+	  /**
+	   * Get parameters
+	   *
+	   * @return {array}
+	   */
+	  getParameters: function() {
+	    return this.ruleValue ? this.ruleValue.split(',') : [];
+	  },
+	
+	  /**
+	   * Get true size of value
+	   *
+	   * @return {integer|float}
+	   */
+	  getSize: function() {
+	    var value = this.inputValue;
+	
+	    if (value instanceof Array) {
+	      return value.length;
+	    }
+	
+	    if (typeof value === 'number') {
+	      return value;
+	    }
+	
+	    if (this.validator._hasNumericRule(this.attribute)) {
+	      return parseFloat(value, 10);
+	    }
+	
+	    return value.length;
+	  },
+	
+	  /**
+	   * Get the type of value being checked; numeric or string.
+	   *
+	   * @return {string}
+	   */
+	  _getValueType: function() {
+	
+	    if (typeof this.inputValue === 'number' || this.validator._hasNumericRule(this.attribute)) {
+	      return 'numeric';
+	    }
+	
+	    return 'string';
+	  },
+	
+	  /**
+	   * Set the async callback response
+	   *
+	   * @param  {boolean|undefined} passes  Whether validation passed
+	   * @param  {string|undefined} message Custom error message
+	   * @return {void}
+	   */
+	  response: function(passes, message) {
+	    this.passes = (passes === undefined || passes === true);
+	    this.customMessage = message;
+	    this.callback(this.passes, message);
+	  },
+	
+	  /**
+	   * Set validator instance
+	   *
+	   * @param {Validator} validator
+	   * @return {void}
+	   */
+	  setValidator: function(validator) {
+	    this.validator = validator;
+	  }
+	
+	};
+	
+	var manager = {
+	
+	  /**
+	   * List of async rule names
+	   *
+	   * @type {Array}
+	   */
+	  asyncRules: [],
+	
+	  /**
+	   * Implicit rules (rules to always validate)
+	   *
+	   * @type {Array}
+	   */
+	  implicitRules: ['required', 'required_if', 'accepted'],
+	
+	  /**
+	   * Get rule by name
+	   *
+	   * @param  {string} name
+	   * @param {Validator}
+	   * @return {Rule}
+	   */
+	  make: function(name, validator) {
+	    var async = this.isAsync(name);
+	    var rule = new Rule(name, rules[name], async);
+	    rule.setValidator(validator);
+	    return rule;
+	  },
+	
+	  /**
+	   * Determine if given rule is async
+	   *
+	   * @param  {string}  name
+	   * @return {boolean}
+	   */
+	  isAsync: function(name) {
+	    for (var i = 0, len = this.asyncRules.length; i < len; i++) {
+	      if (this.asyncRules[i] === name) {
+	        return true;
+	      }
+	    }
+	    return false;
+	  },
+	
+	  /**
+	   * Determine if rule is implicit (should always validate)
+	   *
+	   * @param {string} name
+	   * @return {boolean}
+	   */
+	  isImplicit: function(name) {
+	    return this.implicitRules.indexOf(name) > -1;
+	  },
+	
+	  /**
+	   * Register new rule
+	   *
+	   * @param  {string}   name
+	   * @param  {function} fn
+	   * @return {void}
+	   */
+	  register: function(name, fn) {
+	    rules[name] = fn;
+	  },
+	
+	  /**
+	   * Register async rule
+	   *
+	   * @param  {string}   name
+	   * @param  {function} fn
+	   * @return {void}
+	   */
+	  registerAsync: function(name, fn) {
+	    this.register(name, fn);
+	    this.asyncRules.push(name);
+	  }
+	
+	};
+	
+	
+	module.exports = manager;
+
+
+/***/ },
+/* 170 */
+/*!***********************************!*\
+  !*** ./~/validatorjs/src/lang.js ***!
+  \***********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var Messages = __webpack_require__(/*! ./messages */ 171);
+	
+	__webpack_require__(/*! ./lang/en */ 173);
+	
+	var container = {
+	
+	  messages: {},
+	
+	  /**
+	   * Set messages for language
+	   *
+	   * @param {string} lang
+	   * @param {object} rawMessages
+	   * @return {void}
+	   */
+	  _set: function(lang, rawMessages) {
+	    this.messages[lang] = rawMessages;
+	  },
+	
+	  /**
+	   * Set message for given language's rule.
+	   *
+	   * @param {string} lang
+	   * @param {string} attribute
+	   * @param {string|object} message
+	   * @return {void}
+	   */
+	  _setRuleMessage: function(lang, attribute, message) {
+	    this._load(lang);
+	    if (message === undefined) {
+	      message = this.messages[lang].def;
+	    }
+	
+	    this.messages[lang][attribute] = message;
+	  },
+	
+	  /**
+	   * Load messages (if not already loaded)
+	   *
+	   * @param  {string} lang
+	   * @return {void}
+	   */
+	  _load: function(lang) {
+	    if (!this.messages[lang]) {
+	      var rawMessages = __webpack_require__(/*! ./lang */ 174)("./" + lang);
+	      this._set(lang, rawMessages);
+	    }
+	  },
+	
+	  /**
+	   * Get raw messages for language
+	   *
+	   * @param  {string} lang
+	   * @return {object}
+	   */
+	  _get: function(lang) {
+	    this._load(lang);
+	    return this.messages[lang];
+	  },
+	
+	  /**
+	   * Make messages for given language
+	   *
+	   * @param  {string} lang
+	   * @return {Messages}
+	   */
+	  _make: function(lang) {
+	    this._load(lang);
+	    return new Messages(lang, this.messages[lang]);
+	  }
+	
+	};
+	
+	module.exports = container;
+
+
+/***/ },
+/* 171 */
+/*!***************************************!*\
+  !*** ./~/validatorjs/src/messages.js ***!
+  \***************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var Attributes = __webpack_require__(/*! ./attributes */ 172);
+	
+	var Messages = function(lang, messages) {
+	  this.lang = lang;
+	  this.messages = messages;
+	  this.customMessages = {};
+	  this.attributeNames = {};
+	};
+	
+	Messages.prototype = {
+	  constructor: Messages,
+	
+	  /**
+	   * Set custom messages
+	   *
+	   * @param {object} customMessages
+	   * @return {void}
+	   */
+	  _setCustom: function(customMessages) {
+	    this.customMessages = customMessages || {};
+	  },
+	
+	  /**
+	   * Set custom attribute names.
+	   *
+	   * @param {object} attributes
+	   */
+	  _setAttributeNames: function(attributes) {
+	    this.attributeNames = attributes;
+	  },
+	
+	  /**
+	   * Set the attribute formatter.
+	   *
+	   * @param {fuction} func
+	   * @return {void}
+	   */
+	  _setAttributeFormatter: function(func) {
+	    this.attributeFormatter = func;
+	  },
+	
+	  /**
+	   * Get attribute name to display.
+	   *
+	   * @param  {string} attribute
+	   * @return {string}
+	   */
+	  _getAttributeName: function(attribute) {
+	    var name = attribute;
+	    if (this.attributeNames.hasOwnProperty(attribute)) {
+	      return this.attributeNames[attribute];
+	    } else if (this.messages.attributes.hasOwnProperty(attribute)) {
+	      name = this.messages.attributes[attribute];
+	    }
+	
+	    if (this.attributeFormatter) {
+	      name = this.attributeFormatter(name);
+	    }
+	
+	    return name;
+	  },
+	
+	  /**
+	   * Get all messages
+	   *
+	   * @return {object}
+	   */
+	  all: function() {
+	    return this.messages;
+	  },
+	
+	  /**
+	   * Render message
+	   *
+	   * @param  {Rule} rule
+	   * @return {string}
+	   */
+	  render: function(rule) {
+	    if (rule.customMessage) {
+	      return rule.customMessage;
+	    }
+	    var template = this._getTemplate(rule);
+	
+	    var message;
+	    if (Attributes.replacements[rule.name]) {
+	      message = Attributes.replacements[rule.name].apply(this, [template, rule]);
+	    } else {
+	      message = this._replacePlaceholders(rule, template, {});
+	    }
+	
+	    return message;
+	  },
+	
+	  /**
+	   * Get the template to use for given rule
+	   *
+	   * @param  {Rule} rule
+	   * @return {string}
+	   */
+	  _getTemplate: function(rule) {
+	
+	    var messages = this.messages;
+	    var template = messages.def;
+	    var customMessages = this.customMessages;
+	    var formats = [rule.name + '.' + rule.attribute, rule.name];
+	
+	    for (var i = 0, format; i < formats.length; i++) {
+	      format = formats[i];
+	      if (customMessages.hasOwnProperty(format)) {
+	        template = customMessages[format];
+	        break;
+	      } else if (messages.hasOwnProperty(format)) {
+	        template = messages[format];
+	        break;
+	      }
+	    }
+	
+	    if (typeof template === 'object') {
+	      template = template[rule._getValueType()];
+	    }
+	
+	    return template;
+	  },
+	
+	  /**
+	   * Replace placeholders in the template using the data object
+	   *
+	   * @param  {Rule} rule
+	   * @param  {string} template
+	   * @param  {object} data
+	   * @return {string}
+	   */
+	  _replacePlaceholders: function(rule, template, data) {
+	    var message, attribute;
+	
+	    data.attribute = this._getAttributeName(rule.attribute);
+	    data[rule.name] = rule.getParameters().join(',');
+	
+	    if (typeof template === 'string' && typeof data === 'object') {
+	      message = template;
+	
+	      for (attribute in data) {
+	        message = message.replace(new RegExp(':' + attribute, 'g'), data[attribute]);
+	      }
+	    }
+	
+	    return message;
+	  }
+	
+	};
+	
+	module.exports = Messages;
+
+
+/***/ },
+/* 172 */
+/*!*****************************************!*\
+  !*** ./~/validatorjs/src/attributes.js ***!
+  \*****************************************/
+/***/ function(module, exports) {
+
+	var replacements = {
+	
+	  /**
+	   * Between replacement (replaces :min and :max)
+	   *
+	   * @param  {string} template
+	   * @param  {Rule} rule
+	   * @return {string}
+	   */
+	  between: function(template, rule) {
+	    var parameters = rule.getParameters();
+	    return this._replacePlaceholders(rule, template, {
+	      min: parameters[0],
+	      max: parameters[1]
+	    });
+	  },
+	
+	  /**
+	   * Required_if replacement.
+	   *
+	   * @param  {string} template
+	   * @param  {Rule} rule
+	   * @return {string}
+	   */
+	  required_if: function(template, rule) {
+	    var parameters = rule.getParameters();
+	    return this._replacePlaceholders(rule, template, {
+	      other: parameters[0],
+	      value: parameters[1]
+	    });
+	  }
+	};
+	
+	function formatter(attribute) {
+	  return attribute.replace(/[_\[]/g, ' ').replace(/]/g, '');
+	}
+	
+	module.exports = {
+	  replacements: replacements,
+	  formatter: formatter
+	};
+
+
+/***/ },
+/* 173 */
+/*!**************************************!*\
+  !*** ./~/validatorjs/src/lang/en.js ***!
+  \**************************************/
+/***/ function(module, exports) {
+
+	module.exports = {
+	  accepted: 'The :attribute must be accepted.',
+	  alpha: 'The :attribute field must contain only alphabetic characters.',
+	  alpha_dash: 'The :attribute field may only contain alpha-numeric characters, as well as dashes and underscores.',
+	  alpha_num: 'The :attribute field must be alphanumeric.',
+	  between: 'The :attribute field must be between :min and :max.',
+	  confirmed: 'The :attribute confirmation does not match.',
+	  email: 'The :attribute format is invalid.',
+	  def: 'The :attribute attribute has errors.',
+	  digits: 'The :attribute must be :digits digits.',
+	  different: 'The :attribute and :different must be different.',
+	  'in': 'The selected :attribute is invalid.',
+	  integer: 'The :attribute must be an integer.',
+	  min: {
+	    numeric: 'The :attribute must be at least :min.',
+	    string: 'The :attribute must be at least :min characters.'
+	  },
+	  max: {
+	    numeric: 'The :attribute may not be greater than :max.',
+	    string: 'The :attribute may not be greater than :max characters.'
+	  },
+	  not_in: 'The selected :attribute is invalid.',
+	  numeric: 'The :attribute must be a number.',
+	  required: 'The :attribute field is required.',
+	  required_if: 'The :attribute field is required when :other is :value.',
+	  same: 'The :attribute and :same fields must match.',
+	  size: {
+	    numeric: 'The :attribute must be :size.',
+	    string: 'The :attribute must be :size characters.'
+	  },
+	  string: 'The :attribute must be a string.',
+	  url: 'The :attribute format is invalid.',
+	  regex: 'The :attribute format is invalid',
+	  attributes: {}
+	};
+
+
+/***/ },
+/* 174 */
+/*!*****************************************!*\
+  !*** ./~/validatorjs/src/lang ^\.\/.*$ ***!
+  \*****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var map = {
+		"./en": 173,
+		"./en.js": 173,
+		"./es": 175,
+		"./es.js": 175,
+		"./fr": 176,
+		"./fr.js": 176,
+		"./it": 177,
+		"./it.js": 177,
+		"./ja": 178,
+		"./ja.js": 178,
+		"./pl": 179,
+		"./pl.js": 179,
+		"./ru": 180,
+		"./ru.js": 180
+	};
+	function webpackContext(req) {
+		return __webpack_require__(webpackContextResolve(req));
+	};
+	function webpackContextResolve(req) {
+		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
+	};
+	webpackContext.keys = function webpackContextKeys() {
+		return Object.keys(map);
+	};
+	webpackContext.resolve = webpackContextResolve;
+	module.exports = webpackContext;
+	webpackContext.id = 174;
+
+
+/***/ },
+/* 175 */
+/*!**************************************!*\
+  !*** ./~/validatorjs/src/lang/es.js ***!
+  \**************************************/
+/***/ function(module, exports) {
+
+	module.exports = {
+	  accepted: 'El campo :attribute debe ser aceptado.',
+	  alpha: 'El campo :attribute solo debe contener letras.',
+	  alpha_dash: 'El campo :attribute solo debe contener letras, números y guiones.',
+	  alpha_num: 'El campo :attribute solo debe contener letras y números.',
+	  attributes: {},
+	  between: 'El campo :attribute tiene que estar entre :min - :max.',
+	  confirmed: 'La confirmación de :attribute no coincide.',
+	  different: 'El campo :attribute y :other deben ser diferentes.',
+	  digits: 'El campo :attribute debe tener :digits dígitos.',
+	  email: 'El campo :attribute no es un correo válido',
+	  'in': 'El campo :attribute es inválido.',
+	  integer: 'El campo :attribute debe ser un número entero.',
+	  max: {
+	    numeric: 'El campo :attribute no debe ser mayor a :max.',
+	    string: 'El campo :attribute no debe ser mayor que :max caracteres.'
+	  },
+	  min: {
+	    numeric: 'El tamaño del campo :attribute debe ser de al menos :min.',
+	    string: 'El campo :attribute debe contener al menos :min caracteres.'
+	  },
+	  not_in: 'El campo :attribute es inválido.',
+	  numeric: 'El campo :attribute debe ser numérico.',
+	  regex: 'El formato del campo :attribute es inválido.',
+	  required: 'El campo :attribute es obligatorio.',
+	  required_if: 'El campo :attribute es obligatorio cuando :other es :value.',
+	  same: 'El campo :attribute y :other deben coincidir.',
+	  size: {
+	    numeric: 'El tamaño del campo :attribute debe ser :size.',
+	    string: 'El campo :attribute debe contener :size caracteres.'
+	  },
+	  url: 'El formato de :attribute es inválido.'
+	};
+
+
+/***/ },
+/* 176 */
+/*!**************************************!*\
+  !*** ./~/validatorjs/src/lang/fr.js ***!
+  \**************************************/
+/***/ function(module, exports) {
+
+	module.exports = {
+	  accepted: 'Le champs :attribute doit être accepté.',
+	  alpha: 'Le champs :attribute ne peut contenir que des caractères alphabétiques.',
+	  alpha_dash: 'Le champs :attribute ne peut contenir que des caractères alphanumériques, des tirets et underscores.',
+	  alpha_num: 'Le champs :attribute doit être alphanumérique.',
+	  between: 'Le champs :attribute doit être compris entre :min and :max.',
+	  confirmed: 'Le champs :attribute ne correspond pas.',
+	  email: 'Le champs :attribute contient un format invalide.',
+	  def: 'Le champs :attribute contient un attribut erroné.',
+	  digits: 'Le champs :attribute doit être de :digits chiffres.',
+	  different: 'Le champs :attribute et :different doivent être differents.',
+	  'in': 'Le champs :attribute est invalide.',
+	  integer: 'Le champs :attribute doit être un entier.',
+	  min: {
+	    numeric: 'Le champs :attribute doit être contenir au moins :min.',
+	    string: 'Le champs :attribute doit être contenir au moins :min caractères.'
+	  },
+	  max: {
+	    numeric: 'Le champs :attribute ne doit être supérieur à :max.',
+	    string: 'Le champs :attribute ne doit être plus de :max characters.'
+	  },
+	  not_in: 'Le champs :attribute est invalide.',
+	  numeric: 'Le champs :attribute doit être un numéro.',
+	  required: 'Le champs :attribute est obligatoire.',
+	  required_if: 'Le champs :attribute est obligatoire quand :other est :value.',
+	  same: 'Le champs :attribute et :same doivent correspondre.',
+	  size: {
+	    numeric: 'La taille du champs :attribute doit être :size.',
+	    string: 'La taille du champs :attribute doit être de :size caractères.'
+	  },
+	  url: 'Le format du champs :attribute est invalide.',
+	  regex: 'Le format du champs :attribute est invalide.',
+	  attributes: {}
+	};
+
+
+/***/ },
+/* 177 */
+/*!**************************************!*\
+  !*** ./~/validatorjs/src/lang/it.js ***!
+  \**************************************/
+/***/ function(module, exports) {
+
+	module.exports = {
+	  accepted: 'Il campo :attribute deve essere accettato.',
+	  alpha: 'Il campo :attribute deve contenere sono caratteri alfabetici.',
+	  alpha_dash: 'Il campo :attribute può contenere solo caratteri alfanumerici oltre a trattini e trattini bassi.',
+	  alpha_num: 'Il campo :attribute deve essere alfanumerico.',
+	  between: 'Il campo :attribute deve essere compreso tra :min e :max.',
+	  confirmed: 'Il campo conferma :attribute non è uguale.',
+	  email: 'Il formato dell\'attributo :attribute non è valido.',
+	  def: 'Gli attributi del campo :attribute contengono degli errori.',
+	  digits: 'Il campo :attribute deve essere di :digits cifre.',
+	  different: 'Il campo :attribute e :different devo essere diversi.',
+	  'in': 'Il valore del campo :attribute non è valido.',
+	  integer: 'Il campo :attribute deve essere un valore intero.',
+	  min: {
+	    numeric: 'Il campo :attribute deve essere maggiore o uguale di :min.',
+	    string: 'Il campo :attribute deve essere composto da almeno :min caratteri.'
+	  },
+	  max: {
+	    numeric: 'Il campo :attribute deve essere minore o uguale di :max.',
+	    string: 'Il campo :attribute deve essere composto da massimo :max caratteri.'
+	  },
+	  not_in: 'Il campo :attribute non è valido.',
+	  numeric: 'Il campo :attribute deve essere un numero.',
+	  required: 'Il campo :attribute è richiesto.',
+	  required_if: 'Il campo :attribute è richiesto quando il campo :other è uguale a :value.',
+	  same: 'I campi :attribute e :same devono essere uguali.',
+	  size: {
+	    numeric: 'La dimensione del campo :attribute deve essere uguale a :size.',
+	    string: 'Il campo :attribute deve essere di :size caratteri.'
+	  },
+	  string: 'Il campo :attribute deve essere una stringa.',
+	  url: 'Il formato del campo :attribute non è valido.',
+	  regex: 'Il formato del campo :attribute non è valido.',
+	  attributes: {}
+	};
+
+
+/***/ },
+/* 178 */
+/*!**************************************!*\
+  !*** ./~/validatorjs/src/lang/ja.js ***!
+  \**************************************/
+/***/ function(module, exports) {
+
+	module.exports = {
+	    accepted: ':attributeを確認してください。',
+	    alpha: ':attributeは英字のみで入力してください。',
+	    alpha_dash: ':attributeは英字とダッシュと下線のみで入力してください。',
+	    alpha_num: ':attributeは英数字のみで入力してください。',
+	    between: ':attributeは:min〜:max文字で入力してください。',
+	    confirmed: ':attributeは確認が一致しません。',
+	    email: ':attributeは正しいメールアドレスを入力してください。',
+	    def: ':attributeは検証エラーが含まれています。',
+	    digits: ':attributeは:digitsの数字のみで入力してください。',
+	    different: ':attributeと:differentは同じであってはなりません。',
+	    'in': '選択された:attributeは無効です。',
+	    integer: ':attributeは整数で入力してください。',
+	    min        : {
+	        numeric : ":attributeは:min以上を入力してください。",
+	        string  : ":attributeは:min文字以上で入力してください。"
+	    },
+	    max : {
+	        numeric : ":attributeは:max以下を入力してください。",
+	        string  : ":attributeは:max文字以上で入力してください。"
+	    },
+	    not_in      : "選択された:attributeは無効です。",
+	    numeric     : ":attributeは数値で入力してください。",
+	    required    : ":attributeは必須です。",
+	    required_if : ":otherは:valueになったら:attributeは必須です。",
+	    same        : ":attributeと:sameは同じでなければなりません。",
+	    size        : {
+	        numeric : ":attributeは:sizeを入力してください。",
+	        string  : ":attributeは:size文字で入力してください。"
+	    },
+	    url        : ":attributeはURIを入力してください。",
+	    regex      : ":attributeの値 \":value\" はパターンにマッチする必要があります。",
+	    attributes : {}
+	};
+
+
+/***/ },
+/* 179 */
+/*!**************************************!*\
+  !*** ./~/validatorjs/src/lang/pl.js ***!
+  \**************************************/
+/***/ function(module, exports) {
+
+	module.exports = {
+	    accepted: 'Pole :attribute musi być zaakceptowane.',
+	    alpha: 'Pole :attribute może zawierać tylko litery.',
+	    alpha_dash: 'Pole :attribute moze zawierać tylko litery, myślnik i podrkeślenie.',
+	    alpha_num: 'Pole :attribute moze zawierac tylko znaki alfanumeryczne.',
+	    between: 'Pole :attribute musi mieć długość od :min do :max.',
+	    confirmed: 'Pole :attribute nie spełnia warunku potwierdzenia.',
+	    email: 'Pole :attribute ma niepoprawny format adresu email.',
+	    def: 'Pole :attribute zawiera błędy.',
+	    digits: 'Pole :attribute może zawierać tylko cyfry ze zbioru :digits.',
+	    different: 'Pola :attribute i :different muszą się różnić.',
+	    'in': 'Pole :attribute musi należeć do zbioru :in.',
+	    integer: 'Pole :attribute musi być liczbą całkowitą.',
+	    min: {
+	        numeric: 'Pole :attribute musi być równe conajmniej :min.',
+	        string: 'Pole :attribute musi zawierać conajmniej :min znaków.'
+	    },
+	    max: {
+	        numeric: 'Pole :attribute nie moze być większe :max.',
+	        string: 'Pole :attribute nie moze być dłuższe niż :max znaków.'
+	    },
+	    not_in: 'Pole :attribute nie może należeć do zbioru :not_in.',
+	    numeric: 'Pole :attribute musi być liczbą.',
+	    required: 'Pole :attribute jest wymagane.',
+	    required_if: 'Pole :attribute jest wymagane jeśli pole :other jest równe :value.',
+	    same: 'Pola :attribute i :same muszą być takie same.',
+	    size: {
+	        numeric: 'Pole :attribute musi być równe :size.',
+	        string: 'Pole :attribute musi zawierać :size znaków.'
+	    },
+	    string: 'Pole :attribute musi być ciągiem znaków.',
+	    url: 'Pole :attribute musi być poprawnym adresem URL.',
+	    regex: 'Pole :attribute nie spełnia warunku.',
+	    attributes: {}
+	};
+
+
+/***/ },
+/* 180 */
+/*!**************************************!*\
+  !*** ./~/validatorjs/src/lang/ru.js ***!
+  \**************************************/
+/***/ function(module, exports) {
+
+	module.exports = {
+	  accepted: 'Вы должны принять :attribute.',
+	  alpha: 'Поле :attribute может содержать только буквы.',
+	  alpha_dash: 'Поле :attribute может содержать только буквы, цифры, дефисы и символы подчёркивания.',
+	  alpha_num: 'Поле :attribute может содержать только буквы и цифры.',
+	  between: 'Поле :attribute должно быть между :min и :max.',
+	  confirmed: 'Поле :attribute не совпадает с подтверждением.',
+	  email: 'Поле :attribute должно быть действительным электронным адресом.',
+	  def: 'Поле :attribute содержит ошибки.',
+	  digits: 'Длина цифрового поля :attribute должна быть :digits.',
+	  different: 'Поля :attribute и :different должны различаться.',
+	  'in': 'Выбранное значение для :attribute ошибочно.',
+	  integer: 'Поле :attribute должно быть целым числом.',
+	  min: {
+	    numeric: 'Значение поля :attribute должно быть больше или равно :min.',
+	    string: 'Количество символов в поле :attribute должно быть не менее :min.'
+	  },
+	  max: {
+	    numeric: 'Значение поля :attribute должно быть меньше или равно :max.',
+	    string: 'Количество символов в поле :attribute не может превышать :max.'
+	  },
+	  not_in: 'Выбранное значение для :attribute ошибочно.',
+	  numeric: 'Поле :attribute должно быть числом.',
+	  required: 'Поле :attribute обязательно для заполнения.',
+	  required_if: 'Поле :attribute требуется когда значения поля :other равно :value.',
+	  same: 'Значение :attribute должно совпадать с :same.',
+	  size: {
+	    numeric: 'Значение поля :attribute должно быть равным :size.',
+	    string: 'Количество символов в поле :attribute должно быть равно :size.'
+	  },
+	  url: 'Поле :attribute должно содержать валидный URL.',
+	  regex: 'Неверный формат поля :attribute.',
+	  attributes: {}
+	};
+
+
+/***/ },
+/* 181 */
+/*!*************************************!*\
+  !*** ./~/validatorjs/src/errors.js ***!
+  \*************************************/
+/***/ function(module, exports) {
+
+	var Errors = function() {
+	  this.errors = {};
+	};
+	
+	Errors.prototype = {
+	  constructor: Errors,
+	
+	  /**
+	   * Add new error message for given attribute
+	   *
+	   * @param  {string} attribute
+	   * @param  {string} message
+	   * @return {void}
+	   */
+	  add: function(attribute, message) {
+	    if (!this.has(attribute)) {
+	      this.errors[attribute] = [];
+	    }
+	
+	    if (this.errors[attribute].indexOf(message) === -1) {
+	      this.errors[attribute].push(message);
+	    }
+	  },
+	
+	  /**
+	   * Returns an array of error messages for an attribute, or an empty array
+	   *
+	   * @param  {string} attribute A key in the data object being validated
+	   * @return {array} An array of error messages
+	   */
+	  get: function(attribute) {
+	    if (this.has(attribute)) {
+	      return this.errors[attribute];
+	    }
+	
+	    return [];
+	  },
+	
+	  /**
+	   * Returns the first error message for an attribute, false otherwise
+	   *
+	   * @param  {string} attribute A key in the data object being validated
+	   * @return {string|false} First error message or false
+	   */
+	  first: function(attribute) {
+	    if (this.has(attribute)) {
+	      return this.errors[attribute][0];
+	    }
+	
+	    return false;
+	  },
+	
+	  /**
+	   * Get all error messages from all failing attributes
+	   *
+	   * @return {Object} Failed attribute names for keys and an array of messages for values
+	   */
+	  all: function() {
+	    return this.errors;
+	  },
+	
+	  /**
+	   * Determine if there are any error messages for an attribute
+	   *
+	   * @param  {string}  attribute A key in the data object being validated
+	   * @return {boolean}
+	   */
+	  has: function(attribute) {
+	    if (this.errors.hasOwnProperty(attribute)) {
+	      return true;
+	    }
+	
+	    return false;
+	  }
+	};
+	
+	module.exports = Errors;
+
+
+/***/ },
+/* 182 */
+/*!************************************!*\
+  !*** ./~/validatorjs/src/async.js ***!
+  \************************************/
+/***/ function(module, exports) {
+
+	function AsyncResolvers(onFailedOne, onResolvedAll) {
+	  this.onResolvedAll = onResolvedAll;
+	  this.onFailedOne = onFailedOne;
+	  this.resolvers = {};
+	  this.resolversCount = 0;
+	  this.passed = [];
+	  this.failed = [];
+	  this.firing = false;
+	}
+	
+	AsyncResolvers.prototype = {
+	
+	  /**
+	   * Add resolver
+	   *
+	   * @param {Rule} rule
+	   * @return {integer}
+	   */
+	  add: function(rule) {
+	    var index = this.resolversCount;
+	    this.resolvers[index] = rule;
+	    this.resolversCount++;
+	    return index;
+	  },
+	
+	  /**
+	   * Resolve given index
+	   *
+	   * @param  {integer} index
+	   * @return {void}
+	   */
+	  resolve: function(index) {
+	    var rule = this.resolvers[index];
+	    if (rule.passes === true) {
+	      this.passed.push(rule);
+	    } else if (rule.passes === false) {
+	      this.failed.push(rule);
+	      this.onFailedOne(rule);
+	    }
+	
+	    this.fire();
+	  },
+	
+	  /**
+	   * Determine if all have been resolved
+	   *
+	   * @return {boolean}
+	   */
+	  isAllResolved: function() {
+	    return (this.passed.length + this.failed.length) === this.resolversCount;
+	  },
+	
+	  /**
+	   * Attempt to fire final all resolved callback if completed
+	   *
+	   * @return {void}
+	   */
+	  fire: function() {
+	
+	    if (!this.firing) {
+	      return;
+	    }
+	
+	    if (this.isAllResolved()) {
+	      this.onResolvedAll(this.failed.length === 0);
+	    }
+	
+	  },
+	
+	  /**
+	   * Enable firing
+	   *
+	   * @return {void}
+	   */
+	  enableFiring: function() {
+	    this.firing = true;
+	  }
+	
+	};
+	
+	module.exports = AsyncResolvers;
+
+
+/***/ },
+/* 183 */
+/*!*******************************************************!*\
+  !*** ./src/client/app/progressForm/utils/classSet.js ***!
+  \*******************************************************/
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
+	function classSet(classes) {
+	  return (typeof classes === 'undefined' ? 'undefined' : _typeof(classes)) !== 'object' ? Array.prototype.join.call(arguments, ' ') : Object.keys(classes).filter(function (className) {
+	    return classes[className];
+	  }).join(' ');
+	}
+	
+	module.exports = classSet;
+
+/***/ },
+/* 184 */
+/*!************************************************************!*\
+  !*** ./src/client/app/progressForm/components/Progress.js ***!
+  \************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var classSet = __webpack_require__(/*! ../utils/classSet */ 183);
+	
+	var ProgressElement = React.createClass({
+	  displayName: 'ProgressElement',
+	
+	  componentDidUpdate: function componentDidUpdate() {
+	    var percent = parseInt(this.props.percent);
+	    var deg = 360 * percent / 100;
+	    var element = this.refs.progress;
+	    element.style.transform = 'rotate(-' + deg + 'deg)';
+	  },
+	  render: function render() {
+	    var percent = Math.floor(this.props.percent);
+	    var classes = classSet({
+	      "progressCircle-pie-chart": true,
+	      "gt-50": percent > 50
+	    });
+	    return React.createElement(
+	      'div',
+	      { className: 'progressCircle clearfix' },
+	      React.createElement(
+	        'div',
+	        { className: classes },
+	        React.createElement(
+	          'div',
+	          { className: 'ppc-progressCircle' },
+	          React.createElement('div', { className: 'ppc-progressCircle-fill', ref: 'progress' })
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'ppc-percents' },
+	          React.createElement(
+	            'div',
+	            { className: 'pcc-percents-wrapper' },
+	            React.createElement(
+	              'span',
+	              null,
+	              percent + '%'
+	            )
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = ProgressElement;
+
+/***/ },
+/* 185 */
+/*!********************************************************!*\
+  !*** ./src/client/app/progressForm/components/Form.js ***!
+  \********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var classSet = __webpack_require__(/*! ../utils/classSet */ 183);
+	var InputElement = __webpack_require__(/*! ./Input */ 186);
+	var SubmitElement = __webpack_require__(/*! ./Submit */ 187);
+	
+	var FormElement = React.createClass({
+	  displayName: 'FormElement',
+	
+	  render: function render() {
+	    var props = this.props;
+	    var inputNodes = props.inputs.map(function (item, index) {
+	      return React.createElement(InputElement, {
+	        key: index,
+	        index: index,
+	        item: item,
+	        onChangeInputHandler: props.onChangeInputHandler });
+	    });
+	    return React.createElement(
+	      'form',
+	      { className: 'form clearfix', onSubmit: this._onSubmit },
+	      inputNodes,
+	      React.createElement(SubmitElement, { percent: this.props.percent })
+	    );
+	  },
+	  _onSubmit: function _onSubmit(e) {
+	    e.preventDefault();
+	    this.props.onSubmitFormHandler();
+	  }
+	});
+	
+	module.exports = FormElement;
+
+/***/ },
+/* 186 */
+/*!*********************************************************!*\
+  !*** ./src/client/app/progressForm/components/Input.js ***!
+  \*********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var classSet = __webpack_require__(/*! ../utils/classSet */ 183);
+	
+	var InputElement = React.createClass({
+	  displayName: 'InputElement',
+	
+	  render: function render() {
+	    var item = this.props.item;
+	    var classes = classSet({
+	      "form--group": true,
+	      "has--error": item.hasError && !item.pristine
+	    });
+	    var getElement = function (item) {
+	      if (item.type === 'select') {
+	        return React.createElement(
+	          'select',
+	          { className: 'form--control', id: item.id, value: item.value, onChange: this._onChange },
+	          (item.options || []).map(function (option) {
+	            return React.createElement(
+	              'option',
+	              { key: option.value, value: option.value },
+	              option.label
+	            );
+	          })
+	        );
+	      } else if (item.type === 'text' || item.type === 'date') {
+	        return React.createElement('input', { type: item.type, className: 'form--control', id: item.id, value: item.value, onChange: this._onChange });
+	      } else if (item.type === 'textarea') {
+	        return React.createElement('textarea', { type: item.type, className: 'form--control', id: item.id, value: item.value, onChange: this._onChange });
+	      }
+	    }.bind(this);
+	    return React.createElement(
+	      'div',
+	      { className: classes },
+	      React.createElement(
+	        'label',
+	        { htmlFor: item.id },
+	        item.label
+	      ),
+	      getElement(item),
+	      React.createElement('span', { className: 'form--focus' }),
+	      React.createElement(
+	        'span',
+	        { className: 'form--error' },
+	        item.errorMessage
+	      )
+	    );
+	  },
+	  _onChange: function _onChange(e) {
+	    var value = e.target.value;
+	    this.props.onChangeInputHandler(this.props.index, value);
+	  }
+	});
+	
+	module.exports = InputElement;
+
+/***/ },
+/* 187 */
+/*!**********************************************************!*\
+  !*** ./src/client/app/progressForm/components/Submit.js ***!
+  \**********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var classSet = __webpack_require__(/*! ../utils/classSet */ 183);
+	
+	var SubmitElement = React.createClass({
+	  displayName: 'SubmitElement',
+	
+	  render: function render() {
+	    var done = this.props.percent >= 100;
+	    var classes = classSet({
+	      'form--submit': true,
+	      'form--submit-disabled': !done
+	    });
+	    var label = done ? 'Submit Now!' : 'You Cannot Yet!';
+	    return React.createElement(
+	      'div',
+	      { className: 'form--group' },
+	      React.createElement(
+	        'button',
+	        { type: 'submit', className: classes },
+	        label
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = SubmitElement;
+
+/***/ },
+/* 188 */
+/*!*****************************************!*\
+  !*** ./src/client/app/ShowEmployees.js ***!
+  \*****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ShowEmployees = _react2.default.createClass({
+	  displayName: "ShowEmployees",
+	  render: function render() {
+	    var _this = this;
+	
+	    return _react2.default.createElement(
+	      "div",
+	      { className: "ui attached segment" },
+	      _react2.default.createElement(
+	        "div",
+	        { className: "ui middle aligned column centered grid" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "left floated six wide column" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "ui header" },
+	            "Employees List:"
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "right floated six wide column" },
+	          _react2.default.createElement(
+	            "button",
+	            { className: "ui button", onClick: function onClick() {
+	                return _this.props.showAddEmployeeForm();
+	              } },
+	            "Add Employee"
+	          )
+	        )
+	      ),
+	      _react2.default.createElement("div", { className: "ui divider" }),
+	      this.props.employees.length > 0 ? null : _react2.default.createElement(
+	        "h4",
+	        null,
+	        "No Employees"
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "ui cards" },
+	        (this.props.employees || []).map(function (employee) {
+	          return _react2.default.createElement(EmployeeCard, { employee: employee });
+	        })
+	      )
+	    );
+	  }
+	});
+	
+	var EmployeeCard = function EmployeeCard(_ref) {
+	  var employee = _ref.employee;
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "card" },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "content" },
+	      _react2.default.createElement(
+	        "div",
+	        { className: "header" },
+	        employee.firstName,
+	        " ",
+	        employee.lastName
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "meta" },
+	        employee.title
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "description" },
+	        _react2.default.createElement(
+	          "p",
+	          null,
+	          "Date Of Birth: ",
+	          employee.dob
+	        ),
+	        _react2.default.createElement(
+	          "p",
+	          null,
+	          "Work Anniversary: ",
+	          employee.anniversaryDate
+	        ),
+	        _react2.default.createElement(
+	          "p",
+	          null,
+	          "Location: ",
+	          employee.location
+	        )
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = ShowEmployees;
+
+/***/ },
+/* 189 */
+/*!****************************************!*\
+  !*** ./src/client/app/BirthdayCard.js ***!
+  \****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _AwesomeComponent = __webpack_require__(/*! ./AwesomeComponent.js */ 159);
+	
+	var _AwesomeComponent2 = _interopRequireDefault(_AwesomeComponent);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var BirthdayCard = _react2.default.createClass({
+	  displayName: 'BirthdayCard',
+	  render: function render() {
+	    var _this = this;
+	
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'ui attached segment' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'ui middle aligned column centered grid' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'left floated six wide column' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'ui header' },
+	            'Employees List:'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'right floated six wide column' },
+	          _react2.default.createElement(
+	            'button',
+	            { className: 'ui button', onClick: function onClick() {
+	                return _this.props.showAddEmployeeForm();
+	              } },
+	            'Add Birthday'
+	          )
+	        )
+	      ),
+	      _react2.default.createElement('div', { className: 'ui divider' }),
+	      this.props.employees.length > 0 ? null : _react2.default.createElement(
+	        'h4',
+	        null,
+	        'No Employees'
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'ui link cards' },
+	        (this.props.employees || []).map(function (employee) {
+	          return _react2.default.createElement(EmployeeCard, { employee: employee });
+	        })
+	      )
+	    );
+	  }
+	});
+	
+	var EmployeeCard = function EmployeeCard(_ref) {
+	  var employee = _ref.employee;
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'card' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'image' },
+	      _react2.default.createElement('img', { src: "img/" + employee.firstName + ".png" })
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'content' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'header' },
+	        employee.firstName,
+	        ' ',
+	        employee.lastName
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'meta' },
+	        _react2.default.createElement(
+	          'a',
+	          null,
+	          employee.title
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'description' },
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'Date Of Birth: ',
+	          employee.dob
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'Work Anniversary: ',
+	          employee.anniversaryDate
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'Location: ',
+	          employee.location
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          _react2.default.createElement(_AwesomeComponent2.default, null)
+	        )
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'extra content' },
+	      _react2.default.createElement(
+	        'span',
+	        { className: 'right floated' },
+	        'Joined in ',
+	        employee.anniversaryDate
+	      ),
+	      _react2.default.createElement(
+	        'span',
+	        null,
+	        _react2.default.createElement('i', { className: 'user icon' }),
+	        employee.title
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = BirthdayCard;
+
+/***/ },
+/* 190 */
+/*!**********************************************!*\
+  !*** ./src/client/app/ShowEmployeesCards.js ***!
+  \**********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _cardstack = __webpack_require__(/*! ./cardstack.js */ 191);
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var backgroundColors = ['#2980B9', '#27AE60', '#9B27AE', '#e67e22'];
+	
+	var cardStyles = {
+		cardHeader: {
+			display: 'flex',
+			height: '125px',
+			justifyContent: 'space-between',
+			alignItems: 'center',
+			padding: '10px 20px',
+			color: '#fff'
+		},
+		headerName: {
+			fontWeight: 500,
+			fontSize: '25px',
+			textAlign: 'right'
+		},
+		headerTitle: {
+			margin: '4px 0 0',
+			fontWeight: 300,
+			fontSize: '17px',
+			opacity: 0.8,
+			textAlign: 'right'
+		}
+	};
+	
+	var i = 0;
+	
+	var ShowEmployeeCards = function ShowEmployeeCards(props) {
+		var numberOfEmployees = props.employees.length;
+		var height = props.employees.length * 150;
+		var cardstackElement = function cardstackElement() {
+			return _react2.default.createElement(
+				_cardstack.CardStack,
+				{ height: height > 500 ? height : 500, width: 500, background: '#f8f8f8', hoverOffset: 25 },
+				(props.employees || []).map(function (employee) {
+					var color = backgroundColors[i % 4];
+					i++;
+					return _react2.default.createElement(
+						_cardstack.Card,
+						{ background: color, key: employee.tnumber },
+						_react2.default.createElement(EmployeeCard, { imgBorderColor: '#015389', employee: employee })
+					);
+				})
+			);
+		};
+	
+		var singleCard = function singleCard(employee) {
+			return _react2.default.createElement(
+				'div',
+				{ style: { 'background-color': '#2980B9' } },
+				_react2.default.createElement(EmployeeCard, { key: employee.tnumber, imgBorderColor: '#015389', employee: employee })
+			);
+		};
+	
+		return _react2.default.createElement(
+			'div',
+			{ className: 'ui attached segment' },
+			_react2.default.createElement(
+				'div',
+				{ className: 'ui middle aligned column centered grid' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'left floated six wide column' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'ui header' },
+						'Employees List:'
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'right floated six wide column' },
+					_react2.default.createElement(
+						'button',
+						{ className: 'ui button', onClick: function onClick() {
+								return props.showAddEmployeeForm();
+							} },
+						'Add Birthday'
+					)
+				)
+			),
+			_react2.default.createElement('div', { className: 'ui divider' }),
+			numberOfEmployees > 0 ? numberOfEmployees > 1 ? cardstackElement() : singleCard(props.employees[0]) : _react2.default.createElement(
+				'h4',
+				null,
+				'No Employees'
+			)
+		);
+	};
+	
+	var ProfilePicture = function ProfilePicture(_ref) {
+		var imgSrc = _ref.imgSrc,
+		    borderColor = _ref.borderColor;
+		return _react2.default.createElement('img', {
+			style: {
+				width: '60px',
+				height: '60px',
+				borderRadius: '100%',
+				border: '3px solid ' + borderColor
+			},
+			src: imgSrc
+		});
+	};
+	
+	var DetailsRow = function DetailsRow(_ref2) {
+		var icon = _ref2.icon,
+		    title = _ref2.title,
+		    summary = _ref2.summary;
+	
+		var styles = {
+			row: {
+				width: '100%',
+				padding: '0 20px',
+				display: 'flex',
+				alignItems: 'center',
+				margin: '25px 0'
+			},
+			icon: {
+				display: 'block',
+				width: '25px',
+				height: '30px',
+				margin: '0 20px 0 0',
+				borderBottom: '1px solid rgba(255, 255, 255, 0.8)',
+				textAlign: 'center',
+				fontSize: '22px'
+			},
+			title: {
+				fontWeight: 500,
+				fontSize: '20px',
+				margin: 0,
+				fontStyle: 'italic'
+			}
+		};
+		var renderSummary = function renderSummary() {
+			if (summary) {
+				return _react2.default.createElement(
+					'p',
+					{ style: { fontWeight: 300, lineHeight: 1.45 } },
+					summary
+				);
+			}
+			return null;
+		};
+	
+		return _react2.default.createElement(
+			'div',
+			{ style: styles.row },
+			_react2.default.createElement('span', { className: 'icon ' + icon,
+				style: Object.assign({}, styles.icon, { alignSelf: 'flex-start' }) }),
+			_react2.default.createElement(
+				'div',
+				{ style: { width: '80%' } },
+				_react2.default.createElement(
+					'h2',
+					{ style: styles.title },
+					title
+				),
+				renderSummary()
+			)
+		);
+	};
+	
+	var EmployeeCard = function EmployeeCard(_ref3) {
+		var employee = _ref3.employee,
+		    _ref3$props = _ref3.props,
+		    props = _ref3$props === undefined ? {} : _ref3$props;
+		return _react2.default.createElement(
+			'div',
+			{ style: { top: 0 } },
+			_react2.default.createElement(
+				'header',
+				{ style: cardStyles.cardHeader, className: 'card-header-details' },
+				_react2.default.createElement(ProfilePicture, { imgSrc: 'img/' + employee.firstName + '.png', borderColor: props.imgBorderColor }),
+				_react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'h1',
+						{ style: cardStyles.headerName },
+						employee.firstName + ' ' + employee.lastName
+					),
+					_react2.default.createElement(
+						'h3',
+						{ style: cardStyles.headerTitle, className: 'icon ion-ios-arrow-down' },
+						' ',
+						employee.title,
+						' '
+					)
+				)
+			),
+			_react2.default.createElement(
+				'div',
+				{ style: { color: '#fff' } },
+				_react2.default.createElement(DetailsRow, {
+					icon: 'ion-ios-location-outline',
+					title: employee.location
+				}),
+				_react2.default.createElement(DetailsRow, {
+					icon: 'icon ion-ios-paper-outline',
+					title: 'Date Of Birth',
+					summary: employee.dob
+				}),
+				_react2.default.createElement(DetailsRow, {
+					icon: 'icon ion-ios-paper-outline',
+					title: 'Work Anniversary',
+					summary: employee.anniversaryDate
+				})
+			)
+		);
+	};
+	
+	exports.default = ShowEmployeeCards;
+
+/***/ },
+/* 191 */
+/*!*************************************!*\
+  !*** ./src/client/app/cardstack.js ***!
+  \*************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.Card = exports.CardStack = undefined;
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var equalsZero = function equalsZero(num) {
+		return num === 0;
+	};
+	var errorMessage = 'CardStack component must have at least two child Card components. Please check the children of this CardStack instance.';
+	
+	var CardStack = function (_React$Component) {
+		_inherits(CardStack, _React$Component);
+	
+		function CardStack(props) {
+			_classCallCheck(this, CardStack);
+	
+			var _this = _possibleConstructorReturn(this, (CardStack.__proto__ || Object.getPrototypeOf(CardStack)).call(this, props));
+	
+			var childrenLength = props.children.length || 1;
+			var headerHeight = props.height / childrenLength;
+	
+			if (childrenLength <= 1) throw new Error(errorMessage);
+	
+			_this.initialTopOffsets = props.children.map(function (child, i) {
+				return equalsZero(i) ? 0 : headerHeight * i;
+			});
+	
+			_this.state = {
+				topOffsets: _this.initialTopOffsets,
+				cardSelected: false
+			};
+			return _this;
+		}
+	
+		_createClass(CardStack, [{
+			key: 'componentWillReceiveProps',
+			value: function componentWillReceiveProps(nextProps) {
+				var childrenLength = nextProps.children.length || 1;
+				var headerHeight = nextProps.height / childrenLength;
+	
+				if (childrenLength <= 1) throw new Error(errorMessage);
+	
+				this.initialTopOffsets = nextProps.children.map(function (child, i) {
+					return equalsZero(i) ? 0 : headerHeight * i;
+				});
+	
+				this.state = {
+					topOffsets: this.initialTopOffsets,
+					cardSelected: false
+				};
+			}
+		}, {
+			key: 'handleCardClick',
+			value: function handleCardClick(id, cb) {
+				var _this2 = this;
+	
+				var state = {
+					topOffsets: [],
+					cardSelected: true
+				};
+	
+				this.setState(this.state.topOffsets.reduce(function (prev, offset, index) {
+					var newOffset = index === id ? 0 : _this2.props.height;
+	
+					if (_this2.state.cardSelected) {
+						prev.cardSelected = false;
+						newOffset = _this2.initialTopOffsets[index];
+					}
+	
+					prev.topOffsets.push(newOffset);
+	
+					return prev;
+				}, state));
+	
+				if (cb) {
+					cb(this.state.cardSelected);
+				};
+			}
+		}, {
+			key: 'renderCards',
+			value: function renderCards() {
+				var _this3 = this;
+	
+				return this.props.children.map(function (child, i) {
+					return _react2.default.cloneElement(child, {
+						key: i,
+						cardId: i,
+						hoverOffset: _this3.props.hoverOffset,
+						cardSelected: _this3.state.cardSelected,
+						height: _this3.props.height,
+						topOffset: _this3.state.topOffsets[i],
+						handleClick: _this3.handleCardClick.bind(_this3)
+					});
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var styles = {
+					background: this.props.background,
+					height: this.props.height,
+					width: this.props.width,
+					display: 'flex',
+					flexDirection: 'column',
+					position: 'relative',
+					overflow: 'hidden',
+					padding: 0,
+					margin: 0
+				};
+				return _react2.default.createElement(
+					'ul',
+					{ style: styles },
+					this.renderCards()
+				);
+			}
+		}]);
+	
+		return CardStack;
+	}(_react2.default.Component);
+	
+	CardStack.propTypes = {
+		background: _react2.default.PropTypes.string,
+		height: _react2.default.PropTypes.number,
+		hoverOffset: _react2.default.PropTypes.number,
+		width: _react2.default.PropTypes.number
+	};
+	
+	CardStack.defaultProps = {
+		width: 350,
+		height: 600,
+		bgColor: 'f8f8f8',
+		hoverOffset: 30
+	};
+	
+	var Card = function (_React$Component2) {
+		_inherits(Card, _React$Component2);
+	
+		function Card(props) {
+			_classCallCheck(this, Card);
+	
+			var _this4 = _possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).call(this, props));
+	
+			_this4.state = {
+				hover: false
+			};
+			return _this4;
+		}
+	
+		_createClass(Card, [{
+			key: 'handleClick',
+			value: function handleClick() {
+				this.props.handleClick(this.props.cardId, this.props.cardClicked);
+				this.setHoverState(false);
+			}
+		}, {
+			key: 'setHoverState',
+			value: function setHoverState(val) {
+				this.setState({
+					hover: val
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var hoverOffset = this.props.cardId !== 0 && this.state.hover && !this.props.cardSelected ? this.props.hoverOffset : 0;
+				var dynamicStyles = {
+					background: this.props.background,
+					transform: 'translate3d(0,' + (this.props.topOffset - hoverOffset) + 'px,0)',
+					height: this.props.height
+				};
+				return _react2.default.createElement(
+					'li',
+					{
+						style: Object.assign({}, styles.card, dynamicStyles),
+						onClick: this.handleClick.bind(this),
+						onMouseEnter: this.setHoverState.bind(this, true),
+						onMouseLeave: this.setHoverState.bind(this, false) },
+					this.props.children
+				);
+			}
+		}]);
+	
+		return Card;
+	}(_react2.default.Component);
+	
+	var styles = {
+		card: {
+			position: 'absolute',
+			top: 0,
+			width: '100%',
+			cursor: 'pointer',
+			transition: '0.5s transform ease',
+			WebkitTransition: '-webkit-transform 0.5s ease'
+		}
+	};
+	
+	exports.CardStack = CardStack;
+	exports.Card = Card;
+
+/***/ },
+/* 192 */
+/*!****************************************!*\
+  !*** ./src/client/app/ShowReleases.js ***!
+  \****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ShowReleases = _react2.default.createClass({
+	  displayName: "ShowReleases",
+	  render: function render() {
+	    var _this = this;
+	
+	    return _react2.default.createElement(
+	      "div",
+	      { className: "ui attached segment" },
+	      _react2.default.createElement(
+	        "div",
+	        { className: "ui middle aligned column centered grid" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "left floated six wide column" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "ui header" },
+	            "Release Info:"
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "right floated six wide column" },
+	          _react2.default.createElement(
+	            "button",
+	            { className: "ui button", onClick: function onClick() {
+	                return _this.props.showAddReleaseForm();
+	              } },
+	            "Add Release"
+	          )
+	        )
+	      ),
+	      _react2.default.createElement("div", { className: "ui divider" }),
+	      this.props.releases.length > 0 ? null : _react2.default.createElement(
+	        "h4",
+	        null,
+	        " No Release Info Available at this time, check back later "
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "ui cards" },
+	        (this.props.releases || []).map(function (release) {
+	          return _react2.default.createElement(ReleaseCard, { release: release });
+	        })
+	      )
+	    );
+	  }
+	});
+	
+	var ReleaseCard = function ReleaseCard(_ref) {
+	  var release = _ref.release;
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "card" },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "content" },
+	      _react2.default.createElement(
+	        "div",
+	        { className: "header" },
+	        release.releaseNumber
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "description" },
+	        _react2.default.createElement(
+	          "p",
+	          null,
+	          "Code Lockdown: ",
+	          release.codeLockDownDate
+	        ),
+	        _react2.default.createElement(
+	          "p",
+	          null,
+	          "Deployment to RC: ",
+	          release.rcDeploymentDate
+	        ),
+	        _react2.default.createElement(
+	          "p",
+	          null,
+	          "Deployment to XUAT: ",
+	          release.xuatDeploymentDate
+	        ),
+	        _react2.default.createElement(
+	          "p",
+	          null,
+	          "Deployment to Production: ",
+	          release.prodDeploymentDate
+	        ),
+	        _react2.default.createElement(
+	          "p",
+	          null,
+	          _react2.default.createElement(
+	            "b",
+	            null,
+	            "Release Notes:"
+	          ),
+	          " ",
+	          release.releaseNotes
+	        )
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = ShowReleases;
+
+/***/ },
+/* 193 */
+/*!********************************************!*\
+  !*** ./src/client/app/ShowReleaseCards.js ***!
+  \********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _cardstack = __webpack_require__(/*! ./cardstack.js */ 191);
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	var backgroundColors = ['#2980B9', '#27AE60', '#9B27AE', '#e67e22'];
+	
+	var styles = {
+		cardHeader: {
+			display: 'flex',
+			height: '125px',
+			justifyContent: 'space-between',
+			alignItems: 'center',
+			padding: '10px 20px',
+			color: '#fff'
+		},
+		headerName: {
+			fontWeight: 500,
+			fontSize: '25px',
+			textAlign: 'right'
+		},
+		headerTitle: {
+			margin: '4px 0 0',
+			fontWeight: 300,
+			fontSize: '17px',
+			opacity: 0.8,
+			textAlign: 'right'
+		}
+	};
+	
+	var i = 0;
+	
+	var ShowReleaseCards = function ShowReleaseCards(props) {
+		var numberOfReleases = props.releases.length;
+		var height = props.releases.length * 125;
+		var cardstackElement = function cardstackElement() {
+			return _react2.default.createElement(
+				_cardstack.CardStack,
+				{ height: height > 500 ? height : 500, width: 500, background: '#f8f8f8', hoverOffset: 25 },
+				(props.releases || []).map(function (release) {
+					var color = backgroundColors[i % 4];
+					i++;
+					return _react2.default.createElement(
+						_cardstack.Card,
+						{ background: color, key: release.releaseNumber },
+						_react2.default.createElement(ReleaseCard, { imgBorderColor: '#015389', release: release })
+					);
+				})
+			);
+		};
+	
+		var singleCard = function singleCard(release) {
+			return _react2.default.createElement(
+				'div',
+				{ style: { 'background-color': '#2980B9', position: 'relative', 'padding-top': '15px', width: '500px' } },
+				_react2.default.createElement(ReleaseCard, { key: release.releaseNumber, imgBorderColor: '#015389', release: release })
+			);
+		};
+	
+		return _react2.default.createElement(
+			'div',
+			{ className: 'ui attached segment' },
+			_react2.default.createElement(
+				'div',
+				{ className: 'ui middle aligned column centered grid' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'left floated six wide column' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'ui header' },
+						'Release Info:'
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'right floated six wide column' },
+					_react2.default.createElement(
+						'button',
+						{ className: 'ui button', onClick: function onClick() {
+								return props.showAddReleaseForm();
+							} },
+						'Add Release'
+					)
+				)
+			),
+			_react2.default.createElement('div', { className: 'ui divider' }),
+			numberOfReleases > 0 ? numberOfReleases > 1 ? cardstackElement() : singleCard(props.releases[0]) : _react2.default.createElement(
+				'h4',
+				null,
+				'No Release Info Available at this time, check back later!'
+			)
+		);
+	};
+	
+	var ProfilePicture = function ProfilePicture(_ref) {
+		var imgSrc = _ref.imgSrc,
+		    text = _ref.text;
+		return _react2.default.createElement(
+			'div',
+			null,
+			_react2.default.createElement('img', {
+				style: {
+					width: '60px',
+					height: '60px',
+					borderRadius: '100%',
+					border: '3px solid'
+				},
+				src: imgSrc }),
+			_react2.default.createElement(
+				'div',
+				{ style: { position: 'absolute', top: '70px', fontWeight: 'bolder', fontSize: '15px', left: '30px' } },
+				text
+			)
+		);
+	};
+	
+	var DetailsRow = function DetailsRow(_ref2) {
+		var icon = _ref2.icon,
+		    title = _ref2.title,
+		    summary = _ref2.summary;
+	
+		var styles = {
+			row: {
+				width: '100%',
+				padding: '0 20px',
+				display: 'flex',
+				alignItems: 'center',
+				margin: '25px 0'
+			},
+			icon: {
+				display: 'block',
+				width: '25px',
+				height: '30px',
+				margin: '0 20px 0 0',
+				borderBottom: '1px solid rgba(255, 255, 255, 0.8)',
+				textAlign: 'center',
+				fontSize: '22px'
+			},
+			title: {
+				fontWeight: 500,
+				fontSize: '20px',
+				margin: 0,
+				fontStyle: 'italic'
+			}
+		};
+		var renderSummary = function renderSummary() {
+			if (summary) return _react2.default.createElement(
+				'p',
+				{ style: { fontWeight: 300, lineHeight: 1.45 } },
+				summary
+			);
+			return null;
+		};
+	
+		return _react2.default.createElement(
+			'div',
+			{ style: styles.row },
+			_react2.default.createElement('span', { className: 'icon ' + icon,
+				style: Object.assign({}, styles.icon, { alignSelf: 'flex-start' }) }),
+			_react2.default.createElement(
+				'div',
+				{ style: { width: '80%' } },
+				_react2.default.createElement(
+					'h2',
+					{ style: styles.title },
+					title
+				),
+				renderSummary()
+			)
+		);
+	};
+	
+	var ReleaseCard = function ReleaseCard(_ref3) {
+		var release = _ref3.release,
+		    props = _objectWithoutProperties(_ref3, ['release']);
+	
+		return _react2.default.createElement(
+			'div',
+			{ style: { top: 0 } },
+			_react2.default.createElement(
+				'header',
+				{ style: styles.cardHeader, className: 'card-header-details' },
+				_react2.default.createElement(ProfilePicture, { imgSrc: props.imgSrc, text: release.releaseNumber }),
+				_react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'h1',
+						{ style: styles.headerName },
+						'Code LockDown'
+					),
+					_react2.default.createElement(
+						'h3',
+						{ style: styles.headerTitle },
+						release.codeLockDownDate
+					)
+				)
+			),
+			_react2.default.createElement(
+				'div',
+				{ style: { color: '#fff' } },
+				_react2.default.createElement(DetailsRow, {
+					icon: 'ion-ios-location-outline',
+					title: 'RC Deployment Date',
+					summary: release.rcDeploymentDate
+				}),
+				_react2.default.createElement(DetailsRow, {
+					icon: 'icon ion-ios-paper-outline',
+					title: 'XUAT Deployment Date',
+					summary: release.xuatDeploymentDate
+				}),
+				_react2.default.createElement(DetailsRow, {
+					icon: 'icon ion-ios-paper-outline',
+					title: 'Production Deployment Date',
+					summary: release.prodDeploymentDate
+				}),
+				_react2.default.createElement(DetailsRow, {
+					icon: 'icon ion-ios-paper-outline',
+					title: 'Release Notes',
+					summary: release.releaseNotes
+				})
+			)
+		);
+	};
+	
+	exports.default = ShowReleaseCards;
+
+/***/ },
+/* 194 */
+/*!*************************************!*\
+  !*** ./src/client/app/ShowTeams.js ***!
+  \*************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ShowTeams = function (_React$Component) {
+		_inherits(ShowTeams, _React$Component);
+	
+		function ShowTeams() {
+			_classCallCheck(this, ShowTeams);
+	
+			return _possibleConstructorReturn(this, (ShowTeams.__proto__ || Object.getPrototypeOf(ShowTeams)).apply(this, arguments));
+		}
+	
+		_createClass(ShowTeams, [{
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"div",
+					{ className: "showTeam" },
+					_react2.default.createElement(
+						"h1",
+						null,
+						"Standup Calendar"
+					),
+					(this.props.teams || []).map(function (team) {
+						return _react2.default.createElement(TeamCard, { team: team });
+					})
+				);
+			}
+		}]);
+	
+		return ShowTeams;
+	}(_react2.default.Component);
+	
+	exports.default = ShowTeams;
+	
+	
+	var TeamCard = function TeamCard(_ref) {
+		var team = _ref.team;
+		return _react2.default.createElement(
+			"div",
+			{ className: "oval-shape" },
+			_react2.default.createElement(
+				"div",
+				{ className: "content" },
+				_react2.default.createElement(
+					"h2",
+					null,
+					team.name
+				),
+				_react2.default.createElement(
+					"p",
+					{ className: "team-description" },
+					"Standup Time: ",
+					team.tandupTime,
+					" ",
+					_react2.default.createElement("br", null),
+					"Scrum Master: ",
+					team.scrumMaster,
+					" ",
+					_react2.default.createElement("br", null),
+					"Business Analyst: ",
+					team.businessAnalyst
+				),
+				(team.members || []).map(function (member) {
+					return _react2.default.createElement(Member, { member: member });
+				})
+			)
+		);
+	};
+	
+	var Member = function Member(_ref2) {
+		var member = _ref2.member;
+		return _react2.default.createElement(
+			"div",
+			{ className: "tag-cloud" },
+			member.name,
+			" -- ",
+			member.role
+		);
+	};
+
+/***/ },
+/* 195 */
+/*!*********************************************************!*\
+  !*** ./src/client/app/progressForm/datas/inputDatas.js ***!
+  \*********************************************************/
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	var datas = [{
+	  id: "tnumber",
+	  type: "text",
+	  label: "T Number:",
+	  value: "",
+	  validation: {
+	    rules: { tnumber: ["required"] },
+	    messages: { "required.tnumber": 'T Number required!' }
+	  },
+	  pristine: true,
+	  hasError: false,
+	  errorMessage: ''
+	}, {
+	  id: "firstName",
+	  type: "text",
+	  label: "First Name:",
+	  value: "",
+	  validation: {
+	    rules: { firstName: ["required", "regex:/^([a-zA-z]{2,10})$/"] },
+	    messages: { "required.firstName": 'First Name is required!', 'regex.firstName': 'Invlid first Name!' }
+	  },
+	  pristine: true,
+	  hasError: false,
+	  errorMessage: ''
+	}, {
+	  id: "lastName",
+	  type: "text",
+	  label: "Last Name:",
+	  value: "",
+	  validation: {
+	    rules: { lastName: ["required", "regex:/^([a-zA-z]{2,10})$/"] },
+	    messages: { "required.lastName": 'Last Name is required!', 'regex.lastName': 'Invalid last name!' }
+	  },
+	  pristine: true,
+	  hasError: false,
+	  errorMessage: ''
+	}, {
+	  id: "title",
+	  type: "text",
+	  label: "Job Title:",
+	  value: "",
+	  validation: {
+	    rules: { title: ["required"] },
+	    messages: { "required.title": 'Job Title is required!' }
+	  },
+	  pristine: true,
+	  hasError: false,
+	  errorMessage: ''
+	}, {
+	  id: "dob",
+	  type: "date",
+	  label: "Date Of Birth:",
+	  value: "",
+	  validation: {
+	    rules: { dob: ["required"] },
+	    messages: { "required.dob": 'DOB is required!' }
+	  },
+	  pristine: true,
+	  hasError: false,
+	  errorMessage: ''
+	}, {
+	  id: "anniversaryDate",
+	  type: "date",
+	  label: "Anniversary Date:",
+	  value: "",
+	  validation: {
+	    rules: { anniversaryDate: ["required"] },
+	    messages: { "required.anniversaryDate": 'Anniversary Date is required!' }
+	  },
+	  pristine: true,
+	  hasError: false,
+	  errorMessage: ''
+	}, {
+	  id: "location",
+	  type: "select",
+	  options: [{
+	    value: "",
+	    label: "Select Your Location"
+	  }, {
+	    value: "Plymouth, MI",
+	    label: "Plymouth, MI"
+	  }, {
+	    value: "Boca, FL",
+	    label: "Boca, FL"
+	  }, {
+	    value: "Atlanta, GA",
+	    label: "Atlanta, GA"
+	  }],
+	  label: "Anniversary Date:",
+	  value: "",
+	  validation: {
+	    rules: { location: ["required"] },
+	    messages: { "required.location": 'Anniversary Date is required!' }
+	  },
+	  pristine: true,
+	  hasError: false,
+	  errorMessage: ''
+	}];
+	
+	module.exports = datas;
+
+/***/ },
+/* 196 */
+/*!**************************************************************!*\
+  !*** ./src/client/app/progressForm/datas/ReleaseFormData.js ***!
+  \**************************************************************/
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	var datas = [{
+	  id: "releaseNumber",
+	  type: "text",
+	  label: "Release Number:",
+	  value: "",
+	  validation: {
+	    rules: { releaseNumber: ["required"] },
+	    messages: { "required.releaseNumber": 'Release Number required!' }
+	  },
+	  pristine: true,
+	  hasError: false,
+	  errorMessage: ''
+	}, {
+	  id: "codeLockDownDate",
+	  type: "date",
+	  label: "Code LockDown:",
+	  value: "",
+	  validation: {
+	    rules: { codeLockDownDate: ["required"] },
+	    messages: { "required.codeLockDownDate": 'Code lockdown date is required!' }
+	  },
+	  pristine: true,
+	  hasError: false,
+	  errorMessage: ''
+	}, {
+	  id: "rcDeploymentDate",
+	  type: "date",
+	  label: "Deployment to RC:",
+	  value: "",
+	  validation: {
+	    rules: { rcDeploymentDate: ["required"] },
+	    messages: { "required.rcDeploymentDate": 'Deployment to Rc date is required!' }
+	  },
+	  pristine: true,
+	  hasError: false,
+	  errorMessage: ''
+	}, {
+	  id: "xuatDeploymentDate",
+	  type: "date",
+	  label: "Deployment to XUAT:",
+	  value: "",
+	  validation: {
+	    rules: { xuatDeploymentDate: ["required"] },
+	    messages: { "required.xuatDeploymentDate": 'Deployment to XUAT date is required!' }
+	  },
+	  pristine: true,
+	  hasError: false,
+	  errorMessage: ''
+	}, {
+	  id: "prodDeploymentDate",
+	  type: "date",
+	  label: "Deployment to Production:",
+	  value: "",
+	  validation: {
+	    rules: { prodDeploymentDate: ["required"] },
+	    messages: { "required.prodDeploymentDate": 'Deployment to Production date is required!' }
+	  },
+	  pristine: true,
+	  hasError: false,
+	  errorMessage: ''
+	}, {
+	  id: "releaseNotes",
+	  type: "textarea",
+	  label: "Release Note:",
+	  value: "",
+	  validation: {
+	    rules: { releaseNotes: ["required"] },
+	    messages: { "required.releaseNotes": 'Release note is required!' }
+	  },
+	  pristine: true,
+	  hasError: false,
+	  errorMessage: ''
+	}];
+	
+	module.exports = datas;
 
 /***/ }
 /******/ ]);

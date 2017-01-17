@@ -1,7 +1,15 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import AwesomeComponent from './AwesomeComponent.js';
+import * as employeeActions from './actions/employeeActions';
 
 const BirthdayCard = React.createClass({
+
+	componentWillMount() {
+		this.props.actions.loadEmployees();
+	},
+
 	render() {
 		return (
 			<div className="ui attached segment">
@@ -17,7 +25,7 @@ const BirthdayCard = React.createClass({
 					{this.props.employees.length > 0 ? null : <h4>No Employees</h4>}
 				<div className="ui link cards">
 					{(this.props.employees || []).map(employee => (
-						<EmployeeCard key={employee.firstName} employee={employee}/>
+						<EmployeeCard key={`${employee.firstName} - ${employee.dob}`} employee={employee}/>
 					))}
 				</div>
 			</div>
@@ -27,7 +35,7 @@ const BirthdayCard = React.createClass({
 
 const EmployeeCard = ({employee}) => (
   	<div className="card">
-  		<div className="image">
+			<div className="image">
 	      	<img src={"img/" + employee.firstName + ".png"} />
 	    </div>
     	<div className="content">
@@ -54,4 +62,16 @@ const EmployeeCard = ({employee}) => (
   	</div>
 );
 
-export default BirthdayCard;
+function mapStateToProps(state, ownProps) {
+  return {
+    employees: state.employees
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(employeeActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BirthdayCard);

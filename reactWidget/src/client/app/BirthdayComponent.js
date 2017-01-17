@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import {getApiCall, postApiCall} from './Api.js';
+import {connect} from 'react-redux'
+import {addEmployee} from './actions/employeeActions'
 
 require('../sass/styles.global.scss');
 
@@ -9,15 +11,10 @@ const TOTAL_INPUTS = 7;
 const BirthdayComponent = React.createClass({
 	postData(e) {
 		e.preventDefault();
-		const successCallback = (value) => {
-		  this.resetForm();
-		  this.gotReponseFromServer(true);
-		}
-		const errorCallBack = (value) => {
-		  this.gotReponseFromServer(false);
-		}
-		postApiCall('/RewardsWidgetAPI/employees', this.getDataToSend(), successCallback, errorCallBack);
+		this.props.addEmployee(this.getDataToSend());
+		this.gotReponseFromServer(true);
 	},
+
 	getDataToSend() {
 		return ({
 			tnumber: this.state.tnumber,
@@ -30,15 +27,12 @@ const BirthdayComponent = React.createClass({
 		});
 	},
 	gotReponseFromServer(success) {
-	  if (success) {
-			this.props.getEmployeeData();
-	  };
-
 	  this.setState({
 		gotResponse: true,
 		isSuccess: success,
 		isSubmitting: false
 	  });
+	  this.resetForm();
 	},
 	getInitialState() {
 		return ({
@@ -147,4 +141,24 @@ const BirthdayComponent = React.createClass({
  	}
 })
 
-export default BirthdayComponent;
+const mapStateToProps = (state) => {
+  return {
+    employees: state.employees
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addEmployee: (employee) => {
+      dispatch(addEmployee(employee))
+    }
+  }
+}
+
+const AddBirthdayComponent = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BirthdayComponent)
+
+export default AddBirthdayComponent
+
