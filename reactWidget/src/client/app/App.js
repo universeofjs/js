@@ -141,10 +141,10 @@ export const App = React.createClass ({
 			<div className="birthdays">
 				<h1> Birthday Calendar</h1>
 				<div className="employee-floatleft">
-					<AddBirthdayComponent />
+					<AddBirthdayComponent getEmployeeData={this.getEmployeeData}/>
 				</div>
 				<div className="employee-floatright">
-					<BirthdayCard />
+					<BirthdayCard employees={this.state.employees} showAddEmployeeForm={this.showAddEmployeeForm}/>
 				</div>
 			</div>
 			
