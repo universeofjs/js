@@ -1,3 +1,12 @@
+$primary-color: gray;
+$color-key: random(4);
+$color-list: #2980B9, #27AE60, #9B27AE, #e67e22;
+$nth: nth($color-list, $color-key);
+
+@function getRandomColor($color-list, $color-key) {
+  @return ($color-list / $color-key);
+}
+
 body {
   color: #62706c;
   font-size: 100%;
@@ -15,6 +24,11 @@ body {
   margin-right: auto;
 }
 
+.header h1 {
+  display: inline-block;
+  padding: 0 600px;
+}
+
 .footer {
   padding-bottom: 30px;
 }
@@ -29,7 +43,7 @@ body {
   height: 510px;
   color: #333;
   background: #FFF;
-  float: left;
+  display: inline-block;
 }
 
 .slick-slide img {
@@ -43,7 +57,15 @@ body {
 }
 
 .events {
-  padding: 40px 0 0 0;
+  padding: 40px 30px 0 0;
+  display: inline-block;
+}
+
+.showRelease {
+  text-align: center;
+  width: 550px;
+  padding-bottom: 30px;
+  display: inline-block;
 }
 
 .upcoming-events, .show-employees-of-the-month, .show-quotes {
@@ -68,18 +90,15 @@ body {
 }
 
 .showBirthday {
-  text-align: center;
   padding-bottom: 30px;
+}
+
+.showBirthday h1 {
+  text-align: center;
 }
 
 .ui.cards {
   justify-content: center;
-}
-
-.showRelease {
-  text-align: center;
-  width: 550px;
-  padding-bottom: 30px;
 }
 
 table {
@@ -113,7 +132,7 @@ table tbody tr td {
     width: 400px;
     margin: 15px;
     text-align: center;
-    background: gray;
+    background: $primary-color;
     -moz-border-radius: 100px / 50px;
     -webkit-border-radius: 100px / 50px;
     border-radius: 50%;

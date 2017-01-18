@@ -6,7 +6,7 @@ export default class UpcomingEvents extends React.Component {
             <div className="upcoming-events">
                 <table>
                     <thead>
-                        <th>Upcoming Events</th>
+                        <tr><th>Upcoming Events</th></tr>
                     </thead>
                     <tbody>
                         <tr>

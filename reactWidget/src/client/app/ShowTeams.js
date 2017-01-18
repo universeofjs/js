@@ -26,9 +26,9 @@ const TeamCard = ({team}) => (
 		<div className="content">
 			<h2>{team.name}</h2>
 			<p className="team-description">
-				Standup Time: {team.tandupTime}	<br/>
+				Standup Time: {team.standupTime}	<br/>
 				Scrum Master: {team.scrumMaster} <br/>
-    			Business Analyst: {team.businessAnalyst}
+    			BA: {team.businessAnalyst}
 			</p>
 			{(team.members || []).map(member => (
 				<Member key={member.name} member={member} />

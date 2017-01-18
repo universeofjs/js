@@ -6,7 +6,7 @@ export default class QuoteOfTheDay extends React.Component {
             <div className="show-quotes">
                 <table>
                     <thead>
-                        <th>Quote of the day</th>
+                        <tr><th>Quote of the day</th></tr>
                     </thead>
                     <tbody>
                         <tr><td>Keep Calm, it works on my machine</td></tr>

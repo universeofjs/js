@@ -6,7 +6,7 @@ export default class EmployeesOfTheMonth extends React.Component {
             <div className="show-employees-of-the-month">
                 <table>
                     <thead>
-                        <th>Employees of the Month</th>
+                        <tr><th>Employees of the Month</th></tr>
                     </thead>
                     <tbody>
                         <tr>
