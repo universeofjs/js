@@ -1,4 +1,4 @@
-module.exports = ()=>{
+module.exports = () => {
 	return {
 		id:"003",
 		name:"Instant Noodles",
