@@ -63,7 +63,7 @@ class ShowReleaseCards extends React.Component {
 		
 		return (
 			<div className="showRelease">
-				<h1>Release Calendar</h1>
+				<h1>DR Release Calendar</h1>
 				{numberOfReleases > 0 ? numberOfReleases > 1 ? cardstackElement() : singleCard(this.props.releases[0]) : <h4>No Release Info Available at this time, check back later!</h4>}
 			</div>
 		);
