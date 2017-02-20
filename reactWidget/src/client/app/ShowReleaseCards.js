@@ -62,16 +62,7 @@ class ShowReleaseCards extends React.Component {
 		);
 		
 		return (
-			<div className="ui attached segment">
-				<div className="ui middle aligned column centered grid">
-					<div className="left floated six wide column">
-						<div className="ui header">Release Info:</div>
-					</div>
-					<div className="right floated six wide column">
-						<button className="ui button" onClick={() => (this.props.showAddReleaseForm())}>Add Release</button>
-					</div>
-				</div>
-				<div className="ui divider"></div>
+			<div>
 				{numberOfReleases > 0 ? numberOfReleases > 1 ? cardstackElement() : singleCard(this.props.releases[0]) : <h4>No Release Info Available at this time, check back later!</h4>}
 			</div>
 		);

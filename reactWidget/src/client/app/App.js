@@ -17,6 +17,13 @@ import ShowReleaseCards from './ShowReleaseCards.js';
 
 import ShowTeams from './ShowTeams.js';
 
+import Header from './Header';
+import DeluxeCoreValues from './DeluxeCoreValues';
+import EmployeesOfTheMonth from './EmployeesOfTheMonth';
+import QuoteOfTheDay from './QuoteOfTheDay';
+import UpcomingEvents from './UpcomingEvents';
+import Footer from './Footer';
+
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as employeeActions from './actions/employeeActions';
@@ -129,44 +136,16 @@ export const App = React.createClass ({
 	render () {
 		return (
 		  <div className="homePage">
-			<h1><img src="/img/deluxe.png" alt="Deluxe Rewards"/></h1>
-			<hr/>
-
-			<div className="standups">
+				<Header/>
+				<DeluxeCoreValues/>
+				<UpcomingEvents/>
+				<EmployeesOfTheMonth/>
+				<QuoteOfTheDay/>
 				<ShowTeams teams={this.state.teams}/>
-			</div>
-			
-			<div className="clear"></div>
-
-			<div className="birthdays">
-				<h1> Birthday Calendar</h1>
-				<div className="employee-floatleft">
-					<AddBirthdayComponent getEmployeeData={this.getEmployeeData}/>
-				</div>
-				<div className="employee-floatright">
-					<BirthdayCard employees={this.state.employees} showAddEmployeeForm={this.showAddEmployeeForm}/>
-				</div>
-			</div>
-			
-			<div className="clear"></div>
-			
-			<div className="releases">
-				<h1> Release Calendar</h1>
-				<div className="release-floatleft">
-					<ReleaseComponent getReleaseData={this.getReleaseData}/>
-				</div>
-				<div className="release-floatright">
-					<ShowReleaseCards releases={this.state.releases} showAddReleaseForm={() => (this.setState({showAddReleaseForm: true}))}/>
-				</div>
-			</div>
-			
-			<div className="clear"></div>
-			
-			{this.state.showAddEmployeeForm && <ProgressForm onClosed={this.onClosed} onSubmitButton={this.createNewEmployee} inputDatas={birthdayFormData}/>}
-			{this.state.showAddReleaseForm && <ProgressForm onClosed={this.onClosed} onSubmitButton={this.createNewRelease} inputDatas={releaseFormData}/>}
-			
+				<BirthdayCard employees={this.state.employees}/>
+				<ShowReleaseCards releases={this.state.releases}/>
+				<Footer/>
 		  </div>
-
 		);
 	}
 });
