@@ -18,13 +18,13 @@ export default class App extends React.Component {
 		return (
 		  <div className="homePage">
 				<Header/>
-				<DeluxeCoreValues/>
 				<UpcomingEvents/>
 				<EmployeesOfTheMonth/>
 				<QuoteOfTheDay/>
+				<DeluxeCoreValues/>
+				<ShowReleaseCards/>
 				<ShowTeams/>
 				<BirthdayCard/>
-				<ShowReleaseCards/>
 				<Footer/>
 		  </div>
 		);
