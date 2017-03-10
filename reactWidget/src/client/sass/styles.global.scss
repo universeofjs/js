@@ -1,5 +1,10 @@
-html {
-  background: #FFF;
+$primary-color: gray;
+$color-key: random(4);
+$color-list: #2980B9, #27AE60, #9B27AE, #e67e22;
+$nth: nth($color-list, $color-key);
+
+@function getRandomColor($color-list, $color-key) {
+  @return ($color-list / $color-key);
 }
 
 body {
@@ -13,55 +18,123 @@ body {
   font-family: Arial, sans-serif;
 }
 
-#app{
-
-}
-
 .homePage{
-	width: 1200px;
+	width: auto;
 	margin-left: auto;
   margin-right: auto;
 }
 
-.employee-floatleft {
-	float:left;
-	width: 500px;
-}
-.employee-floatright {
-	float: right;
-	width: 670px;
-    padding-right: 40px;
+.upcoming-events, .show-employees-of-the-month, .show-quotes {
+  padding: 20px 0 0 0;
 }
 
-.clear{
-	clear: both;
-	height: 50px;
+.upcoming-events {
+   table tr td {
+    background: wheat; 
+  }
+  display: inline-block;
+  padding-left: 30px;
 }
 
-.release-floatleft {
-	float:left;
-	width: 500px;
+.show-employees-of-the-month {
+  table tr td {
+    background: darkseagreen; 
+  }
+  display: inline-block; 
+  padding-left: 30px;
 }
 
-.release-floatright {
-	float: right;
-    width: 670px;
-    padding-right: 140px;
+.show-quotes {
+   table tr td {
+    background: khaki; 
+  }
+  display: inline-block;
+  padding-left: 30px;
 }
 
-.standups {
-  
+.container {
+  padding: 10px 30px;
+  width: 775px;
+  height: 520px;
+  color: #333;
+  background: #FFF;
+  display: inline-block;
 }
 
-.showTeam h1 {
+.container h1 {
   text-align: center;
 }
 
-.oval-shape {
+.slick-slide img {
+  display: block;
+  width: 775px;
+  height: 520px;
+}
+
+.showRelease {
+  text-align: center;
+  padding-left: 15px;
+  padding-bottom: 30px;
+  display: inline-block;
+}
+
+.showTeam {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.showBirthday {
+  padding-bottom: 30px;
+}
+
+.showBirthday h1 {
+  text-align: center;
+}
+
+.ui.cards {
+  justify-content: center;
+}
+
+.footer {
+  padding-bottom: 30px;
+}
+
+.footer h4 {
+  text-align: center;
+}
+
+table {
     width: 400px;
+    height: 150px;
+}
+
+table thead th { 
+	border:1px solid black; 
+	font-size:24px; 
+	color:#555; 
+	background:#dbdbdb; 
+	padding:10px 15px; 
+	margin:0; 
+	text-shadow: 1px 1px 1px white; 
+	text-align: center;
+}
+
+table tbody tr td {
+  border:1px solid black; 
+	font-size:20px; 
+	color:#555; 
+	background: wheat; 
+	padding:10px 15px; 
+	margin:0; 
+	text-shadow: 1px 1px 1px white; 
+	text-align: center;
+} 
+
+.oval-shape {
+    width: 300px;
     margin: 15px;
     text-align: center;
-    background: gray;
+    background: $primary-color;
     -moz-border-radius: 100px / 50px;
     -webkit-border-radius: 100px / 50px;
     border-radius: 50%;
@@ -88,6 +161,11 @@ body {
     margin: 2px;
     text-decoration: none !important;
     border: 1px solid #d7d7d7;
+}
+
+.clear{
+	clear: both;
+	height: 50px;
 }
 
 *, *:after, *:before { box-sizing: border-box; }
@@ -154,6 +232,7 @@ label {
 .has--error .form--focus {
   background: #FB797E;
 }
+
 .has--error .form--error {
   display: block;
 }
@@ -177,6 +256,7 @@ label {
   -webkit-transition: background-color 0.3s, color 0.3s, width 0.3s, border-width 0.3s, border-color 0.3s;
   transition: background-color 0.3s, color 0.3s, width 0.3s, border-width 0.3s, border-color 0.3s;
 }
+
 .form--submit:hover {
   background-color: #1ECD97;
   color: #fff;
@@ -203,6 +283,7 @@ label {
   background-color: #E5E5E5;
   position: relative;
 }
+
 .progressCircle-pie-chart.gt-50 {
   background-color: #1ECD97;
 }
@@ -217,6 +298,7 @@ label {
   height: 200px;
   clip: rect(0, 200px, 200px, 100px);
 }
+
 .ppc-progressCircle .ppc-progressCircle-fill {
   content: "";
   position: absolute;
@@ -233,9 +315,11 @@ label {
       -ms-transform: rotate(0deg);
           transform: rotate(0deg);
 }
+
 .gt-50 .ppc-progressCircle {
   clip: rect(0, 100px, 200px, 0);
 }
+
 .gt-50 .ppc-progressCircle .ppc-progressCircle-fill {
   clip: rect(0, 200px, 200px, 100px);
   background: #E5E5E5;
@@ -253,6 +337,7 @@ label {
   text-align: center;
   display: table;
 }
+
 .ppc-percents span {
   display: block;
   font-size: 2.6em;

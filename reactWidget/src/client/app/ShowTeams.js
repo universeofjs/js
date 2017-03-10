@@ -12,7 +12,7 @@ class ShowTeams extends React.Component {
 	render() {
 		return (
 			<div className="showTeam">
-				<h1>Standup Calendar</h1>
+				<h1>DR Standup Calendar</h1>
 				{(this.props.teams || []).map(team =>(
 					<TeamCard key={team.name} team={team} />
 				))}
@@ -26,9 +26,9 @@ const TeamCard = ({team}) => (
 		<div className="content">
 			<h2>{team.name}</h2>
 			<p className="team-description">
-				Standup Time: {team.tandupTime}	<br/>
+				Standup Time: {team.standupTime}	<br/>
 				Scrum Master: {team.scrumMaster} <br/>
-    			Business Analyst: {team.businessAnalyst}
+    			BA: {team.businessAnalyst}
 			</p>
 			{(team.members || []).map(member => (
 				<Member key={member.name} member={member} />

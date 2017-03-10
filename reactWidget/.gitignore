@@ -37,4 +37,5 @@ jspm_packages
 .DS_Store
 
 #remove bundle.js
-src/client/bundle.js
+src/client/public/bundle.js
+src/client/public/bundle.js.map
