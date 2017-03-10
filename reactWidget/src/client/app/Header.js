@@ -5,7 +5,7 @@ export default class Header extends React.Component {
         return (
             <div className="header">
                 <img src="/img/deluxe.png" alt="Deluxe Rewards"/>
-                <h1>Bulletin Board</h1>
+                <h1>Deluxe Bulletin Board</h1>
 				<hr/>
             </div>
         );
