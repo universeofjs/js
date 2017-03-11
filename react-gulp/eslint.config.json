@@ -1,0 +1,40 @@
+{
+  "ecmaFeatures": {
+    "arrowFunctions": true,
+    "blockBindings": true,
+    "classes": true,
+    "destructuring": true,
+    "modules": true,
+    "objectLiteralComputedProperties": true,
+    "objectLiteralShorthandMethods": true,
+    "objectLiteralShorthandProperties": true,
+    "templateStrings": true,
+    "jsx": true
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jquery": true
+  },
+  "rules": {
+    "quotes": 0,
+    "no-trailing-spaces": 0,
+    "eol-last": 0,
+    "no-unused-vars": 0,
+    "no-underscore-dangle": 0,
+    "no-alert": 0,
+    "no-lone-blocks": 0
+  },
+  "globals": {
+    "__BROWSER__": false,
+    "__SERVER__": false,
+    "__DEV__": false,
+    "__PROD__": false,
+    "__": false,
+    "Promise": true,
+    "casper": false,
+    "jest": false,
+    "jQuery": true,
+    "$": true
+  }
+}
