@@ -1,5 +1,5 @@
 {
-  "name": "reactwidget",
+  "name": "React-Widgets",
   "version": "1.0.0",
   "description": "",
   "main": "app/server.js",
@@ -10,14 +10,14 @@
     "start": "npm-run-all --parallel gulp server",
     "start:debug": "npm-run-all --parallel gulp debug"
   },
-  "author": "Priti",
+  "author": "Ankit Jain",
   "license": "ISC",
   "devDependencies": {
     "babel": "^5.8.29",
     "babel-core": "^5.8.30",
     "babel-loader": "^5.3.2",
     "babel-preset-es2015": "^6.0.12",
-	"babel-preset-react": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "browser-sync": "^2.9.11",
     "chokidar-cli": "^1.1.1",
@@ -40,7 +40,7 @@
     "react-form-elements": "^0.3.3",
     "react-router": "^1.0.0",
     "require-dir": "^0.3.0",
-	"validatorjs": "^2.0.5",
+    "validatorjs": "^2.0.5",
     "webpack": "^1.12.2"
   },
   "dependencies": {
