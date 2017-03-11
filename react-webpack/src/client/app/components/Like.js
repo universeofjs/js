@@ -1,18 +1,17 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as counterAction from '../actions/counterAction';
 
-export default class Like extends React.Component {
+export class Like extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-        likesCount : 0
-    };
     this.onLike = this.onLike.bind(this);
   }
 
   onLike () {
-    let newLikesCount = this.state.likesCount + 1;
-    this.setState({likesCount: newLikesCount});
+    this.props.actions.counterAction.increaseCounter();
   }
 
   render() {
@@ -22,10 +21,25 @@ export default class Like extends React.Component {
           <i className="heart icon"></i> Like
         </div>
         <a className="ui basic red left pointing label">
-          {this.state.likesCount}
+          {this.props.likesCount}
         </a>
       </div>
     );
   }
-
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    likesCount: state.counter
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    actions: {
+      counterAction: bindActionCreators(counterAction, dispatch)
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Like);
